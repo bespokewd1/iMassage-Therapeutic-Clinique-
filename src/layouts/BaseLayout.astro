@@ -24,7 +24,10 @@ const { description, title, preloadedImage } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="keywords" content="" />
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Fjalla+One&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Fjalla+One&family=Hammersmith+One&display=swap"
+      rel="stylesheet"
+    />
 
     <link
       rel="canonical"
@@ -42,7 +45,10 @@ const { description, title, preloadedImage } = Astro.props;
       property="og:url"
       content={`https://${client.domain}${Astro.url.pathname}`}
     />
-    <meta property="og:image" content="/assets/favicons/favicon-stone-massage.jpg" />
+    <meta
+      property="og:image"
+      content="/assets/favicons/favicon-stone-massage.jpg"
+    />
     <meta
       property="og:image:secure_url"
       content="/assets/favicons/favicon-stone-massage.jpg"
@@ -109,11 +115,11 @@ const { description, title, preloadedImage } = Astro.props;
     </main>
     <Footer />
 
-    {
+    <!-- {
       !Astro.url.pathname.startsWith('/contact') && (
         <StickyButton phoneNumber="(587) 938-0458" />
       )
-    }
+    } -->
   </body>
 </html>
 

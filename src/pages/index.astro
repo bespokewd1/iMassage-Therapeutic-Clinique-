@@ -179,7 +179,7 @@ posts.sort(
             <div class="mt-8 flex flex-wrap gap-4">
               <a
                 href="https://www.massagebook.com/therapists/StoneMassage?src=external"
-                class="inline-flex items-center justify-center rounded-full border-2 border-emerald-700 bg-emerald-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-emerald-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+                class="inline-flex items-center justify-center rounded-full border-2 border-emerald-200 bg-emerald-200 px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
               >
                 Book Appointment
               </a>
@@ -237,14 +237,14 @@ posts.sort(
   </section>
 
   <!-- ================= CTA (Green band) ================ -->
-  <section class="bg-emerald-700 text-emerald-50">
+  <section class="bg-emerald-200/75 text-emerald-900">
     <div
       class="mx-auto max-w-6xl px-6 py-12 md:py-14 lg:py-16 text-center flex flex-col items-center gap-6"
     >
       <h2 class="font-serif text-3xl leading-tight md:text-4xl lg:text-5xl">
         Restore Balance. Feel Renewed
       </h2>
-      <p class="text-emerald-100">
+      <p class="text-emerald-950">
         Expert therapeutic massage tailored to your needs.
       </p>
       <a
@@ -342,6 +342,57 @@ posts.sort(
                 alt="lady in a stone massage"
                 class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
               />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Why Choose Us ================ -->
+  <section id="why-choose-us" class="px-0">
+    <!-- second content -->
+    <div
+      class="mx-auto px-6 py-12 md:py-14 lg:py-16 grid grid-cols-4 items-stretch gap-0 relative"
+    >
+      <!-- Left: edge-to-edge image -->
+      <div class="relative col-start-2 col-end-4">
+        <Image
+          src={aboutImage2}
+          class="block aspect-square w-full object-cover lg:h-full lg:max-w-[600px]"
+          alt="lady in a stone massage"
+        />
+      </div>
+
+      <!-- Right: text block on light card -->
+      <div
+        class="absolute inset-0 col-start-3 col-end-4 flex items-center justify-center px-6 py-12"
+      >
+        <div
+          class="w-full max-w-[680px] rounded-xl bg-orange-200 shadow-[0_10px_25px_rgba(0,0,0,0.15)] ring-1 ring-black/10"
+        >
+          <div class="p-6 sm:p-8 md:p-10">
+            <h3
+              class="font-serif text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-950"
+            >
+              Welcome to iMassage Therapeutic Clinique
+            </h3>
+
+            <p class="mt-5 text-gray-700 leading-7">
+              At iMassage Therapeutic Clinique, we focus on restorative,
+              evidence‑based massage care tailored to your body’s needs. From
+              deep tissue and hot stone to relaxation-focused treatments, our
+              goal is to reduce pain, release tension, and renew your overall
+              well‑being.
+            </p>
+
+            <div class="mt-8">
+              <a
+                href="/about"
+                class="inline-flex items-center rounded-full border-2 border-gray-900 px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
+              >
+                Learn More
+              </a>
             </div>
           </div>
         </div>
@@ -524,258 +575,5 @@ posts.sort(
   /* Add smooth scrolling to the entire HTML document */
   html {
     scroll-behavior: smooth;
-  }
-
-  /*-- -------------------------- -->
-<---           Hero             -->
-<--- -------------------------- -*/
-
-  /* Mobile - 360px */
-  @media only screen and (min-width: 0em) {
-    #hero {
-      font-family: 'Open Sans', 'Roboto', Arial, sans-serif;
-
-      text-align: center;
-      padding: 0 (16/16rem);
-      padding-bottom: (100/16rem);
-      position: relative;
-      z-index: 1;
-      overflow: hidden;
-      /* Add background attachment for mobile */
-      // background: url('/assets/images/hero-img.avif') center/cover no-repeat;
-      // background-attachment: scroll; /* Default for mobile */
-
-      .cs-picture {
-        width: 100%;
-        height: 100%;
-        display: block;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -2;
-
-        &:before {
-          content: '';
-          width: 100%;
-          height: 100%;
-          opacity: 0.7;
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 0;
-          z-index: 1;
-          pointer-events: none;
-        }
-
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          position: absolute;
-          top: 0;
-          left: 0;
-        }
-      }
-
-      .cs-container {
-        width: 100%;
-        max-width: (1280/16em);
-        margin: auto;
-        /* we put the padding top and bottom on the container instead of #Hero so the pseudo element lines go to the top and bottom of the section */
-        /* 144px - 280px - leaving extra space for the navigation */
-        /* changes on tablet */
-        padding: clamp(9em, 25.95vw, 17.5em) 0;
-        position: relative;
-
-        &:before {
-          /* Left Line */
-          content: '';
-          width: 1px;
-          height: 100%;
-          background: -moz-linear-gradient(
-            top,
-            rgba(250, 251, 252, 0.5) 0%,
-            rgba(250, 251, 252, 0) 100%
-          ); /* FF3.6-15 */
-          background: -webkit-linear-gradient(
-            top,
-            rgba(250, 251, 252, 0.5) 0%,
-            rgba(250, 251, 252, 0) 100%
-          ); /* Chrome10-25,Safari5.1-6 */
-          opacity: 1;
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 0;
-        }
-      }
-
-      .cs-flex-group {
-        width: 80vw;
-        /* 464px - 562px */
-        max-width: clamp(29em, 60vw, 35.125em);
-        margin: auto;
-        /* 60px - 220px */
-        margin-bottom: clamp(3.75em, 15.5vw, 13.75em);
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-
-      .cs-topper {
-        text-align: center;
-        //  margin-bottom: (16/16rem);
-        // color: var(--primary);
-        color: var(--medium);
-      }
-
-      .cs-title {
-        text-align: center;
-        width: 100%;
-        color: var(--bodyTextColorWhite);
-        margin-bottom: 0;
-      }
-
-      .cs-text {
-        text-align: center;
-        /* 32px - 40px */
-        margin: 0 auto clamp(2rem, 4vw, 2.5rem) 0;
-        /* 40px - 48px */
-        margin-bottom: clamp(1.5rem, 4vw, 2rem);
-        color: var(--bodyTextColorWhite);
-      }
-
-      .cs-button-solid {
-        line-height: clamp(2.875em, 5.5vw, 3.5em);
-        height: initial;
-        margin-bottom: calc(16 / 16 * 1rem);
-        padding: 0 1rem;
-        color: var(--bodyTextColorWhite);
-        border-radius: calc(32 / 16 * 1rem);
-        &:before {
-          border-radius: calc(32 / 16 * 1rem);
-        }
-      }
-
-      .cs-button-transparent {
-        font-size: (16/16rem);
-        font-weight: 700;
-        /* 46px - 56px */
-        line-height: clamp(2.875em, 5.5vw, 3.5em);
-        text-decoration: none;
-        //  width: (180/16rem);
-        width: max-content;
-        /* 46px - 56px */
-        height: clamp(2.875em, 5.5vw, 3.5em);
-        margin: 0 (8/16rem);
-        box-sizing: border-box;
-        padding: 0 0.5rem;
-        color: #fff;
-        background-color: transparent;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        z-index: 1;
-
-        &:before {
-          content: '';
-          background: #000;
-          opacity: 1;
-          display: block;
-          position: absolute;
-          /* so it sits on top of the border */
-          top: -1px;
-          right: -1px;
-          bottom: -1px;
-          left: -1px;
-          z-index: -1;
-          /* this is what creates the grow affect on hover */
-          transform: scaleX(0);
-          transition: transform 0.3s;
-          transform-origin: left;
-        }
-
-        &:hover {
-          &:before {
-            transform: scaleX(1);
-          }
-        }
-
-        .cs-img {
-          margin-right: (12/16rem);
-          display: block;
-        }
-      }
-    }
-  }
-
-  /* Tablet - 768px */
-  @media only screen and (min-width: 48em) {
-    #hero {
-      /* 32px - 40px */
-      padding: 0 clamp(2em, 5vw, 2.5em);
-
-      .cs-container {
-        padding: clamp(7em, 27.95vw, 17.5em) 0 clamp(9em, 30.95vw, 23.5em) 0;
-        &:after {
-          /* Right Line */
-          content: '';
-          width: 1px;
-          height: 100%;
-          background: -moz-linear-gradient(
-            top,
-            rgba(250, 251, 252, 0) 0%,
-            rgba(250, 251, 252, 0.5) 100%
-          ); /* FF3.6-15 */
-          background: -webkit-linear-gradient(
-            top,
-            rgba(250, 251, 252, 0) 0%,
-            rgba(250, 251, 252, 0.5) 100%
-          ); /* Chrome10-25,Safari5.1-6 */
-          opacity: 1;
-          display: block;
-          position: absolute;
-          top: 0;
-          right: 0;
-        }
-      }
-
-      .cs-button-solid {
-        // margin-right: (20/16rem);
-        margin-bottom: 0;
-        padding: 0 1.875rem;
-      }
-    }
-  }
-
-  /* Desktop Parallax Effect - 1300px */
-  // @media only screen and (min-width: 64em) {
-  //   #hero {
-  //     background: url('/assets/images/hero-img.avif');
-  //     background-position: center;
-  //     background-size: cover;
-  //     background-repeat: no-repeat;
-  //     background-attachment: fixed; /* Enable parallax on desktop */
-  //     /* Add transform for smoother parallax */
-  //     transform: translate3d(0, 0, 0); /* Enable hardware acceleration */
-  //     will-change: background-position; /* Optimize performance */
-  //   }
-  // }
-
-  /* Dark Mode */
-  @media only screen and (min-width: 0em) {
-    body.dark-mode {
-      #hero {
-        .cs-background {
-          &:before {
-            opacity: 0.8;
-          }
-        }
-      }
-    }
   }
 </style>
