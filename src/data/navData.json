@@ -5,13 +5,27 @@
     "children": []
   },
   {
+    "key": "About Us",
+    "url": "/about",
+    "children": [
+      {
+        "key": "Our Story",
+        "url": "/about/story"
+      },
+      {
+        "key": "Our Team",
+        "url": "/about/team"
+      }
+  ]
+  },
+  {
     "key": "Services",
-    "url": "/#massage-services",
+    "url": "/services/",
     "children": []
   },
   {
-    "key": "Mobile Massage",
-    "url": "/mobile-massage/",
+    "key": "Contact Us",
+    "url": "/contact/",
     "children": []
   },
   {
@@ -20,20 +34,8 @@
     "children": []
   },
   {
-    "key": "Wellness Blog",
-    "url": "/blog/",
-    "children": []
-  },
-  {
-    "key": "Gallery",
-    "url": "/gallery/",
-    "children": [
-     
-    ]
-  },
-  {
-    "key": "Contact",
-    "url": "/contact/",
+    "key": "Book Appointment",
+    "url": "/appointments/",
     "children": []
   }
 ]

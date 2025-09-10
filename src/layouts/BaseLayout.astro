@@ -6,7 +6,7 @@ import Footer from '@components/Footer.astro';
 import StickyButton from '@components/StickyButton.astro';
 import ScrollToTop from '@components/ScrollToTop.astro';
 import '@styles/root.less';
-import '@styles/dark.less';
+// import '@styles/dark.less';
 import '../styles/global.css';
 
 const { description, title, preloadedImage } = Astro.props;
@@ -149,7 +149,7 @@ const { description, title, preloadedImage } = Astro.props;
     theme === 'dark' ? enableDarkMode() : disableDarkMode();
   }
 
-  setTheme();
+  // setTheme();
 
-  document.addEventListener('astro:after-swap', setTheme); // For View Transitions purposes - astro:after-swap ensures that the theme is kept after navigating to a new page.
+  // document.addEventListener('astro:after-swap', setTheme); // For View Transitions purposes - astro:after-swap ensures that the theme is kept after navigating to a new page.
 </script>

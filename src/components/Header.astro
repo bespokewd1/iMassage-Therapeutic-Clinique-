@@ -12,27 +12,15 @@ interface Props extends HTMLAttributes<'header'> {}
 const props = Astro.props as Props;
 ---
 
-<!-- ============================================ --><!--                 Navigation                   --><!-- ============================================ -->
-<!--Banner at the Top - Display on Mobile -->
+<!-- ============================================ --><!--                 Navigation                   --><!-- ============================================ --><!--Banner at the Top - Display on Mobile -->
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 </style>
-<header id="cs-navigation" {...props}>
-  <!-- Fixed Announcement Bar -->
-  <div
-    class="fixed h-[40px] flex top-0 left-0 w-full z-50 bg-[#f3117e] text-muted text-sm dark:bg-transparent dark:border-b dark:border-slate-800 dark:text-slate-400  md:flex gap-1 overflow-hidden px-3 py-2 text-ellipsis whitespace-nowrap"
-  >
-    <a
-      class="inline-block animate-scroll px-4 text-white animate-[scroll_15s_linear_infinite] lg:animate-none"
-    >
-      🎉Offering professional in-clinic and in-home massage in Edmonton & Nearby. Call now for mobile massage, or book in-clinic online
-    </a>
-  </div>
-
+<header id="cs-navigation" class="bg-green-200/75" {...props}>
   <!-- Push content below the fixed top bar -->
-  <div class="pt-12 cs-container">
+  <div class="cs-container justify-start">
     <!-- Logo -->
-    <a href="/" class="cs-logo" aria-label="back to home">
+    <a href="/" class="cs-logo mr-0" aria-label="back to home">
       <Image
         src={MainLogo}
         alt="Main logo massage"
@@ -59,7 +47,7 @@ const props = Astro.props as Props;
 
       <!-- Navigation Items -->
       <div class="cs-ul-wrapper">
-        <ul id="cs-expanded-ul" class="cs-ul">
+        <ul id="cs-expanded-ul" class="cs-ul gap-2">
           {
             navData.map((entry) => (
               <li
@@ -73,37 +61,48 @@ const props = Astro.props as Props;
                     aria-expanded="false"
                     aria-controls={`submenu-${entry.key}`}
                     class:list={[
-                      'cs-li-link cs-dropdown-button',
+                      'cs-li-link cs-dropdown-button before:hidden',
+                      'rounded-full bg-orange-50 px-3 py-1 text-gray-950 hover:bg-orange-100 transition-colors ',
                       { 'cs-active': Astro.url.pathname.includes(entry.url) },
                     ]}
                   >
                     {entry.key}
-                    <Icon name="mdi--caret" class="cs-drop-icon" style="font:bold" />
+                    {/* <Icon name="mdi--caret" class="cs-drop-icon" style="font:bold" /> */}
                   </button>
                 ) : (
                   <a
                     href={entry.url}
                     class:list={[
-                      'cs-li-link',
-                      { 'cs-active': Astro.url.pathname === entry.url },
+                      'cs-li-link before:hidden',
+                      'rounded-full bg-orange-50 px-3 py-1 text-gray-950 hover:bg-orange-100 transition-colors ',
+                      {
+                        'cs-active bg-orange-200 text-gray-50':
+                          Astro.url.pathname === entry.url,
+                      },
                     ]}
                     aria-current={
                       Astro.url.pathname === entry.url ? 'page' : undefined
                     }
                   >
+                    {/* bg-(--btn-secondary-bg)  */}
                     {entry.key}
                   </a>
                 )}
 
                 {entry.children?.length > 0 && (
-                  <ul id={`submenu-${entry.key}`} class="cs-drop-ul">
+                  <ul
+                    id={`submenu-${entry.key}`}
+                    class="cs-drop-ul rounded-xl bg-orange-50"
+                  >
                     {entry.children.map((child) => (
                       <li class="cs-drop-li">
                         <a
                           href={child.url}
                           class="cs-li-link cs-drop-link"
                           aria-current={
-                            Astro.url.pathname === child.url ? 'page' : undefined
+                            Astro.url.pathname === child.url
+                              ? 'page'
+                              : undefined
                           }
                         >
                           {child.key}
@@ -117,46 +116,52 @@ const props = Astro.props as Props;
           }
 
           <!-- Book Online Button -->
-          <li>
+          <!-- <li>
             <button onclick="document.getElementById('popup').classList.remove('hidden')" class="cs-button-solid flex justify-center items-center leading-none">
             Book Online
           </button>
-          </li>
+          </li> -->
         </ul>
       </div>
     </nav>
 
     <!-- Dark Mode Toggle -->
-    <div class="dark-mode-wrapper">
+    <!-- <div class="dark-mode-wrapper">
       <DarkModeToggle />
-    </div>
+    </div> -->
   </div>
 </header>
 <!-- Popup Overlay -->
-          <div id="popup" class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[9999] hidden">
-            <div class="p-6 rounded-xl shadow-xl w-11/12 max-w-md" style="background: rgba(255, 255, 255, 0.3);">
-              <div class="flex flex-col gap-4">
-                <a
-                  href="https://www.massagebook.com/therapists/StoneMassage?src=external"
-                  class="cs-button-solid rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem]"
-                >
-                  Book In-Clinic Appointment (Online)
-                </a>
-                <a
-                  href="tel:587-938-0458"
-                  class="cs-button-solid rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem]"
-                >
-                  Call to Book In-Home Massage
-                </a>
-                <button
-                  onclick="document.getElementById('popup').classList.add('hidden')"
-                  class="text-sm text-white-500 hover:text-white mt-2"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
+<div
+  id="popup"
+  class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[9999] hidden"
+>
+  <div
+    class="p-6 rounded-xl shadow-xl w-11/12 max-w-md"
+    style="background: rgba(255, 255, 255, 0.3);"
+  >
+    <div class="flex flex-col gap-4">
+      <a
+        href="https://www.massagebook.com/therapists/StoneMassage?src=external"
+        class="cs-button-solid rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem]"
+      >
+        Book In-Clinic Appointment (Online)
+      </a>
+      <a
+        href="tel:587-938-0458"
+        class="cs-button-solid rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem]"
+      >
+        Call to Book In-Home Massage
+      </a>
+      <button
+        onclick="document.getElementById('popup').classList.add('hidden')"
+        class="text-sm text-white-500 hover:text-white mt-2"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>
 
 <style lang="less">
   /*-- -------------------------- -->
@@ -173,14 +178,15 @@ const props = Astro.props as Props;
 
     #cs-navigation {
       /* remove the font family so the Stitch inherits the fonts from your global stylesheet */
-      font-family: "Poppins",sans-serif;
+      font-family: 'Poppins', sans-serif;
       font-weight: bold;
-      
+
       width: 100%;
       /* prevents padding from affecting height and width */
       box-sizing: border-box;
       padding: (12/16rem) (16/16rem);
-      background-color: rgba(var(--primary-rgb), 0.3);
+      // background-color: rgba(var(--primary-rgb), 0.3);
+      background-color: var(--primary);
       backdrop-filter: blur(30px);
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
       position: fixed;
@@ -206,10 +212,10 @@ const props = Astro.props as Props;
       }
 
       &.cs-active {
-        &:before {
-          width: 100%;
-          opacity: 1;
-        }
+        // &:before {
+        //   width: 100%;
+        //   opacity: 1;
+        // }
 
         .cs-ul-wrapper {
           opacity: 1;
@@ -453,11 +459,13 @@ const props = Astro.props as Props;
           position: absolute;
           bottom: (-2/16rem);
           left: 0;
+          display: none;
         }
 
         &.cs-active {
           &:before {
-            display: block;
+            // display: block;
+            display: none;
           }
         }
       }
@@ -587,12 +595,16 @@ const props = Astro.props as Props;
     #cs-navigation {
       .cs-dropdown {
         position: relative;
+        .cs-drop-ul {
+          translate: 0 -20px;
+        }
         &:hover,
         &.cs-active {
           cursor: pointer;
           .cs-drop-ul {
             opacity: 1;
             visibility: visible;
+            // transform: scaleY(1);
             transform: scaleY(1);
           }
 
@@ -779,16 +791,17 @@ const props = Astro.props as Props;
   @media only screen and (min-width: 64rem) {
     #cs-navigation {
       /* remove the font family so the Stitch inherits the fonts from your global stylesheet */
-      font-family: "Poppins", sans-serif;
+      font-family: 'Poppins', sans-serif;
       font-weight: 400;
       font-size: bold;
-      letter-spacing: .05rem;
+      letter-spacing: 0.05rem;
       width: 100%;
       /* prevents padding from affecting height and width */
       box-sizing: border-box;
       padding: 0 (16/16rem);
       //  background-color: #fff;
-      background-color: rgba(var(--primary-rgb), 0.3);
+      // background-color: rgba(var(--primary-rgb), 0.3);
+      background-color: var(--primary);
       backdrop-filter: blur(30px);
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
       position: fixed;
@@ -907,12 +920,11 @@ const props = Astro.props as Props;
     }
   }
   @keyframes scroll {
-  0% {
-    transform: translateX(100%);
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
 </style>

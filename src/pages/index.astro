@@ -36,7 +36,6 @@ import ThaiOilIcon from '@components/Icons/massages/ThaiOilIcon.astro';
 import PrenatalIcon from '@components/Icons/massages/PrenatalIcon.astro';
 import KidsIcon from '@components/Icons/massages/KidsIcon.astro';
 
-
 const optimizedImage = await getOptimizedImage(landingImage);
 
 const promotionInfo: PromotionProps[] = [
@@ -112,7 +111,11 @@ posts.sort(
   (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
 );
 ---
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
 <BaseLayout
   title="Hot Stone Massage Edmonton - Professional Massage Therapy"
   description="Professional massage therapy for relaxation, pain relief, and overall wellness in Edmonton."
@@ -122,236 +125,235 @@ posts.sort(
   <!--                    Hero                      -->
   <!-- ============================================ -->
 
-  <section id="hero">
-    <div class="cs-container">
-      <div class="cs-flex-group">
-        <span class="cs-topper mt-12">Hot Stone Massage - Edmonton</span>
-        <h1 class="cs-title">Relax. Rejuvenate. Revive.</h1>
-        <p class="cs-text mt-28">
-          Professional massage therapy for relaxation, pain relief, and overall
-          wellness in Edmonton.
-        </p>
-        <!-- <a href="/about" class="cs-button-solid">Call Now (780-123-4567)</a> -->
-        <a
-          href="tel:587-938-0458"
-          class="cs-button-solid w-[300px] rounded-full mt-8 text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem] lg:w-[220px] xl:w-[230px]"
-          >
-          <span class="text-[1rem]">Call for Mobile Massage</span> <i class="fas fa-phone text-[#28a745] ml-1"></i>
-         </a>
-        <a
-          href="https://www.massagebook.com/therapists/StoneMassage?src=external"
-          class="cs-button-solid w-[300px]  rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem] lg:w-[230px] lg:mt-8"
-          >
-          <span class="text-[1rem]">Book In-Clinic Massage </span> <i class="fas fa-calendar text-[#28a745]"></i>
-          </a>
-      </div>
-    </div>
+  <section id="hero" class="bg-orange-50 px-0">
+    <div class="mx-auto grid grid-cols-2 items-stretch gap-0">
+      <!-- Left: edge-to-edge image -->
+      <div class="relative col-span-1">
+        <!-- <Picture
+          src={heroImg}
+          alt="lady in a stone massage"
+          formats={['avif', 'webp']}
+          pictureAttributes={{
+            class:
+              'block aspect-video w-full object-cover lg:h-full lg:min-h-[770px]',
+          }}
+          loading="eager"
+        /> -->
 
-    <!-- Background Image -->
-    <!-- We can't use Astro <Picture /> as it does not support multiple sources -->
-    <!-- <ImageSlider imgDatas={heroImages} isAutoSlide client:visible /> -->
-    <Picture
-      src={heroImg}
-      alt="lady in a stone massage"
-      formats={['avif', 'webp']}
-      pictureAttributes={{ class: 'cs-picture hidden' }}
-      loading="eager"
-    />
-  </section>
-  <!-- Popup Overlay -->
-          <div id="popup" class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[9999] hidden">
-            <div class="p-6 rounded-xl shadow-xl w-11/12 max-w-md" style="background: rgba(255, 255, 255, 0.3);">
-              <div class="flex flex-col gap-4">
-                <a
-                  href="https://www.massagebook.com/therapists/StoneMassage?src=external"
-                  class="cs-button-solid rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem]"
-                >
-                  Book In-Clinic Appointment (Online)
-                </a>
-                <a
-                  href="tel:587-938-0458"
-                  class="cs-button-solid rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem]"
-                >
-                  Call to Book In-Home Massage
-                </a>
-                <button
-                  onclick="document.getElementById('popup').classList.add('hidden')"
-                  class="text-sm text-white-500 hover:text-white mt-2"
-                >
-                  Close
-                </button>
-              </div>
+        <Image
+          loading={'eager'}
+          src={heroImg}
+          class="block aspect-video w-full object-cover lg:h-full lg:min-h-[770px]"
+          alt="lady in a stone massage"
+        />
+      </div>
+
+      <!-- Right: text block on light card -->
+      <div
+        class="relative flex items-center justify-center px-6 py-12 col-span-1"
+      >
+        <div class="w-full max-w-xl">
+          <div class="p-8 md:p-10">
+            <!-- Topper (optional) -->
+            <!-- <span class="block text-sm font-semibold tracking-wide text-gray-600">
+              Hot Stone Massage - Edmonton
+            </span> -->
+
+            <!-- Big serif headline -->
+            <h1
+              class="font-serif text-left text-3xl leading-tight text-gray-950 md:text-4xl lg:text-5xl"
+            >
+              Restore, Rejuvenate,
+              <br class="hidden sm:block" />
+              and Feel Your Best
+            </h1>
+
+            <!-- Supporting paragraph -->
+            <p class="mt-6 text-base leading-7 text-gray-700 text-left">
+              Personalized therapeutic massage in Edmonton—deep tissue, Swedish,
+              and hot stone treatments designed to relieve pain, calm the mind,
+              and enhance everyday performance.
+            </p>
+
+            <!-- CTAs -->
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a
+                href="https://www.massagebook.com/therapists/StoneMassage?src=external"
+                class="inline-flex items-center justify-center rounded-full border-2 border-emerald-700 bg-emerald-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-emerald-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+              >
+                Book Appointment
+              </a>
             </div>
           </div>
-  <!-- ============================================ -->
-  <!--                  Introduction                -->
-  <!-- ============================================ -->
-  <section id="introduction" class="glass-bg">
-    <div class="cs-container">
-      <div class="cs-flex-group">
-        <span class="cs-topper">Welcome to</span>
-        <h1 class="cs-title">HOT STONE MASSAGE</h1>
-        <h1 class="cs-title">EDMONTON</h1>
-        <p class="cs-text">
-          Pamper yourself with an expert masseuse trained in various massage
-          techniques.
-        </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- second content -->
+    <div class="mx-auto mt-4 grid grid-cols-4 items-stretch gap-0 relative">
+      <!-- Left: edge-to-edge image -->
+      <div class="relative col-start-2 col-end-4">
+        <Image
+          src={aboutImage2}
+          class="block aspect-square w-full object-cover lg:h-full lg:max-w-[600px]"
+          alt="lady in a stone massage"
+        />
+      </div>
+
+      <!-- Right: text block on light card -->
+      <div
+        class="absolute inset-0 col-start-3 col-end-4 flex items-center justify-center px-6 py-12"
+      >
+        <div
+          class="w-full max-w-[680px] rounded-xl bg-orange-200 shadow-[0_10px_25px_rgba(0,0,0,0.15)] ring-1 ring-black/10"
+        >
+          <div class="p-6 sm:p-8 md:p-10">
+            <h3
+              class="font-serif text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-950"
+            >
+              Welcome to iMassage Therapeutic Clinique
+            </h3>
+
+            <p class="mt-5 text-gray-700 leading-7">
+              At iMassage Therapeutic Clinique, we focus on restorative,
+              evidence‑based massage care tailored to your body’s needs. From
+              deep tissue and hot stone to relaxation-focused treatments, our
+              goal is to reduce pain, release tension, and renew your overall
+              well‑being.
+            </p>
+
+            <div class="mt-8">
+              <a
+                href="/about"
+                class="inline-flex items-center rounded-full border-2 border-gray-900 px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!--                  Promotions                    -->
-  <!-- ============================================ -->
-
-  <section id="services" class="services">
-    <h2 class="cs-header">Announcement</h2>
-    <article class="card">
-      <Picture
-        src={promoImag1}
-        alt="lady in a stone massage"
-        formats={['avif', 'webp']}
-        pictureAttributes={{ class: 'cs-picture' }}
-      />
-
-      <h3>Licensed & Insured</h3>
-    </article>
-
-    <article class="card">
-      <Picture
-        src={promoImag2}
-        alt="lady in a stone massage"
-        formats={['avif', 'webp']}
-        pictureAttributes={{ class: 'cs-picture' }}
-      />
-      <h3>Direct Billing Available</h3>
-    </article>
-
-    <article class="card">
-      <Picture
-        src={promoImag3}
-        alt="lady in a stone massage"
-        formats={['avif', 'webp']}
-        pictureAttributes={{ class: 'cs-picture' }}
-      />
-      <h3>Get a Massage Gift Certificate</h3>
-    </article>
-  </section>
-
-  <!-- ============================================ -->
-  <!--               Promotional                    -->
-  <!-- ============================================ -->
-
-  <!-- <section class="relative max-w-[80rem] p-(--sectionPadding) mx-auto">
-    <h2 class="text-(length:--headerFontSize) text-center">
-      Our Massage Services
-    </h2>
-
-    <button
-      id="scrollLeft"
-      class="absolute left-1 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-md hidden md:block lg:hidden"
-      aria-label="Scroll left"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-    </button>
-
+  <!-- ================= CTA (Green band) ================ -->
+  <section class="bg-emerald-700 text-emerald-50">
     <div
-      id="cardsContainer"
-      class:list={[
-        'py-12 px-5 grid-flow-col auto-cols-[100%] grid gap-6 ',
-        'overflow-x-auto overscroll-x-contain snap-x [&::-webkit-scrollbar]:hidden [scrollbar-width:none]',
-        'md:gap-4 *:place-self-center',
-        'lg:auto-cols-auto lg:grid-flow-row lg:grid-cols-3 *:self-stretch ',
-        'scroll-smooth *:justify-self-stretch ', // Added for smooth scrolling
-      ]}
+      class="mx-auto max-w-6xl px-6 py-12 md:py-14 lg:py-16 text-center flex flex-col items-center gap-6"
     >
-      {
-        promotionInfo.map((promo) => (
-          <PromotionCard
-            imgSrc={promo.imgSrc}
-            title={promo.title}
-            description={promo.description}
-          />
-        ))
-      }
+      <h2 class="font-serif text-3xl leading-tight md:text-4xl lg:text-5xl">
+        Restore Balance. Feel Renewed
+      </h2>
+      <p class="text-emerald-100">
+        Expert therapeutic massage tailored to your needs.
+      </p>
+      <a
+        href="/contact"
+        class="inline-flex items-center rounded-full bg-orange-200 hover:bg-orange-100 transition-colors text-gray-900 px-6 py-3 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
+      >
+        Contact Us
+      </a>
+    </div>
+  </section>
+
+  <!-- ================= Services ================= -->
+  <section class="bg-orange-50">
+    <!-- Intro -->
+    <div class="mx-auto max-w-6xl px-6 py-16 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="font-serif text-3xl md:text-4xl text-gray-950">
+          Our Services
+        </h2>
+        <p class="mt-4 text-gray-700 leading-7">
+          From deep tissue and hot stone to relaxing Swedish massage, each
+          session at iMassage Therapeutic Clinique is customized to your
+          goals—reducing pain, improving mobility, and helping you feel your
+          best.
+        </p>
+      </div>
     </div>
 
-    <button
-      id="scrollRight"
-      class="absolute right-1 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-md hidden md:block lg:hidden"
-      aria-label="Scroll right"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
-    </button>
-  </section> -->
-  <!-- ============================================ -->
-  <!--               MOBILE MASSAGE                 -->
-  <!-- ============================================ -->
-   <section class="mobile mt-8" >
-      <div class="w-5/6 flex flex-col justify-center items-center " style="margin: auto;">
-        <h1 class="text-3xl text-center md:text-5xl text-[var(--primary)]" style="animation: blink 1s step-start infinite;">Mobile Massage Available– We Come to You!</h1>
-        <p class="text-left mt-2">Experience the ultimate relaxation without leaving your home. 
-          Our mobile massage service brings the full spa experience right to your doorstep — 
-          complete with a professional massage table, cozy warm towels, soothing lotion, and optional add-ons like:
-        </p>
-        <div class="w-5/6 flex flex-col justify-center items-center place-items-center mt-4 sm:w-5/6 md:w-full md:flex-row md:items-start md:justify-evenly md:mt-8">
-          <div class="w-full flex flex-row justify-start items-center mb-8 md:flex-col">
-            <img src="assets/images/stone-massage.png" class="w-1/3">
-            <h1 class="text-2xl md:text-center">Hot Stone Therapy</h1>
-          </div>
-          <div class="w-full flex flex-row justify-start items-center mb-8 md:flex-col">
-            <img src="assets/images/cupping-theraphy.png" class="w-1/3">
-            <h1 class="text-2xl md:text-center">Cupping Treatment</h1>
-          </div>
-          <div class="w-full flex flex-row justify-start items-center mb-8 md:flex-col">
-            <img src="assets/images/foot-massage.png" class="w-1/3">
-            <h1 class="text-2xl md:text-center">Foot Scrub</h1>
+    <!-- Image row with overlay card on orange-200 -->
+    <div class="mx-auto max-w-7xl px-0">
+      <div class="grid grid-cols-1 md:grid-cols-12 items-stretch">
+        <!-- Left image -->
+        <div class="md:col-span-6">
+          <Image
+            src={aboutImage1}
+            alt="lady in a stone massage"
+            class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
+          />
+        </div>
+
+        <!-- Middle card on orange-200 -->
+        <div
+          class="bg-orange-200 md:col-span-6 flex items-center justify-center px-6 py-10"
+        >
+          <div class="w-full max-w-xl text-center md:text-left">
+            <h3 class="text-gray-900 font-semibold tracking-wide">
+              Therapeutic Deep-Tissue / Relaxation Massage
+            </h3>
+            <p class="mt-4 text-gray-700 leading-7">
+              Target chronic tension and restore ease of movement with focused
+              deep‑tissue work—balanced with soothing relaxation techniques for
+              a calm, refreshed body and mind.
+            </p>
+            <div class="mt-6">
+              <a
+                href="/services"
+                class="inline-flex items-center rounded-full border-2 border-gray-900 px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
+              >
+                View Services
+              </a>
+            </div>
           </div>
         </div>
-        <p class="text-left mt-2 italic">Whether you need stress relief or targeted therapy, enjoy 
-          personalized care in the comfort and privacy of your own space.
-        </p>
-        <div class="w-full flex flex-row justify-center items-center mt-8 ">
-            <h1 class="text-3xl">📍</h1>
-            <h1 class="text-xl md:text-center">Serving Edmonton & Nearby Areas</h1>
+
+        <!-- Right image (stretches full width on small, aligns in grid on md+) -->
+        <div class="md:col-span-12">
+          <div class="grid grid-cols-1 md:grid-cols-12">
+            <div class="md:col-span-6 order-2 md:order-1">
+              <div
+                class="bg-orange-200 w-full h-full flex items-center justify-center px-6 py-10"
+              >
+                <div class="w-full max-w-xl text-center md:text-left">
+                  <h3 class="text-gray-900 font-semibold tracking-wide">
+                    Therapeutic Hot Stone Massage
+                  </h3>
+                  <p class="mt-4 text-gray-700 leading-7">
+                    Sink into deeper relaxation with heated basalt stones that
+                    gently melt muscular tension, boost circulation, and promote
+                    overall well‑being.
+                  </p>
+                  <div class="mt-6">
+                    <a
+                      href="/services"
+                      class="inline-flex items-center rounded-full border-2 border-gray-900 px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
+                    >
+                      Learn More
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="md:col-span-6 order-1 md:order-2">
+              <Image
+                src={aboutImage2}
+                alt="lady in a stone massage"
+                class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
+              />
+            </div>
+          </div>
         </div>
-        <a
-          href="tel:587-938-0458"
-          class="h-auto cs-button-solid w-[300px] rounded-full mt-8 text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem] lg:w-[220px] xl:w-[230px]"
-          >
-          <span class="text-[1rem]">Call for Mobile Massage</span> <i class="fas fa-phone text-[#28a745] ml-1"></i>
-         </a>
       </div>
-   </section>
+    </div>
+  </section>
+
   <!-- ============================================ -->
   <!--               Services                    -->
   <!-- ============================================ -->
 
-  <section
+  <!-- <section
     id="massage-services"
     class="relative overflow-hidden p-(--sectionPadding) lg:max-w-[80rem] mx-auto gap-4 flex flex-col md:gap-8"
   >
@@ -367,292 +369,13 @@ posts.sort(
       }}
       class="object-cover w-full h-full"
     />
-  </section>
+  </section> -->
 
-  <!-- ============================================ -->
-  <!--                 Side By Side                 -->
-  <!-- ============================================ -->
-
-  <section id="sbs" class="glass-bg">
-    <div class="cs-container">
-      <!-- Left Image Section -->
-      <div class="cs-left">
-        <Picture
-          src={aboutImage1}
-          formats={['avif', 'webp']}
-          alt="massage therapist"
-          pictureAttributes={{ class: 'cs-picture cs-picture1' }}
-        />
-        <Picture
-          src={aboutImage2}
-          formats={['avif', 'webp']}
-          alt="massage therapist"
-          pictureAttributes={{ class: 'cs-picture cs-picture2' }}
-        />
-      </div>
-      <!-- Right Content Section-->
-      <div class="cs-right">
-        <span class="cs-topper">About Us</span>
-        <h2 class="cs-title">Stone Massage</h2>
-        <p class="cs-text">
-          At Stone Massage Edmonton, we are dedicated to providing therapeutic
-          massage services that promote relaxation, reduce pain, and improve
-          overall wellness. Whether you're dealing with muscle tension, stress,
-          or simply need a moment of relaxation, our skilled therapists are here
-          to help you feel your best.
-        </p>
-        <p class="cs-text">
-          With years of experience, we pride ourselves on creating a calming
-          environment where you can unwind and experience the therapeutic
-          benefits of massage. From Swedish and deep tissue massages to hot
-          stone therapy, we offer a range of services tailored to your
-          individual needs.
-        </p>
-        <div class="cs-flex-group">
-          <p class="cs-flex-p">
-            We believe in a personalized approach to each session. Our
-            therapists work with you to understand your unique concerns,
-            ensuring that every massage is focused on your health and
-            relaxation.
-          </p>
-          <span class="cs-name">Cecilia Batu</span>
-          <span class="cs-job">Founder & Lead Therapist</span>
-          <img
-            class="cs-quote-icon"
-            loading="lazy"
-            decoding="async"
-            src="https://csimg.nyc3.digitaloceanspaces.com/SideBySide/quote-white.svg"
-            alt="quote"
-            width="136"
-            height="77"
-          />
-        </div>
-        <a href="/services" class="cs-button-solid rounded-button"
-          >Our Services</a
-        >
-      </div>
-    </div>
-  </section>
-  <!-- ============================================ -->
-  <!--                Why Choose Us?                -->
-  <!-- ============================================ -->
-  <section id="sbs-1067" class="glass-bg">
-    <div class="cs-container">
-      <h2 class="cs-title">Why Choose Healing Touch Massage Therapy?</h2>
-      <div class="cs-content">
-        <div>
-          <div class="content">
-            <Picture
-              src={checkMark}
-              alt="lady in a stone massage"
-              formats={['avif', 'webp']}
-              pictureAttributes={{ class: 'cs-picture' }}
-            />
-            <div>
-              <p><b>Certified & Skilled Therapists</b></p>
-              <p>Trained professionals ensuring quality care.</p>
-            </div>
-          </div>
-        </div>
-        <div class="content">
-          <Picture
-            src={checkMark}
-            alt="lady in a stone massage"
-            formats={['avif', 'webp']}
-            pictureAttributes={{ class: 'cs-picture' }}
-          />
-          <div>
-            <p><b>Convenient Home Service</b></p>
-            <p>Relax without leaving your space.</p>
-          </div>
-        </div>
-        <div class="content">
-          <Picture
-            src={checkMark}
-            alt="lady in a stone massage"
-            formats={['avif', 'webp']}
-            pictureAttributes={{ class: 'cs-picture' }}
-          />
-          <div>
-            <p><b>Personalized Experience</b></p>
-            <p>Tailored massages for your unique needs.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================ -->
-  <!--                   Reviews                    -->
-  <!-- ============================================ -->
-  <section id="reviews">
-    <div class="cs-container">
-      <span class="cs-topper">Our Reviews</span>
-      <h2 class="cs-title">Words From Our Happy Clients</h2>
-      <p class="cs-text">
-        At Healing Touch Massage Therapy, we pride ourselves on providing
-        exceptional care. Here's what some of our clients have to say about
-        their experience with us.
-      </p>
-
-      <div class="relative lg:contents">
-        <button
-          id="scrollLeft"
-          class="backdrop-blur-lg absolute left-1 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-md hidden xmd:hidden"
-          aria-label="Scroll left"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-        <ul id="reviews-container" class="cs-card-group mobile-scroll-x">
-          <!-- Review 1 -->
-          <li class="cs-item">
-            <img
-              class="cs-item-img"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/profile5.png"
-              alt="profile picture"
-              width="80"
-              height="80"
-            />
-            <p class="cs-item-p">
-              "I had an amazing experience at Healing Touch. The massage was
-              exactly what I needed to relieve my stress and muscle tension. I
-              left feeling completely relaxed and rejuvenated. Highly recommend
-              to anyone looking for a professional, therapeutic massage."
-            </p>
-            <span class="cs-reviewer">
-              Sarah L.
-              <span class="cs-desc">Client</span>
-            </span>
-            <img
-              class="cs-item-stars"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/stars-yellow.svg"
-              alt="stars"
-              width="96"
-              height="16"
-            />
-          </li>
-          <!-- Review 2 -->
-          <li class="cs-item">
-            <img
-              class="cs-item-img"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/profile-4.png"
-              alt="profile picture"
-              width="80"
-              height="80"
-            />
-            <p class="cs-item-p">
-              "The best massage therapy experience I've had! The therapist was
-              professional and really listened to my needs. I walked out feeling
-              refreshed and with significantly less pain in my lower back. I’ll
-              definitely be coming back!"
-            </p>
-            <span class="cs-reviewer">
-              James T.
-              <span class="cs-desc">Client</span>
-            </span>
-            <img
-              class="cs-item-stars"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/stars-yellow.svg"
-              alt="stars"
-              width="96"
-              height="16"
-            />
-          </li>
-          <!-- Review 3 -->
-          <li class="cs-item">
-            <img
-              class="cs-item-img"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/profile6.png"
-              alt="profile picture"
-              width="80"
-              height="80"
-            />
-            <p class="cs-item-p">
-              "I’ve tried a few massage therapy places, but Healing Touch is by
-              far the best. The environment is peaceful, and the staff is
-              friendly and knowledgeable. My therapist worked wonders on my neck
-              and shoulders. I can’t wait for my next visit!"
-            </p>
-            <span class="cs-reviewer">
-              Emily W.
-              <span class="cs-desc">Client</span>
-            </span>
-            <img
-              class="cs-item-stars"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/stars-yellow.svg"
-              alt="stars"
-              width="96"
-              height="16"
-            />
-          </li>
-        </ul>
-
-        <button
-          id="scrollRight"
-          class="backdrop-blur-lg absolute right-1 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow-md hidden xmd:hidden"
-          aria-label="Scroll right"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
-      </div>
-
-      <a
-        aria-label="read more reviews"
-        href="https://www.massagebook.com/therapists/StoneMassage/reviews"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="cs-button-solid rounded-button">Our Reviews</a
-      >
-    </div>
-  </section>
-
-  <FAQ />
+  <!-- <FAQ /> -->
   <!-- ============================================ -->
   <!--                 Blog Section                 -->
   <!-- ============================================ -->
-  <section id="blog" class="glass-bg">
+  <!-- <section id="blog" class="glass-bg">
     <div class="cs-container">
       <div class="cs-content">
         <span class="cs-topper">Our Blog</span>
@@ -662,9 +385,6 @@ posts.sort(
         </p>
       </div>
       <div class="main-content">
-        <!-- ============================================ -->
-        <!--                 Blog Articles                -->
-        <!-- ============================================ -->
         {posts.length === 0 && <h1>No Recent Posts</h1>}
         {
           posts.length >= 1 &&
@@ -691,7 +411,6 @@ posts.sort(
                         decoding="async"
                       />
                     </picture>
-                    <!--this is the original -->
                     {/* <span class="blog-author">{post.data.author}</span>
                     <span aria-hidden="true" class="blog-dot" />
                     <span class="blog-date">{formatDate(post.data.date)}</span> */}
@@ -710,15 +429,14 @@ posts.sort(
         }
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- ============================================ -->
   <!--            Extra Content To Rank             -->
   <!-- ============================================ -->
 
-  <section id="sbs-r">
+  <!-- <section id="sbs-r">
     <div class="cs-container">
-      <!-- Left Image Section -->
       <div class="cs-left">
         <picture class="cs-picture cs-picture1">
           <source
@@ -759,7 +477,6 @@ posts.sort(
           />
         </picture>
       </div>
-      <!-- Right Content Section-->
       <div class="cs-right">
         <span class="cs-topper">Benefits of Massage Therapy</span>
         <h2 class="cs-title">Reap the Benefits of Massage Therapy Today</h2>
@@ -798,203 +515,10 @@ posts.sort(
         >
       </div>
     </div>
-  </section>
+  </section> -->
 
-  <CTA />
+  <!-- <CTA /> -->
 </BaseLayout>
-
-<script>
-  // TypeScript type definitions
-  interface ScrollState {
-    currentIndex: number;
-    totalItems: number;
-  }
-
-  // Get DOM elements with appropriate type assertions
-  const scrollLeftBtn = document.getElementById(
-    'scrollLeft'
-  ) as HTMLButtonElement | null;
-  const scrollRightBtn = document.getElementById(
-    'scrollRight'
-  ) as HTMLButtonElement | null;
-  const cardsContainer = document.getElementById(
-    'reviews-container'
-  ) as HTMLDivElement | null;
-
-  // Initialize state to track current position
-  const state: ScrollState = {
-    currentIndex: 0,
-    totalItems: 3, // Fixed to your items
-  };
-
-  // Show/hide arrows based on current index
-  function updateArrowVisibility(): void {
-    if (!scrollLeftBtn || !scrollRightBtn) return;
-
-    // Hide left arrow if at the beginning
-    scrollLeftBtn.classList.toggle('invisible', state.currentIndex === 0);
-
-    // Hide right arrow if at the end
-    scrollRightBtn.classList.toggle(
-      'invisible',
-      state.currentIndex === state.totalItems - 1
-    );
-
-    // In desktop mode (lg breakpoint), hide both arrows since all items are visible
-    const isDesktop = window.matchMedia('(min-width: 49rem)').matches;
-    if (isDesktop) {
-      scrollLeftBtn.classList.add('hidden');
-      scrollRightBtn.classList.add('hidden');
-    } else {
-      scrollLeftBtn.classList.remove('hidden');
-      scrollRightBtn.classList.remove('hidden');
-    }
-  }
-
-  // Scroll to a specific item by index
-  function scrollToIndex(index: number): void {
-    if (!cardsContainer) return;
-
-    // Ensure index is within bounds
-    index = Math.max(0, Math.min(index, state.totalItems - 1));
-
-    // Calculate the target scroll position
-    const itemWidth = cardsContainer.clientWidth;
-    const targetScroll = index * itemWidth;
-
-    // Perform the scroll with animation
-    cardsContainer.scrollTo({
-      left: targetScroll,
-      behavior: 'smooth',
-    });
-
-    // Update the state
-    state.currentIndex = index;
-
-    // Update visibility after scrolling
-    updateArrowVisibility();
-  }
-
-  // Set up event listeners
-  if (scrollLeftBtn) {
-    scrollLeftBtn.addEventListener('click', () => {
-      scrollToIndex(state.currentIndex - 1);
-    });
-  }
-
-  if (scrollRightBtn) {
-    scrollRightBtn.addEventListener('click', () => {
-      scrollToIndex(state.currentIndex + 1);
-    });
-  }
-
-  if (cardsContainer) {
-    // When user manually scrolls, update our index accordingly
-    cardsContainer.addEventListener('scroll', () => {
-      if (!cardsContainer) return;
-
-      const itemWidth = cardsContainer.clientWidth;
-      const scrollPosition = cardsContainer.scrollLeft;
-
-      // Calculate current index based on scroll position
-      const newIndex = Math.round(scrollPosition / itemWidth);
-
-      if (newIndex !== state.currentIndex) {
-        state.currentIndex = newIndex;
-        updateArrowVisibility();
-      }
-    });
-
-    // Handle window resize
-    window.addEventListener('resize', () => {
-      // Re-scroll to maintain position after resize
-      scrollToIndex(state.currentIndex);
-      updateArrowVisibility();
-    });
-
-    // Initial check
-    updateArrowVisibility();
-  }
-
-  // Enhanced parallax effect with smooth scrolling
-  document.addEventListener('DOMContentLoaded', () => {
-    // Array of sections with parallax
-    const parallaxSections = [
-      // for speed lower is slower
-      { element: document.querySelector('#hero'), speed: 0.5 },
-      { element: document.querySelector('#massage-services'), speed: 0.3 }, // Slower speed for variety
-    ];
-
-    const applyParallax = () => {
-      const isDesktop = window.matchMedia('(min-width: 81.25em)').matches;
-
-      parallaxSections.forEach((section) => {
-        if (!section.element) return;
-
-        if (isDesktop) {
-          const handleScroll = () => {
-            const scrollPosition = window.scrollY;
-            const sectionRect = section.element?.getBoundingClientRect();
-            const sectionTop = (sectionRect?.top || 0) + scrollPosition;
-            const offset = (scrollPosition - sectionTop) * section.speed;
-
-            // Only apply parallax when section is in view
-            if (
-              scrollPosition >= sectionTop - window.innerHeight &&
-              scrollPosition <= sectionTop + (sectionRect?.height || 0)
-            ) {
-              (section.element as HTMLElement).style.backgroundPositionY =
-                `${offset}px`;
-            }
-          };
-
-          // Throttle scroll events
-          let ticking = false;
-          window.addEventListener('scroll', () => {
-            if (!ticking) {
-              window.requestAnimationFrame(() => {
-                handleScroll();
-                ticking = false;
-              });
-              ticking = true;
-            }
-          });
-
-          handleScroll(); // Initial position
-        } else {
-          (section.element as HTMLElement).style.backgroundPositionY = 'center'; // Reset for mobile
-        }
-      });
-    };
-
-    // Initial call and resize listener
-    applyParallax();
-    window.addEventListener('resize', applyParallax);
-
-    // Update existing scroll buttons for smooth behavior
-    const scrollLeftBtn = document.getElementById('scrollLeft');
-    const scrollRightBtn = document.getElementById('scrollRight');
-    const cardsContainer = document.getElementById('cardsContainer');
-
-    if (cardsContainer) {
-      // Enhance existing scrollToIndex function
-      function scrollToIndex(index: number) {
-        if (!cardsContainer) return;
-        index = Math.max(0, Math.min(index, state.totalItems - 1));
-        const itemWidth = cardsContainer.clientWidth;
-        const targetScroll = index * itemWidth;
-
-        cardsContainer.scrollTo({
-          left: targetScroll,
-          behavior: 'smooth',
-        });
-
-        state.currentIndex = index;
-        updateArrowVisibility();
-      }
-    }
-  });
-</script>
 
 <style lang="less">
   /* Add smooth scrolling to the entire HTML document */
@@ -1010,7 +534,7 @@ posts.sort(
   @media only screen and (min-width: 0em) {
     #hero {
       font-family: 'Open Sans', 'Roboto', Arial, sans-serif;
-      
+
       text-align: center;
       padding: 0 (16/16rem);
       padding-bottom: (100/16rem);
@@ -1018,8 +542,8 @@ posts.sort(
       z-index: 1;
       overflow: hidden;
       /* Add background attachment for mobile */
-      background: url('/assets/images/hero-img.avif') center/cover no-repeat;
-      background-attachment: scroll; /* Default for mobile */
+      // background: url('/assets/images/hero-img.avif') center/cover no-repeat;
+      // background-attachment: scroll; /* Default for mobile */
 
       .cs-picture {
         width: 100%;
@@ -1229,18 +753,18 @@ posts.sort(
   }
 
   /* Desktop Parallax Effect - 1300px */
-  @media only screen and (min-width: 64em) {
-    #hero {
-      background: url('/assets/images/hero-img.avif');
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed; /* Enable parallax on desktop */
-      /* Add transform for smoother parallax */
-      transform: translate3d(0, 0, 0); /* Enable hardware acceleration */
-      will-change: background-position; /* Optimize performance */
-    }
-  }
+  // @media only screen and (min-width: 64em) {
+  //   #hero {
+  //     background: url('/assets/images/hero-img.avif');
+  //     background-position: center;
+  //     background-size: cover;
+  //     background-repeat: no-repeat;
+  //     background-attachment: fixed; /* Enable parallax on desktop */
+  //     /* Add transform for smoother parallax */
+  //     transform: translate3d(0, 0, 0); /* Enable hardware acceleration */
+  //     will-change: background-position; /* Optimize performance */
+  //   }
+  // }
 
   /* Dark Mode */
   @media only screen and (min-width: 0em) {
@@ -2456,7 +1980,12 @@ posts.sort(
     }
   }
   @keyframes blink {
-    0%,100% {opacity: 1;}
-    50%{opacity: 0;}
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
   }
 </style>
