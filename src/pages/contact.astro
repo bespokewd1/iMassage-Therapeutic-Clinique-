@@ -2,11 +2,51 @@
 import BaseLayout from 'src/layouts/BaseLayout.astro';
 import client from '@data/client.json';
 import Landing from '@components/Landing.astro';
-
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import { getOptimizedImage } from '@js/utils';
 import landingImage from '@assets/images/stone-massage-background1.png'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import FacebookIcon from '@components/Icons/Socials/FacebookIcon.astro';
+import type { AstroComponentDirectives } from 'astro';
+import TwitterIcon from '@components/Icons/Socials/TwitterIcon.astro';
+import LinkedInIcon from '@components/Icons/Socials/LinkedInIcon.astro';
+import InstagramIcon from '@components/Icons/Socials/InstagramIcon.astro';
+import CheckIcon from '@components/Icons/Utility/CheckIcon.astro';
+import MapPinFilled from '@components/Icons/Utility/MapPinFilled.astro';
+
+// type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
+// type IconComponent = AstroComponentDirectives;
+
+type Social = {
+  name: string;
+  href: string;
+  Icon: typeof FacebookIcon;
+};
+
 const optimizedImage = await getOptimizedImage(landingImage);
+
+const phoneDisplay = '780-919-1633';
+const phoneHref = 'tel:7809191633';
+const email = 'info@imassageclinique.ca';
+const emailHref = `mailto:${email}`;
+const socials: Social[] = [
+  { name: 'Facebook', href: '#', Icon: FacebookIcon },
+  { name: 'Twitter/X', href: '#', Icon: TwitterIcon },
+  { name: 'LinkedIn', href: '#', Icon: LinkedInIcon },
+  { name: 'Instagram', href: '#', Icon: InstagramIcon },
+];
+
+const clinicName = client.name || 'iMassage Therapeutic Clinique';
+const addressOne =
+  client.address.lineOne?.trim() ||
+  'South Gate Mall, Edmonton, Alberta, Canada';
+const mapHref =
+  client.address.mapLink ||
+  'https://www.google.com/maps?q=South+Gate+Mall,+Edmonton,+Alberta,+Canada';
+
+const hours = [
+  { label: 'Mon – Sat', value: '10:00 am – 10:00 pm' },
+  { label: 'Sunday', value: '3:00 pm – 10:00 pm' },
+];
 ---
 
 <BaseLayout
@@ -14,72 +54,259 @@ const optimizedImage = await getOptimizedImage(landingImage);
   description="Meta description for the page"
   preloadedImage={optimizedImage}
 >
-  <!-- ============================================ -->
-  <!--                    LANDING                   -->
-  <!-- ============================================ -->
+  <section
+    class="relative bg-orange-50 grid grid-cols-5 lg:grid-cols-6 lg:grid-rows-5 xl:grid-rows-4 lg:max-h-[900px]"
+  >
+    <!-- Background image band -->
+    <div class="relative col-span-6 lg:row-span-2">
+      <img
+        src={optimizedImage.src}
+        width={optimizedImage.attributes.width}
+        height={optimizedImage.attributes.height}
+        alt="Green plants and soft light through a window"
+        class="lg:h-full w-full object-cover"
+        loading="eager"
+        decoding="async"
+      />
+    </div>
 
-  <Landing title="Contact" image={optimizedImage} />
-
-  <!-- ============================================ -->
-  <!--                Contact Form                  -->
-  <!-- ============================================ -->
-
-  <section id="cs-contact">
-    <div class="cs-container">
-      <div class="cs-content">
-          <span class="cs-topper">Contact</span>
-          <h2 class="cs-title">Get in Touch</h2>
-          <p class="cs-text">
-            Need to relax and recharge? Contact us today to book your massage
-            and feel rejuvenated.
+    <!-- Content -->
+    <div
+      class="mx-auto max-w-6xl col-span-6 lg:col-start-2 lg:col-end-6 lg:row-start-2 relative lg:absolute lg:inset-0 h-full lg:pb-4 border-b"
+    >
+      <!-- lg:shadow-xl lg:ring-1 lg:ring-black/10 -->
+      <div
+        class="grid grid-cols-1 gap-8 rounded-xl bg-orange-50/85 backdrop-blur-md p-6 md:grid-cols-2 md:p-10 h-full"
+      >
+        <!-- Left: text -->
+        <div class="md:col-span-2 lg:col-span-1 flex flex-col gap-6 lg:pr-6">
+          <h2 class="font-serif text-3xl md:text-4xl text-gray-900">
+            Book Your Massage Today!
+          </h2>
+          <p class="text-gray-700 leading-7">
+            Have questions about our therapeutic massage services, pricing, or
+            mobile availability? Our team is happy to assist. Reach out to book
+            an appointment or ask about the best treatment for your needs.
           </p>
-          <div class="flex flex-col justify-center items-center sm:flex-row">
-            <div class="h-[254px] flex flex-col justify-between items-center text-center sm:w-3/4" style="background: white;
-              border-radius: 1rem;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-              max-width: 300px;
-              padding: 2rem;
-              margin: 1rem;">
-              <h1 class="font-bold text-xl mb-4">📞 Mobile Massage</h1>
-              <h2 >Call now to book a mobile massage session in your area.</h2>
-              <a
-                href="tel:587-938-0458"
-                class="cs-button-solid rounded-full text-center text-white leading-snug pt-4 pb-4 text-[.6rem] md:text-[1rem]"
-                style="margin: 1rem  0 0 0;width: 100%;"
+
+          <ul class="space-y-2 text-gray-800">
+            <li class="flex items-center gap-3">
+              <CheckIcon class="text-green-700" />
+              <span>Same‑day bookings may be available</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <CheckIcon class="text-green-700" />
+              <span>Secure online payments and multiple payment options</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <CheckIcon class="text-green-700" />
+              <span>Registered, professional massage therapists</span>
+            </li>
+          </ul>
+
+          <div class="grid sm:grid-cols-2 gap-x-4 gap-y-6 mt-4">
+            <div class="xs:col-span-1">
+              <h3
+                class="text-sm font-semibold uppercase tracking-wide text-gray-700"
               >
-                Call Now
+                Phone
+              </h3>
+              <a
+                href={phoneHref}
+                class="mt-1 block text-gray-900 hover:text-emerald-700"
+              >
+                {phoneDisplay}
               </a>
-              <button
-                onclick="document.getElementById('popup').classList.add('hidden')"
-                class="text-sm text-white-500 hover:text-white mt-2 min-w-[400px]"
-              ></button>
             </div>
-          
-          
-            <div class="h-[254px] flex flex-col justify-center items-center text-center sm:w-3/4" style="background: white;
-              border-radius: 1rem;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-              max-width: 300px;
-              padding: 2rem;
-              margin: 1rem;">
-              <h1 class="font-bold text-xl mb-4">🏥 In-Clinic Massage</h1>
-              <h2 >Visit our clinic and enjoy a peaceful massage. Book your session online today.</h2>
-              <a
-                href="tel:587-938-0458"
-                class="cs-button-solid rounded-full text-center text-white leading-snug pt-4 pb-4 text-[.6rem] md:text-[1rem]"
-                style="margin: 1rem  0 0 0;width: 100%;"
+
+            <div class="">
+              <h3
+                class="text-sm font-semibold uppercase tracking-wide text-gray-700"
               >
-                Book Online
+                Email
+              </h3>
+              <a
+                href={emailHref}
+                class="mt-1 block text-gray-900 hover:text-emerald-700"
+              >
+                {email}
               </a>
-              <button
-                onclick="document.getElementById('popup').classList.add('hidden')"
-                class="text-sm text-white-500 hover:text-white mt-2 min-w-[400px]"
-              ></button>
+            </div>
+
+            <div class="xs:col-span-2">
+              <h3
+                class="text-sm font-semibold uppercase tracking-wide text-gray-700"
+              >
+                Social Media
+              </h3>
+              <div class="mt-2 flex items-center gap-1">
+                {
+                  socials.map(({ name, href, Icon }) => (
+                    <a
+                      href={href}
+                      aria-label={name}
+                      class="inline-flex h-8 w-8 items-center justify-center rounded-full text-emerald-900 transition-colors duration-300 hover:bg-emerald-800 hover:text-emerald-50"
+                    >
+                      {/* <i class="" /> */}
+                      <Icon />
+                    </a>
+                  ))
+                }
+              </div>
             </div>
           </div>
         </div>
-        
-      <!-- <form id="cs-form" name="Contact Form" method="post">
+
+        <!-- Right: form -->
+        <div class="md:col-span-2 lg:col-span-1">
+          <form
+            class="grid grid-cols-1 gap-4"
+            onsubmit="event.preventDefault();"
+          >
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label class="mb-1 block text-sm text-gray-700"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  placeholder="First name"
+                />
+              </div>
+              <div>
+                <label class="mb-1 block text-sm text-gray-700">Last Name</label
+                >
+                <input
+                  type="text"
+                  class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  placeholder="Last name"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label class="mb-1 block text-sm text-gray-700">Email *</label>
+              <input
+                type="email"
+                required
+                class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="you@example.com"
+              />
+            </div>
+
+            <div>
+              <label class="mb-1 block text-sm text-gray-700">Message</label>
+              <textarea
+                rows="5"
+                class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="How can we help?"></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="inline-flex w-full items-center justify-center rounded bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-300 hover:text-emerald-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500"
+            >
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-orange-50">
+    <div class="mx-auto max-w-3xl xl:max-w-6xl px-6 py-16 md:py-20 md:px-10">
+      <div class="mx-auto">
+        <h2 class="font-serif text-3xl md:text-4xl text-gray-950">
+          Visit Us In‑Clinic
+        </h2>
+        <p class="mt-4 text-gray-700 leading-7">
+          Our licensed therapists provide personalized therapeutic
+          care—including deep‑tissue, relaxation massage, and hot stone
+          therapy—in a calm, welcoming space. We’re easy to find and always
+          happy to help you feel your best.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-col gap-6">
+        <!-- left info -->
+        <div class="">
+          <div class="space-y-6">
+            <div>
+              <h3
+                class="text-sm font-semibold uppercase tracking-wide text-gray-700"
+              >
+                Address
+              </h3>
+              <div class="pl-2 mt-2 text-gray-900">
+                <p class="font-medium inline-flex items-center gap-2">
+                  <span>
+                    <MapPinFilled />
+                  </span>
+                  {clinicName}
+                </p>
+                <a
+                  href={mapHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="mt-1 block text-emerald-800 hover:text-emerald-700 underline underline-offset-2"
+                >
+                  {addressOne}
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <h3
+                class="text-sm font-semibold uppercase tracking-wide text-gray-700"
+              >
+                Opening Hours
+              </h3>
+              <ul class="mt-2 space-y-1 text-gray-900">
+                {
+                  hours.map((h) => (
+                    <li class="flex items-center gap-6">
+                      <small class="font-semibold min-w-16">{h.label}:</small>
+                      <p class="">{h.value}</p>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- map -->
+        <div class="">
+          <!-- Option A: Simple embed using the mapLink from client.json
+          -->
+          <div class="overflow-hidden rounded-lg ring-1 ring-black/10">
+            <iframe
+              src={`${mapHref}&output=embed`}
+              style="border:0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="h-[420px] w-full"></iframe>
+          </div>
+          <!--
+          Option B (commented): Using the Google Maps Embed API "search" pattern (no key needed for basic usage),
+          in case you want a fixed query independent of mapLink:
+          <iframe
+            src="https://www.google.com/maps?q=South+Gate+Mall,+Edmonton,+Alberta,+Canada&output=embed"
+            style="border:0"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            class="h-[420px] w-full"></iframe>
+
+        -->
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <form id="cs-form" name="Contact Form" method="post">
         <div class="cs-content">
           <span class="cs-topper">Contact</span>
           <h2 class="cs-title">Get in Touch</h2>
@@ -139,378 +366,4 @@ const optimizedImage = await getOptimizedImage(landingImage);
           >Submit Message</button
         >
       </form> -->
-      <div class="cs-right-section">
-        <!--Email-->
-        <span class="cs-header">Email</span>
-        <a class="cs-link" href={`mailto:${client.email}`}>{client.email}</a>
-        <!--Phone-->
-        <span class="cs-header">Phone</span>
-        <a class="cs-link" href={`tel:${client.phoneForTel}`}
-          >{client.phoneFormatted}</a
-        >
-        <!--Address-->
-        <span class="cs-header">Address</span>
-        <a class="cs-link" href={client.address.mapLink}>
-          {client.address.lineOne},
-          <br />
-          {client.address.lineTwo},
-          <br />
-          <span class="cs-block">
-            {client.address.city}
-            {client.address.state}
-            {client.address.zip}
-          </span>
-        </a>
-
-        <!-- Background Image-->
-        <picture class="cs-bg-picture">
-          <source
-            media="(min-width: 601px)"
-            srcset="/assets/images/contact-background.png"
-          />
-          <img
-            aria-hidden="true"
-            decoding="async"
-            src="/assets/images/contact-background.png"
-            alt="building"
-            loading="lazy"
-            width="2500"
-            height="1667"
-          />
-        </picture>
-      </div>
-    </div>
-  </section>
-
-  <style lang="less">
-    /* PAGE-SPECIFIC STYLES FOR THE CONTACT PAGE */
-
-    /*-- -------------------------- -->
-<---          Contact           -->
-<--- -------------------------- -*/
-
-    /* Mobile - 360px */
-    @media only screen and (min-width: 0em) {
-      :root {
-        /* 13px - 16px */
-        --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
-        /* 31px - 49px */
-        --headerFontSize: clamp(1.9375rem, 4.5vw, 3.0625rem);
-        --bodyFontSize: 1rem;
-
-        /* 60px - 100px top and bottom */
-        --sectionPadding: clamp(3.75em, 7.82vw, 6.25em) 1rem;
-      }
-
-      #cs-contact {
-        font-family: 'Roboto', 'Arial', sans-serif;
-        padding: var(--sectionPadding);
-
-        .cs-container {
-          width: 100%;
-          /* changes to 1280px at desktop */
-          max-width: (800/16rem);
-          margin: auto;
-        }
-
-        .cs-content {
-          width: 100%;
-        }
-
-        .cs-topper {
-          text-align: left;
-          /* 8px - 12px */
-          margin-bottom: clamp(0.5rem, 1.4vw, 0.75rem);
-        }
-
-        .cs-title {
-          text-align: left;
-          max-width: (800/16rem);
-        }
-
-        .cs-text {
-          text-align: left;
-          /* 404px - 522px */
-          max-width: clamp(25.25rem, 30vw, 32.625rem);
-          margin: 0 auto 0 0;
-          /* 40px - 48px */
-          margin-bottom: clamp(2.5rem, 6.3vw, 3rem);
-        }
-
-        #cs-form {
-          margin-bottom: (40/16rem);
-          label {
-            font-size: (16/16rem);
-            font-weight: 700;
-            line-height: 1.5em;
-            /* 12px - 20px */
-            margin-bottom: clamp(0.75rem, 1.3em, 1.25rem);
-            color: var(--headerColor);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-          }
-
-          .cs-label-message {
-            /* 32px - 48px */
-            margin-bottom: clamp(2rem, 6.3vw, 3rem);
-          }
-
-          input,
-          textarea {
-            font-size: (16/16rem);
-            width: 100%;
-            height: (64/16rem);
-            margin-top: (4/16rem);
-            /* prevents border & padding from affecting height */
-            box-sizing: border-box;
-            padding-left: (20/16rem);
-            border: 1px solid #b4b2c7;
-            border-radius: (8/16rem);
-            transition: border 0.3s;
-
-            &:hover {
-              border: 1px solid var(--primary);
-            }
-          }
-
-          textarea {
-            font-family: inherit;
-            min-height: (120/16rem);
-            padding-top: (20/16rem);
-          }
-
-          .cs-button-solid {
-            width: 100%;
-            border: none;
-          }
-        }
-
-        .cs-right-section {
-          height: (320/16rem);
-          /* 24px - 40px top & bottom */
-          /* 20px - 40px left & right */
-          padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem);
-          border-radius: (8/16rem);
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: flex-start;
-          position: relative;
-          /* cuts off corners on img tag */
-          overflow: hidden;
-        }
-
-        .cs-header {
-          /* 16px - 20px */
-          font-size: clamp(1rem, 3vw, 1.25rem);
-          font-weight: 700;
-          line-height: 1.2em;
-          margin-bottom: (8/16rem);
-          color: var(--bodyTextColorWhite);
-          display: block;
-        }
-
-        .cs-link {
-          /* 16px - 20px */
-          font-size: clamp(1rem, 3vw, 1.25rem);
-          line-height: 1.2em;
-          text-decoration: none;
-          margin-bottom: (20/16rem);
-          color: var(--bodyTextColorWhite);
-          display: block;
-          position: relative;
-
-          &:before {
-            /* Animated underline */
-            content: '';
-            width: 0%;
-            height: 2px;
-            /* current color of the parent */
-            background: currentColor;
-            opacity: 1;
-            display: block;
-            position: absolute;
-            bottom: (-2/16rem);
-            left: 0;
-            transition: width 0.3s;
-          }
-
-          &:hover {
-            &:before {
-              width: 100%;
-            }
-          }
-
-          &:last-of-type {
-            margin-bottom: 0;
-          }
-        }
-
-        .cs-block {
-          /* sends second address line to the bottom on its own line */
-          display: block;
-        }
-
-        .cs-bg-picture {
-          width: 100%;
-          height: 100%;
-          display: block;
-          position: absolute;
-          top: 0;
-          left: 0;
-          z-index: -1;
-          transition: transform 0.6s;
-
-          &:before {
-            /* background color overlay */
-            content: '';
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-              180deg,
-              rgba(0, 0, 0, 0) 0%,
-              rgba(0, 0, 0, 0.8) 100%
-            );
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-          }
-
-          img {
-            width: 100%;
-            height: 100%;
-            /* Makes img tag act as a background image */
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-          }
-        }
-      }
-    }
-
-    /* Tablet - 700px */
-    @media only screen and (min-width: 43.75em) {
-      #cs-contact {
-        #cs-form {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          flex-wrap: wrap;
-
-          label {
-            width: 48%;
-          }
-
-          .cs-label-message {
-            width: 100%;
-          }
-        }
-      }
-    }
-
-    /* Small Desktop - 1024px */
-    @media only screen and (min-width: 64em) {
-      #cs-contact {
-        .cs-container {
-          max-width: (1280/16rem);
-          display: flex;
-          justify-content: flex-end;
-          align-items: flex-start;
-          gap: (80/16rem);
-        }
-
-        #cs-form {
-          max-width: (630/16rem);
-          label {
-            width: 100%;
-          }
-        }
-
-        .cs-right-section {
-          width: 40%;
-          max-width: (542/16rem);
-          /* changes to 578px at 1300px wide */
-          height: (686/16rem);
-          /* prevents flexbox from squishing it */
-          flex: none;
-
-          &:hover {
-            .cs-bg-picture {
-              transform: scale(1.1);
-            }
-          }
-        }
-
-        .cs-block {
-          /* goes back to inline so it stays "in line" with the rest of the text */
-          display: inline-block;
-        }
-      }
-    }
-
-    /* Small Desktop - 1300px */
-    @media only screen and (min-width: 81.25em) {
-      #cs-contact {
-        #cs-form {
-          column-gap: (0/16rem);
-          label {
-            width: 48%;
-            max-width: (305/16rem);
-          }
-
-          .cs-label-message {
-            max-width: 100%;
-          }
-        }
-
-        .cs-right-section {
-          height: (578/16rem);
-        }
-      }
-    }
-
-    /* Dark Mode */
-    @media only screen and (min-width: 0em) {
-      body.dark-mode {
-        #cs-contact {
-          .cs-text,
-          .cs-title {
-            color: var(--bodyTextColorWhite);
-          }
-
-          .cs-topper {
-            color: var(--primaryLight);
-          }
-
-          #cs-form {
-            label,
-            input,
-            textarea {
-              color: var(--bodyTextColorWhite);
-              background-color: transparent;
-
-              &::placeholder {
-                /* lighten up the color of the text by 40%*/
-                filter: brightness(1.4);
-              }
-            }
-          }
-
-          .cs-bg-picture {
-            background-color: #000;
-
-            img {
-              /* lets parent background-color bleed through and darken it */
-              opacity: 0.5;
-            }
-          }
-        }
-      }
-    }
-  </style>
 </BaseLayout>

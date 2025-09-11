@@ -7,21 +7,28 @@
   {
     "key": "About Us",
     "url": "/about",
-    "children": [
-      {
-        "key": "Our Story",
-        "url": "/about/story"
-      },
-      {
-        "key": "Our Team",
-        "url": "/about/team"
-      }
-  ]
+    "children": []
   },
   {
     "key": "Services",
     "url": "/services/",
-    "children": []
+    "children": [
+      {
+        "key": "Therapeutic Deep Tissue Massage",
+        "url": "/services/therapeutic-deep-tissue-massage"
+      },
+      {
+        "key": "Therapeutic Hot Stone Massage",
+        "url": "/services/therapeutic-hot-stone-massage"
+      },
+      {
+        "key": "Chair Massage",
+        "url": "/services/chair-massage"
+      },{
+        "key": "Couple's Massage",
+        "url": "/services/couples-massage"
+      }
+  ]
   },
   {
     "key": "Contact Us",

@@ -20,7 +20,6 @@ import serviceImg1 from '@assets/images/Services-1.TherapeuticMassage.jpg';
 import serviceImg2 from '@assets/images/Services-2.DeepTissueMassage.jpg';
 import serviceImg3 from '@assets/images/Services-3.RelaxationMassage.jpg';
 import serviceImg5 from '@assets/images/stone-massage-background1.png';
-import whyChooseImg from '@assets/images/why-choose.webp';
 import promoImag1 from '@assets/images/promo-1.webp';
 import promoImag2 from '@assets/images/promo-2.webp';
 import promoImag3 from '@assets/images/promo-3.webp';
@@ -41,6 +40,7 @@ import FacebookIcon from '@components/Icons/Socials/FacebookIcon.astro';
 import InstagramIcon from '@components/Icons/Socials/InstagramIcon.astro';
 import LinkedInIcon from '@components/Icons/Socials/LinkedInIcon.astro';
 import TwitterIcon from '@components/Icons/Socials/TwitterIcon.astro';
+import WhyChooseUs from '@components/why-choose-us.astro';
 
 const optimizedImage = await getOptimizedImage(landingImage);
 
@@ -123,7 +123,7 @@ posts.sort(
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 />
 <BaseLayout
-  title="Hot Stone Massage Edmonton - Professional Massage Therapy"
+  title="Therapeutic Hot Stone Massage Edmonton - Professional Massage Therapy"
   description="Professional massage therapy for relaxation, pain relief, and overall wellness in Edmonton."
   preloadedImage={optimizedImage}
 >
@@ -185,7 +185,7 @@ posts.sort(
             <div class="mt-8 flex flex-wrap gap-4">
               <a
                 href="https://www.massagebook.com/therapists/StoneMassage?src=external"
-                class="inline-flex items-center justify-center rounded-full border-2 border-emerald-200 bg-emerald-200 px-6 py-3 text-sm font-semibold text-gray-950 transition-colors hover:bg-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+                class="inline-flex items-center justify-center rounded-full border-2 border-emerald-200 bg-emerald-200 px-6 py-3 text-sm font-semibold text-gray-950 transition-colors active:border-transparent hover:bg-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
               >
                 Book Appointment
               </a>
@@ -243,24 +243,10 @@ posts.sort(
   </section>
 
   <!-- ================= CTA (Green band) ================ -->
-  <section class="bg-emerald-200/75 text-emerald-900">
-    <div
-      class="mx-auto max-w-6xl px-6 py-12 md:py-14 lg:py-16 text-center flex flex-col items-center gap-6"
-    >
-      <h2 class="font-serif text-3xl leading-tight md:text-4xl lg:text-5xl">
-        Restore Balance. Feel Renewed
-      </h2>
-      <p class="text-emerald-950">
-        Expert therapeutic massage tailored to your needs.
-      </p>
-      <a
-        href="/contact"
-        class="inline-flex items-center rounded-full bg-orange-200 hover:bg-orange-100 transition-colors text-gray-900 px-6 py-3 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
-      >
-        Contact Us
-      </a>
-    </div>
-  </section>
+  <CTA
+    title="Restore Balance. Feel Renewed"
+    description="Expert therapeutic massage tailored to your needs."
+  />
 
   <!-- ================= Services ================= -->
   <section class="bg-orange-50">
@@ -355,80 +341,8 @@ posts.sort(
     </div>
   </section>
 
-  <!-- ================= Why Choose Us ================ -->
-  <section id="why-choose-us" class="px-0">
-    <div
-      class="mx-auto px-6 py-12 md:py-14 lg:py-16 grid grid-cols-4 items-stretch gap-0 relative"
-    >
-      <!-- Left image -->
-      <div class="relative col-span-5 xl:col-start-2 xl:col-end-4">
-        <Image
-          src={whyChooseImg}
-          class="block aspect-square w-full object-cover lg:h-full mx-auto xl:ms-0 max-w-[600px]"
-          alt="lady in a stone massage"
-        />
-      </div>
-
-      <!-- Card with bullets -->
-      <div
-        class="xl:absolute relative inset-0 col-span-5 mx-auto xl:col-start-3 flex items-center md:px-6 py-12"
-      >
-        <div
-          class="w-full max-w-[680px] rounded-xl bg-orange-200 shadow-[0_10px_25px_rgba(0,0,0,0.15)] ring-1 ring-black/10"
-        >
-          <div class="p-6 sm:p-8 md:p-10">
-            <h3
-              class="font-serif text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-950"
-            >
-              Why Choose iMassage?
-            </h3>
-
-            <p class="mt-4 text-gray-700 leading-7">
-              We deliver thoughtful, therapeutic care tailored to your body—so
-              you leave lighter, looser, and genuinely restored.
-            </p>
-
-            <ul class="mt-6 space-y-3 text-gray-800">
-              <li class="flex gap-3">
-                <span class="mt-2 h-2 w-2 rounded-full bg-gray-900"></span>
-                <span
-                  >Registered, experienced therapists focused on results</span
-                >
-              </li>
-              <li class="flex gap-3">
-                <span class="mt-2 h-2 w-2 rounded-full bg-gray-900"></span>
-                <span
-                  >Personalized treatment plans for pain relief and relaxation</span
-                >
-              </li>
-              <li class="flex gap-3">
-                <span class="mt-2 h-2 w-2 rounded-full bg-gray-900"></span>
-                <span
-                  >Evidence‑based techniques: deep tissue, hot stone, Swedish,
-                  and more</span
-                >
-              </li>
-              <li class="flex gap-3">
-                <span class="mt-2 h-2 w-2 rounded-full bg-gray-900"></span>
-                <span
-                  >Welcoming clinic with easy booking and flexible hours</span
-                >
-              </li>
-            </ul>
-
-            <div class="mt-8">
-              <a
-                href="/about"
-                class="inline-flex items-center rounded-full border-2 border-gray-900 px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
-              >
-                Learn More
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- ================= Why Choose Us ================= -->
+  <WhyChooseUs />
 
   <!-- ================= How to Book (Steps) ================= -->
   <section class="bg-orange-50">
@@ -488,7 +402,7 @@ posts.sort(
 
         <a
           href="/direct-billing"
-          class="mt-6 inline-flex items-center rounded-full bg-gray-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500"
+          class="mt-6 inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:text-emerald-900 hover:bg-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500"
         >
           Book Appointment
         </a>
@@ -585,7 +499,7 @@ posts.sort(
 
           <button
             type="submit"
-            class="mt-6 w-full md:w-auto rounded bg-emerald-900 px-8 py-3 text-white font-semibold hover:bg-emerald-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+            class="mt-6 w-full md:w-auto rounded bg-emerald-200 px-8 py-3 text-emerald-950 font-semibold transition-colors hover:text-emerald-900 hover:bg-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
           >
             Send
           </button>

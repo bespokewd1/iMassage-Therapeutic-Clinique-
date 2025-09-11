@@ -7,9 +7,33 @@ import fallbackImage from '@assets/images/CTA/cabinets2.jpg';
 import ctaBg from '@assets/images/CTA-Background-Image.jpg';
 
 import { Picture } from 'astro:assets';
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
 ---
 
-<section id="cta">
+<section class="bg-emerald-200/75 text-emerald-900">
+  <div
+    class="mx-auto max-w-6xl px-6 py-12 md:py-14 lg:py-16 text-center flex flex-col items-center gap-6"
+  >
+    <h2 class="font-serif text-3xl leading-tight md:text-4xl lg:text-5xl">
+      {title}
+    </h2>
+    <p class="text-emerald-950">
+      {description}
+    </p>
+    <a
+      href="/contact"
+      class="inline-flex items-center rounded-full bg-orange-200 hover:bg-orange-100 transition-colors text-gray-900 px-6 py-3 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
+    >
+      Contact Us
+    </a>
+  </div>
+</section>
+<!-- <section id="cta">
   <div class="container">
     <h2 class="title">
       Relax. Rejuvenate. Restore.
@@ -24,33 +48,7 @@ import { Picture } from 'astro:assets';
     alt="stone arrangement with rolled towel"
     formats={['avif', 'webp']}
   />
-  <!-- <CSPicture
-    mobileImgUrl={mobileImage}
-    mobileMediaWidth="600px"
-    desktopImgUrl={desktopImage}
-    desktopMediaWidth="601px"
-    fallbackImgUrl={fallbackImage}
-    alt=""
-  /> -->
-  <!-- <picture>
-    <source
-      media="(max-width: 600px)"
-      srcset="/assets/images/cabinets2-m.jpg"
-    />
-    <source media="(min-width: 601px)" srcset="/assets/images/cabinets2.jpg" />
-    <img
-      aria-hidden="true"
-      decoding="async"
-      src="/assets/images/cabinets2.jpg"
-      alt="kitchen cabinets"
-      loading="lazy"
-      width="2500"
-      height="1667"
-    />
-  </picture> -->
-</section>
-
-<style lang="less">
+</section> --><!-- <style lang="less">
   /* Mobile */
   @media only screen and (min-width: 0em) {
     #cta {
@@ -190,4 +188,4 @@ import { Picture } from 'astro:assets';
       }
     }
   }
-</style>
+</style> -->
