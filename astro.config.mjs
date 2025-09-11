@@ -1,4 +1,4 @@
-import { defineConfig, passthroughImageService } from 'astro/config';
+import { defineConfig  } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import icon from 'astro-icon';
 
@@ -22,8 +22,5 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
-  },
-  image: {
-    service: passthroughImageService(),
   }
 });
