@@ -8,7 +8,7 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   // update me!
-  site: 'https://stonemassage.ca/',
+  site: 'https://imassage-therapeutic-clinique.netlify.app/',
 
   integrations: [
     icon(),
