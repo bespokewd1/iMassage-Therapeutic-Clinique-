@@ -42,7 +42,7 @@
   },
   {
     "key": "Book Appointment",
-    "url": "/appointments/",
+    "url": "/booking/",
     "children": []
   }
 ]
