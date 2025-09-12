@@ -12,6 +12,8 @@ import '@styles/global.css';
 const { description, title, preloadedImage } = Astro.props;
 ---
 
+<section>Coming Soon</section>
+
 <!-- A fully fleshed-out <head>, dynamically changing based on client.json and the page front matter -->
 <html lang="en">
   <head>
@@ -77,20 +79,36 @@ const { description, title, preloadedImage } = Astro.props;
     <!-- Sitewide Scripts -->
     <script src="@js/nav.js"></script>
   </head>
-  <body>
-    <!--Screen reader skip main nav-->
-    <a class="skip" aria-label="skip to main content" href="#main"
-      >Click To Skip To Main Content</a
-    >
-
-    <Header />
-    <main id="main" class="relative *:h-dvh *:md:pt-12 *:pt-20 *:lg:pt-16">
-      <iframe
-        src="https://www.massagebook.com/therapists/StoneMassage/widget/services"
-        frameborder="0"
-        width="100%"
-        height="1000"></iframe>
-    </main>
+  <body class="">
+    <div class="flex flex-col h-dvh">
+      <!--Screen reader skip main nav-->
+      <a class="skip" aria-label="skip to main content" href="#main"
+        >Click To Skip To Main Content</a
+      >
+      <Header />
+      <main class="bg-orange-50 flex-1 pt-16">
+        <section class="bg-orange-50">
+          <div class="container">
+            <div class="row">
+              <div class="">
+                <h1 class="text-4xl text-center text-emerald-950">Booking</h1>
+                <p class="text-3xl text-center text-emerald-900">Coming Soon</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <main
+        id="main"
+        class="hidden relative *:h-dvh *:md:pt-12 *:pt-20 *:lg:pt-16"
+      >
+        <iframe
+          src="https://www.massagebook.com/therapists/StoneMassage/widget/services"
+          frameborder="0"
+          width="100%"
+          height="1000"></iframe>
+      </main>
+    </div>
   </body>
 </html>
 
