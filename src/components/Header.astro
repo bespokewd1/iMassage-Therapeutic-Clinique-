@@ -6,6 +6,8 @@ import MainLogo from '@assets/images/logo/updated-logo.png';
 import { Image } from 'astro:assets';
 
 import type { HTMLAttributes } from 'astro/types';
+import ChevronDown from './Icons/Utility/ChevronDown.astro';
+import ChevronUp from './Icons/Utility/ChevronUp.astro';
 
 interface Props extends HTMLAttributes<'header'> {}
 
@@ -57,18 +59,42 @@ const props = Astro.props as Props;
                 ]}
               >
                 {entry.children?.length > 0 ? (
-                  <button
-                    aria-expanded="false"
-                    aria-controls={`submenu-${entry.key}`}
-                    class:list={[
-                      'cs-li-link cs-dropdown-button before:hidden',
-                      'rounded-full bg-orange-50 px-3 py-1 text-gray-950 hover:bg-orange-100 transition-colors ',
-                      { 'cs-active': Astro.url.pathname.includes(entry.url) },
-                    ]}
-                  >
-                    {entry.key}
-                    {/* <Icon name="mdi--caret" class="cs-drop-icon" style="font:bold" /> */}
-                  </button>
+                  <div class="block relative lg:contents">
+                    <a
+                      href={entry.url}
+                      class:list={[
+                        'cs-li-link before:hidden',
+                        'rounded-full bg-orange-50 pr-8 pl-3 lg:pr-3 py-1 text-gray-950 hover:bg-orange-100 transition-colors ',
+                        {
+                          'cs-active bg-orange-200 text-gray-50':
+                            Astro.url.pathname === entry.url,
+                        },
+                      ]}
+                      aria-current={
+                        Astro.url.pathname === entry.url ? 'page' : undefined
+                      }
+                    >
+                      {/* bg-(--btn-secondary-bg)  */}
+                      {entry.key}
+                    </a>
+                    <button
+                      aria-expanded="false"
+                      aria-controls={`submenu-${entry.key}`}
+                      class:list={[
+                        'before:hidden block lg:hidden submenu-btn',
+                        'rounded-full rounded-tl-none rounded-bl-none bg-orange-100 px-1 py-1 text-gray-950 hover:bg-orange-100 transition-colors ',
+                        'z-10 absolute right-0 top-1/2 -translate-y-1/2 h-full ',
+                        { 'cs-active': Astro.url.pathname.includes(entry.url) },
+                      ]}
+                    >
+                      <span class="down-icon">
+                        <ChevronDown />
+                      </span>
+                      <span class="up-icon">
+                        <ChevronUp />
+                      </span>
+                    </button>
+                  </div>
                 ) : (
                   <a
                     href={entry.url}
@@ -92,13 +118,13 @@ const props = Astro.props as Props;
                 {entry.children?.length > 0 && (
                   <ul
                     id={`submenu-${entry.key}`}
-                    class="cs-drop-ul rounded-xl bg-orange-50"
+                    class="cs-drop-ul rounded-xl bg-orange-50 border-emerald-300"
                   >
                     {entry.children.map((child) => (
-                      <li class="cs-drop-li">
+                      <li class="cs-drop-li ">
                         <a
                           href={child.url}
-                          class="cs-li-link cs-drop-link"
+                          class="cs-li-link cs-drop-link text-gray-950 hover:bg-orange-100 transition-colors "
                           aria-current={
                             Astro.url.pathname === child.url
                               ? 'page'
@@ -509,7 +535,20 @@ const props = Astro.props as Props;
 
         position: relative;
 
+        .submenu-btn {
+          .up-icon {
+            display: none;
+          }
+        }
         &.cs-active {
+          .submenu-btn {
+            .down-icon {
+              display: none;
+            }
+            .up-icon {
+              display: inline;
+            }
+          }
           .cs-drop-ul {
             height: auto;
             margin: (12/16rem) 0 0 0;

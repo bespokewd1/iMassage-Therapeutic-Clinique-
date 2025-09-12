@@ -15,18 +15,27 @@
     "children": [
       {
         "key": "Therapeutic Deep Tissue Massage",
-        "url": "/services/therapeutic-deep-tissue-massage"
+        "url": "/services/deep-tissue"
       },
       {
         "key": "Therapeutic Hot Stone Massage",
-        "url": "/services/therapeutic-hot-stone-massage"
+        "url": "/services/hot-stone"
       },
       {
         "key": "Chair Massage",
-        "url": "/services/chair-massage"
-      },{
-        "key": "Couple's Massage",
-        "url": "/services/couples-massage"
+        "url": "/services/chair"
+      },
+      {
+        "key": "Therapeutic Swedish Massage",
+        "url": "/services/swedish"
+      },
+      {
+        "key": "Therapeutic Cupping Massage",
+        "url": "/services/cupping"
+      },
+      {
+        "key": "Therapeutic Lymphatic Massage",
+        "url": "/services/lymphatic"
       }
   ]
   },

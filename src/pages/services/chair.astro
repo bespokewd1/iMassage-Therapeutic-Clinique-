@@ -1,0 +1,75 @@
+---
+import BaseLayout from 'src/layouts/BaseLayout.astro';
+import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import type { HeroServiceProps } from '@components/Services/ServiceHero.astro';
+import { getOptimizedImage } from '@js/utils';
+import ServiceHero from '@components/Services/ServiceHero.astro';
+import type { PriceBenefitsProps } from '@components/Services/PriceBenifits.astro';
+import PriceBenifits from '@components/Services/PriceBenifits.astro';
+import services3Img from '@assets/images/Services-3.RelaxationMassage.jpg';
+
+const optimizedImage = await getOptimizedImage(landingImage);
+export const chairHero: HeroServiceProps = {
+  title: 'Chair Massage (In‑Clinic)',
+  image: services3Img,
+  alt: 'In‑clinic chair massage easing neck and shoulder tension',
+  subtitle:
+    'A convenient, fully clothed session designed to ease neck, shoulder, and back tension—ideal for quick relief between commitments or during busy weeks.',
+  highlights: [
+    {
+      title: 'Quick Relief',
+      body: 'Targeted work to reduce desk‑related tightness and tension headaches.',
+    },
+    {
+      title: 'No Outfit Change',
+      body: 'Stay fully clothed for a comfortable, efficient session.',
+    },
+    {
+      title: 'Flexible Scheduling',
+      body: 'Shorter appointments fit easily into your day.',
+    },
+  ],
+  ctaPrimary: { label: 'Book Chair Massage', href: '/booking' },
+  ctaSecondary: { label: 'Ask a Question', href: '/contact' },
+};
+export const chairMassageData: PriceBenefitsProps = {
+  benefitsTitle: 'Chair Massage (In‑Clinic)',
+  benefits: [
+    {
+      num: '01',
+      title: 'Quick relief',
+      body: 'Fully clothed sessions to ease neck, shoulder, and upper‑back tension in less time.',
+    },
+    {
+      num: '02',
+      title: 'Workday reset',
+      body: 'Great for posture‑related discomfort or a mid‑day stress break.',
+    },
+    {
+      num: '03',
+      title: 'Focus where needed',
+      body: 'Targeted attention on trouble spots to help you feel lighter and more mobile.',
+    },
+    {
+      num: '04',
+      title: 'Convenient & efficient',
+      body: 'A practical option when you want therapeutic results without changing clothes.',
+    },
+  ],
+  benefitsTagline: 'Ease Neck & Shoulder Tension—Fast and Convenient',
+  prices: [
+    { duration: '20 minutes', price: '$35' },
+    { duration: '30 minutes', price: '$50' },
+    { duration: '45 minutes', price: '$70' },
+  ],
+};
+---
+
+<BaseLayout
+  title="Services"
+  description="Therapeutic Hot Stone Massage Edmonton - Professional Massage Therapy"
+  preloadedImage={optimizedImage}
+>
+  <ServiceHero {...chairHero} />
+  <PriceBenifits {...chairMassageData} />
+</BaseLayout>

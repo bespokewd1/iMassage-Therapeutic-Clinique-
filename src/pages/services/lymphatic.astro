@@ -1,0 +1,78 @@
+---
+import BaseLayout from 'src/layouts/BaseLayout.astro';
+import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import type { HeroServiceProps } from '@components/Services/ServiceHero.astro';
+import { getOptimizedImage } from '@js/utils';
+import ServiceHero from '@components/Services/ServiceHero.astro';
+import type { PriceBenefitsProps } from '@components/Services/PriceBenifits.astro';
+import PriceBenifits from '@components/Services/PriceBenifits.astro';
+import services6Img from '@assets/images/Services-6.LymphaticMassage.jpg';
+
+const optimizedImage = await getOptimizedImage(landingImage);
+export const lymphaticHero: HeroServiceProps = {
+  title: 'Therapeutic Lymphatic Massage',
+  image: services6Img,
+  alt: 'Gentle lymphatic massage encouraging fluid movement and recovery',
+  subtitle:
+    'Gentle, rhythmic techniques encourage lymph flow—designed to ease fluid retention and support recovery under professional care.',
+  highlights: [
+    {
+      title: 'Gentle & Specific',
+      body: 'Light pressure work tailored to encourage lymphatic movement.',
+    },
+    {
+      title: 'Reduce Retention',
+      body: 'Helps ease fluid build‑up and supports recovery protocols.',
+    },
+    {
+      title: 'Professional Guidance',
+      body: 'In‑clinic care with attention to comfort and safety.',
+    },
+  ],
+  ctaPrimary: { label: 'Book Lymphatic Session', href: '/booking' },
+  ctaSecondary: { label: 'Ask a Question', href: '/contact' },
+};
+// Lymphatic
+export const lymphaticData: PriceBenefitsProps = {
+  benefitsTitle: 'Therapeutic Lymphatic Massage',
+  benefits: [
+    {
+      num: '01',
+      title: 'Gentle lymph flow',
+      body: 'Light, rhythmic work helps encourage lymphatic circulation.',
+    },
+    {
+      num: '02',
+      title: 'Reduce fluid retention',
+      body: 'May ease swelling or heaviness with a carefully paced approach.',
+    },
+    {
+      num: '03',
+      title: 'Calming effect',
+      body: 'Promotes a soothing, parasympathetic response for deep rest.',
+    },
+    {
+      num: '04',
+      title: 'Recovery support',
+      body: 'Complements clinical plans when appropriate; always consult your provider as needed.',
+    },
+  ],
+  benefitsTagline: 'Encourage Lymph Flow, Ease Heaviness & Support Recovery',
+  prices: [
+    { duration: '45 minutes', price: '$95' },
+    { duration: '60 minutes', price: '$115' },
+    { duration: '75 minutes', price: '$135' },
+  ],
+  availabilityNote:
+    'In‑clinic sessions only. If you have specific medical conditions, please consult your healthcare provider first.',
+};
+---
+
+<BaseLayout
+  title="Services"
+  description="Therapeutic Hot Stone Massage Edmonton - Professional Massage Therapy"
+  preloadedImage={optimizedImage}
+>
+  <ServiceHero {...lymphaticHero} />
+  <PriceBenifits {...lymphaticData} />
+</BaseLayout>
