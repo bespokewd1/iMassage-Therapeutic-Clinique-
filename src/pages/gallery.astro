@@ -1,97 +1,146 @@
 ---
-import BaseLayout from "src/layouts/BaseLayout.astro";
-import CTA from "@components/CTA.astro";
-import Landing from "@components/Landing.astro";
+import BaseLayout from 'src/layouts/BaseLayout.astro';
+import CTA from '@components/CTA.astro';
+import Landing from '@components/Landing.astro';
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
-import {getOptimizedImage} from "@js/utils"
-import landingImage from "@assets/images/stone-massage-background1.png" // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
-const optimizedImage = await getOptimizedImage(landingImage)
+import { getOptimizedImage } from '@js/utils';
+import landingImage from '@assets/images/stone-massage-background1.png'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+const optimizedImage = await getOptimizedImage(landingImage);
 ---
 
 <BaseLayout
   title="Gallery"
-  description="Meta description for the page"
-  preloadedImage = {optimizedImage}
+  description="iMassage Therapeutic Clinique- Professional Massage Therapy"
+  preloadedImage={optimizedImage}
 >
   <!-- ============================================ -->
   <!--                    LANDING                   -->
   <!-- ============================================ -->
 
-  <Landing 
-    title="Gallery"
-    image={optimizedImage}
-  />
+  <Landing title="Gallery" image={optimizedImage} />
 
   <!-- ============================================ -->
   <!--                   Gallery                    -->
   <!-- ============================================ -->
 
   <section id="gallery">
-    <div class="flex flex-col  mb-10 gap-y-4 items-center md:flex-row sm:justify-center md:gap-x-8 ">
-      <button id="btn-tab1" class="tab-button cs-button-solid" onclick="switchTab('tab1')">Inside Our Clinic</button>
-      <button id="btn-tab2" class="tab-button cs-button-solid" onclick="switchTab('tab2')">Client Experience</button>
-      <button id="btn-tab3" class="tab-button cs-button-solid" onclick="switchTab('tab3')">Events & Specials</button>
+    <div
+      class="flex flex-col mb-10 gap-y-4 items-center md:flex-row sm:justify-center md:gap-x-8"
+    >
+      <button
+        id="btn-tab1"
+        class="tab-button cs-button-solid"
+        onclick="switchTab('tab1')">Inside Our Clinic</button
+      >
+      <button
+        id="btn-tab2"
+        class="tab-button cs-button-solid"
+        onclick="switchTab('tab2')">Client Experience</button
+      >
+      <button
+        id="btn-tab3"
+        class="tab-button cs-button-solid"
+        onclick="switchTab('tab3')">Events & Specials</button
+      >
     </div>
     <div class="cs-container tab-content" id="tab1">
-      <h1 class="md:text-4xl mb-4" style="text-transform: uppercase;">Inside Our Clinic</h1>
+      <h1 class="md:text-4xl mb-4" style="text-transform: uppercase;">
+        Inside Our Clinic
+      </h1>
       <div class="w-full mb-8">
-        <div class=" flex flex-col justify-center items-center gap-4 lg:flex-row lg:flex-wrap ">
-          <img src="/assets/images/clinic1.png" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg">
-          <img src="/assets/images/clinic2.png" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg">
-          <img src="/assets/images/clinic3.png" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg">
+        <div
+          class="flex flex-col justify-center items-center gap-4 lg:flex-row lg:flex-wrap"
+        >
+          <img
+            src="/assets/images/clinic1.png"
+            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+          />
+          <img
+            src="/assets/images/clinic2.png"
+            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+          />
+          <img
+            src="/assets/images/clinic3.png"
+            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+          />
         </div>
       </div>
       <a href="/contact" class="cs-button-solid">Get Free Quote</a>
     </div>
-    <div class="cs-container tab-content  hidden" id="tab2">
-      <h1 class="md:text-4xl mb-4" style="text-transform: uppercase;">Client Experience</h1>
+    <div class="cs-container tab-content hidden" id="tab2">
+      <h1 class="md:text-4xl mb-4" style="text-transform: uppercase;">
+        Client Experience
+      </h1>
       <div class="w-full mb-8">
-        <div class=" flex flex-col justify-center items-center gap-4 lg:flex-row lg:flex-wrap ">
-          <img src="/assets/images/stone-massage-background1.png" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg">
-          <img src="/assets/images/stone-massage-back.png" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg">
-          <img src="/assets/images/stone-massage-feet.png" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg">
+        <div
+          class="flex flex-col justify-center items-center gap-4 lg:flex-row lg:flex-wrap"
+        >
+          <img
+            src="/assets/images/stone-massage-background1.png"
+            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+          />
+          <img
+            src="/assets/images/stone-massage-back.png"
+            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+          />
+          <img
+            src="/assets/images/stone-massage-feet.png"
+            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+          />
         </div>
       </div>
       <a href="/contact" class="cs-button-solid">Get Free Quote</a>
     </div>
-    <div class="cs-container tab-content  hidden" id="tab3">
-      <h1 class="md:text-4xl mb-4" style="text-transform: uppercase;">Events & Specials</h1>
+    <div class="cs-container tab-content hidden" id="tab3">
+      <h1 class="md:text-4xl mb-4" style="text-transform: uppercase;">
+        Events & Specials
+      </h1>
       <div class="w-full mb-8">
-        <div class=" flex flex-col justify-center items-center gap-4 lg:flex-row lg:flex-wrap ">
-          <img src="/assets/images/stone-massage-feet.png" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg">
-          <img src="/assets/images/clinic2.png" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg">
-          <img src="/assets/images/stone-massage-background1.png" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg">
+        <div
+          class="flex flex-col justify-center items-center gap-4 lg:flex-row lg:flex-wrap"
+        >
+          <img
+            src="/assets/images/stone-massage-feet.png"
+            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+          />
+          <img
+            src="/assets/images/clinic2.png"
+            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+          />
+          <img
+            src="/assets/images/stone-massage-background1.png"
+            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+          />
         </div>
       </div>
       <a href="/contact" class="cs-button-solid">Get Free Quote</a>
     </div>
-
   </section>
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const tabs = ["tab1", "tab2", "tab3"];
+    document.addEventListener('DOMContentLoaded', function () {
+      const tabs = ['tab1', 'tab2', 'tab3'];
 
-    window.switchTab = function (tabId) {
-      tabs.forEach((id) => {
-        const tab = document.getElementById(id);
-        const btn = document.getElementById("btn-" + id);
-        if (tab && btn) {
-          tab.classList.add("hidden");
-          btn.classList.remove("bg-blue-500", "text-white");
-          btn.classList.add("bg-gray-200");
+      window.switchTab = function (tabId) {
+        tabs.forEach((id) => {
+          const tab = document.getElementById(id);
+          const btn = document.getElementById('btn-' + id);
+          if (tab && btn) {
+            tab.classList.add('hidden');
+            btn.classList.remove('bg-blue-500', 'text-white');
+            btn.classList.add('bg-gray-200');
+          }
+        });
+
+        const selectedTab = document.getElementById(tabId);
+        const selectedBtn = document.getElementById('btn-' + tabId);
+        if (selectedTab && selectedBtn) {
+          selectedTab.classList.remove('hidden');
+          selectedBtn.classList.remove('bg-gray-200');
+          selectedBtn.classList.add('bg-[#f3117e]', 'text-white');
         }
-      });
-
-      const selectedTab = document.getElementById(tabId);
-      const selectedBtn = document.getElementById("btn-" + tabId);
-      if (selectedTab && selectedBtn) {
-        selectedTab.classList.remove("hidden");
-        selectedBtn.classList.remove("bg-gray-200");
-        selectedBtn.classList.add("bg-[#f3117e]", "text-white");
-      }
-    };
-  });
-</script>
+      };
+    });
+  </script>
 
   <CTA />
 </BaseLayout>
@@ -120,7 +169,7 @@ const optimizedImage = await getOptimizedImage(landingImage)
 
       .cs-image-group {
         /* used rem so it doesn't scale with the font size of on parent */
-        font-size: ~"min(1.1vw, 1em)";
+        font-size: ~'min(1.1vw, 1em)';
         width: 100%;
         max-width: (1322/16em);
         margin: 0 auto (60/16rem);

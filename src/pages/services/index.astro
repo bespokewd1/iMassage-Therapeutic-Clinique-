@@ -11,6 +11,8 @@ import services3Img from '@assets/images/Services-3.RelaxationMassage.jpg';
 import services4Img from '@assets/images/Services-4.CuppingMassage.jpg';
 import services5Img from '@assets/images/Services-5.HotStoneMassage.jpg';
 import services6Img from '@assets/images/Services-6.LymphaticMassage.jpg';
+import services7Img from '@assets/images/Services-7.jpg';
+import services8Img from '@assets/images/Services-8.jpg';
 
 import serviceIcon1 from '@assets/images/service-icons-transparent/deep-tissue.png';
 import serviceIcon2 from '@assets/images/service-icons-transparent/hot-stone.png';
@@ -36,54 +38,78 @@ type Service = {
   href?: string;
 };
 
+//
+//
+//
+//
+//
+//
+//
+//
 const services: Service[] = [
   {
-    title: 'Therapeutic Deep‑Tissue Massage',
+    title: 'Deep Tissue Massage',
     blurb:
-      'Focused work to release stubborn tension, improve mobility, and reduce pain. Ideal for recurring tightness or post‑exercise soreness.',
+      'Targets deeper muscle layers to relieve chronic tension, muscle tightness, and pain.',
     cta: 'Read More',
     img: services2Img,
     href: '/services/deep-tissue',
   },
   {
-    title: 'Therapeutic Hot Stone Massage',
+    title: 'Hot Stone Massage',
     blurb:
-      'Heated basalt stones gently melt muscular tension and enhance circulation for deeper relaxation with therapeutic benefit.',
+      'Uses smooth, heated stones to melt away muscle tension and promote deep relaxation.',
     cta: 'Read More',
     img: services5Img,
     href: '/services/hot-stone',
   },
   {
-    title: 'Chair Massage (In‑Clinic)',
+    title: 'Relaxation Massage',
     blurb:
-      'A convenient, fully clothed session designed to ease neck, shoulder, and back tension. Perfect for a quick reset between commitments.',
+      'A gentle, full-body massage designed to reduce stress, ease tension, and promote overall relaxation.',
     cta: 'Read More',
     img: services3Img,
-    href: '/services/chair',
+    href: '/services/relaxation',
   },
   {
-    title: 'Therapeutic Swedish Massage',
+    title: 'Pregnancy Massage',
     blurb:
-      'A calm, flowing technique to support circulation, reduce stress, and settle the nervous system—great for overall wellness.',
+      'A soothing massage tailored to the needs of expectant mothers to ease discomfort and support prenatal wellness.',
     cta: 'Read More',
     img: services1Img,
-    href: '/services/swedish',
+    href: '/services/pregnancy',
   },
   {
-    title: 'Therapeutic Cupping Massage',
+    title: 'Cupping',
     blurb:
-      'Targeted negative pressure helps release fascia, improve tissue glide, and relieve tight areas when combined with hands‑on therapy.',
+      'An ancient therapy using suction cups to improve circulation, relieve muscle tension, and promote healing.',
     cta: 'Read More',
     img: services4Img,
     href: '/services/cupping',
   },
   {
-    title: 'Therapeutic Lymphatic Massage',
+    title: 'Sports Massage',
     blurb:
-      'Gentle, rhythmic work to encourage lymph flow—designed to ease fluid retention and support recovery under professional care.',
+      'Focused therapy for athletes to enhance performance, prevent injury, and aid recovery.',
     cta: 'Read More',
     img: services6Img,
-    href: '/services/lymphatic',
+    href: '/services/sports',
+  },
+  {
+    title: 'Craniosacral Massage',
+    blurb:
+      'A light-touch technique that releases tension in the central nervous system to improve overall health and well-being.',
+    cta: 'Read More',
+    img: services7Img,
+    href: '/services/craniosacral',
+  },
+  {
+    title: 'MVA (Motor Vehicle Accident) Massage',
+    blurb:
+      'Therapeutic treatment to address pain and soft tissue injuries resulting from car accidents, often covered by insurance.',
+    cta: 'Read More',
+    img: services8Img,
+    href: '/services/mva',
   },
 ];
 
@@ -179,7 +205,7 @@ const mapNote =
 
 <BaseLayout
   title="Services"
-  description="Therapeutic Hot Stone Massage Edmonton - Professional Massage Therapy"
+  description="iMassage Therapeutic Clinique- Professional Massage Therapy"
   preloadedImage={optimizedImage}
 >
   <section class="bg-orange-50">

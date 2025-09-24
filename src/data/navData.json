@@ -14,28 +14,36 @@
     "url": "/services/",
     "children": [
       {
-        "key": "Therapeutic Deep Tissue Massage",
+        "key": "Deep Tissue Massage",
         "url": "/services/deep-tissue"
       },
       {
-        "key": "Therapeutic Hot Stone Massage",
+        "key": "Hot Stone Massage",
         "url": "/services/hot-stone"
       },
       {
-        "key": "Chair Massage",
-        "url": "/services/chair"
+        "key": "Relaxation Massage",
+        "url": "/services/relaxation"
       },
       {
-        "key": "Therapeutic Swedish Massage",
-        "url": "/services/swedish"
+        "key": "Pregnancy Massage",
+        "url": "/services/pregnancy"
       },
       {
-        "key": "Therapeutic Cupping Massage",
+        "key": "Cupping",
         "url": "/services/cupping"
       },
       {
-        "key": "Therapeutic Lymphatic Massage",
-        "url": "/services/lymphatic"
+        "key": "Sports Massage",
+        "url": "/services/sports"
+      },
+      {
+        "key": "Craniosacral Massage",
+        "url": "/services/craniosacral"
+      },
+      {
+        "key": "MVA (Motor Vehicle Accident) Massage",
+        "url": "/services/mva"
       }
   ]
   },

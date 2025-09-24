@@ -17,13 +17,10 @@ import PriceBenifits from '@components/Services/PriceBenifits.astro';
 const optimizedImage = await getOptimizedImage(landingImage);
 
 const deepTissue: HeroServiceProps = {
-  title: 'Therapeutic Deep‑Tissue Massage',
+  title: 'Deep Tissue Massage',
   image: deepTissueHero,
   alt: 'Therapeutic deep‑tissue massage focused on relieving stubborn muscle tension',
-  subtitle: `Focused therapeutic work to release stubborn tension, improve mobility,
-        and reduce pain—ideal for recurring tightness or post‑exercise soreness.
-        Sessions are delivered in‑clinic by licensed therapists for safe,
-        effective results.`,
+  subtitle: `Targets deeper muscle layers to relieve chronic tension, muscle tightness, and pain.`,
   highlights: [
     {
       title: 'Targeted Relief',
@@ -89,7 +86,7 @@ const priceBenefits: PriceBenefitsProps = {
 
 <BaseLayout
   title="Services"
-  description="Therapeutic Hot Stone Massage Edmonton - Professional Massage Therapy"
+  description="iMassage Therapeutic Clinique- Professional Massage Therapy"
   preloadedImage={optimizedImage}
 >
   <ServiceHero {...deepTissue} />

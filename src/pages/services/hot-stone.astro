@@ -11,11 +11,11 @@ import PriceBenifits from '@components/Services/PriceBenifits.astro';
 const optimizedImage = await getOptimizedImage(landingImage);
 
 export const hotStoneHero: HeroServiceProps = {
-  title: 'Therapeutic Hot Stone Massage',
+  title: 'Hot Stone Massage',
   image: services5Img,
   alt: 'Therapeutic hot stone massage with heated stones placed to ease muscular tension',
   subtitle:
-    'Heated basalt stones gently melt muscular tension and enhance circulation, delivering deep relaxation with therapeutic care—perfect for easing stress and stubborn tightness.',
+    'Uses smooth, heated stones to melt away muscle tension and promote deep relaxation.',
   highlights: [
     {
       title: 'Deeper Relaxation',
@@ -69,7 +69,7 @@ export const hotStoneData: PriceBenefitsProps = {
 
 <BaseLayout
   title="Services"
-  description="Therapeutic Hot Stone Massage Edmonton - Professional Massage Therapy"
+  description="iMassage Therapeutic Clinique- Professional Massage Therapy"
   preloadedImage={optimizedImage}
 >
   <ServiceHero {...hotStoneHero} />
