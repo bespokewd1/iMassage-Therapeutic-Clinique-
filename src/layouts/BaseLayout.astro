@@ -9,7 +9,15 @@ import '@styles/root.less';
 // import '@styles/dark.less';
 import '../styles/global.css';
 
-const { description, title, preloadedImage } = Astro.props;
+import ogImg from '@assets/images/og/iMassage-og.jpg';
+import { getOptimizedImage } from '@js/utils';
+const ogImage = await getOptimizedImage(ogImg);
+
+const {
+  description = 'Experience personalized massage therapy in Edmonton. From deep tissue to Swedish and hot stone, our treatments are designed to relieve pain, reduce stress, and restore balance so you can feel your best every day.',
+  title = 'Restore, Rejuvenate & Feel Your Best | Edmonton Therapeutic Massage',
+  preloadedImage,
+} = Astro.props;
 ---
 
 <!-- A fully fleshed-out <head>, dynamically changing based on client.json and the page front matter -->
@@ -36,6 +44,7 @@ const { description, title, preloadedImage } = Astro.props;
 
     <!-- Preloads the image passed as a prop -->
     <link rel="preload" href={preloadedImage.src} as="image" />
+    <link rel="preload" href={ogImage.src} as="image" />
 
     <!--Social Media Display-->
     <meta property="og:title" content={title} />
@@ -45,11 +54,8 @@ const { description, title, preloadedImage } = Astro.props;
       property="og:url"
       content={`https://${client.domain}${Astro.url.pathname}`}
     />
-    <meta property="og:image" content="/assets/favicons/favicon-imassage.jpg" />
-    <meta
-      property="og:image:secure_url"
-      content="/assets/favicons/favicon-imassage.jpg"
-    />
+    <meta property="og:image" content={ogImage.src} />
+    <meta property="og:image:secure_url" content={ogImage.src} />
 
     <!--Favicons-->
     <link
