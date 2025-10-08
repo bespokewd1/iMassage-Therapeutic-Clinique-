@@ -5,8 +5,8 @@ import type { HeroServiceProps } from '@components/Services/ServiceHero.astro';
 import { getOptimizedImage } from '@js/utils';
 import ServiceHero from '@components/Services/ServiceHero.astro';
 import type { PriceBenefitsProps } from '@components/Services/PriceBenifits.astro';
-import PriceBenifits from '@components/Services/PriceBenifits.astro';
-import services3Img from '@assets/images/Services-3.RelaxationMassage.jpg';
+import PriceBenifits from '@components/Services/swedish.astro';
+import services3Img from '@assets/images/swedish-massage.jpg';
 
 const optimizedImage = await getOptimizedImage(landingImage);
 export const relaxHero: HeroServiceProps = {
@@ -14,7 +14,7 @@ export const relaxHero: HeroServiceProps = {
   image: services3Img,
   alt: 'Swedish massage with gentle, flowing techniques for full‑body calm',
   subtitle:
-    'A gentle, full-body massage designed to reduce stress, ease tension, and promote overall relaxation.',
+    'A relaxing full-body massage that uses smooth, gentle strokes to improve circulation, relieve muscle tension, and promote overall relaxation and well-being. Ideal for stress relief and general relaxation.',
   highlights: [
     {
       title: 'Full‑Body Calm',
