@@ -1,0 +1,65 @@
+[
+  {
+    "key": "Home",
+    "url": "/",
+    "children": []
+  },
+  {
+    "key": "About Us",
+    "url": "/about",
+    "children": []
+  },
+  {
+    "key": "Services",
+    "url": "/services/",
+    "children": [
+      {
+        "key": "Deep Tissue Massage",
+        "url": "/services/deep-tissue"
+      },
+      {
+        "key": "Hot Stone Massage",
+        "url": "/services/hot-stone"
+      },
+      {
+        "key": "Relaxation Massage",
+        "url": "/services/relaxation"
+      },
+      {
+        "key": "Pregnancy Massage",
+        "url": "/services/pregnancy"
+      },
+      {
+        "key": "Cupping",
+        "url": "/services/cupping"
+      },
+      {
+        "key": "Sports Massage",
+        "url": "/services/sports"
+      },
+      {
+        "key": "Craniosacral Massage",
+        "url": "/services/craniosacral"
+      },
+      {
+        "key": "MVA (Motor Vehicle Accident) Massage",
+        "url": "/services/mva"
+      }
+  ]
+  },
+  {
+    "key": "Contact Us",
+    "url": "/contact/",
+    "children": []
+  },
+  {
+    "key": "Direct Billing",
+    "url": "/direct-billing/",
+    "children": []
+  },
+  {
+    "key": "Book Appointment",
+    "url": "https://www.massagebook.com/biz/imassage-therapeutic-clinique",
+    "children": []
+  }
+]

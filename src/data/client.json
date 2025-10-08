@@ -1,0 +1,15 @@
+{
+	"name": "iMassage Therapeutic Massage",
+	"email": "imassageclinique@gmail.com",
+	"phoneForTel": "+1-780-729-0978",
+	"phoneFormatted": "(780) 729-0978",
+	"address": {
+		"lineOne": "South Gate Mall, Edmonton, Alberta, Canada ",
+		"lineTwo": null,
+		"city": "",
+		"state": "",
+		"zip": "",
+		"mapLink": "https://www.google.com/maps?q=South+Gate+Mall,+Edmonton,+Alberta,+Canada"
+	},
+	"domain": "https://stonemassage.ca/"
+}

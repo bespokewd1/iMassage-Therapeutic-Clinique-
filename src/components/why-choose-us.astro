@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import whyChooseImg from '@assets/images/why-choose.webp';
+---
+
+<section id="why-choose-us" class="px-0">
+  <div
+    class="mx-auto px-6 py-12 md:py-14 lg:py-16 grid grid-cols-4 items-stretch gap-0 relative"
+  >
+    <!-- Left image -->
+    <div class="relative col-span-5 xl:col-start-2 xl:col-end-4">
+      <Image
+        src={whyChooseImg}
+        class="block aspect-square w-full object-cover lg:h-full mx-auto xl:ms-0 max-w-[600px]"
+        alt="lady in a stone massage"
+      />
+    </div>
+
+    <!-- Card with bullets -->
+    <div
+      class="xl:absolute relative inset-0 col-span-5 mx-auto xl:col-start-3 flex items-center md:px-6 py-12"
+    >
+      <div
+        class="w-full max-w-[680px] rounded-xl bg-orange-200 shadow-[0_10px_25px_rgba(0,0,0,0.15)] ring-1 ring-black/10"
+      >
+        <div class="p-6 sm:p-8 md:p-10">
+          <h3
+            class="font-serif text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-950"
+          >
+            Why Choose iMassage?
+          </h3>
+
+          <p class="mt-4 text-gray-700 leading-7">
+            We deliver thoughtful, therapeutic care tailored to your body—so you
+            leave lighter, looser, and genuinely restored.
+          </p>
+
+          <ul class="mt-6 space-y-3 text-gray-800">
+            <li class="flex gap-3">
+              <span class="mt-2 h-2 w-2 rounded-full bg-gray-900"></span>
+              <span>Registered, experienced therapists focused on results</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-2 h-2 w-2 rounded-full bg-gray-900"></span>
+              <span
+                >Personalized treatment plans for pain relief and relaxation</span
+              >
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-2 h-2 w-2 rounded-full bg-gray-900"></span>
+              <span
+                >Evidence‑based techniques: deep tissue, hot stone, Swedish, and
+                more</span
+              >
+            </li>
+            <li class="flex gap-3">
+              <span class="mt-2 h-2 w-2 rounded-full bg-gray-900"></span>
+              <span>Welcoming clinic with easy booking and flexible hours</span>
+            </li>
+          </ul>
+
+          <div class="mt-8">
+            <a
+              href="/about"
+              class="inline-flex items-center rounded-full border-2 border-gray-900 px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
+            >
+              Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,312 @@
+---
+import BaseLayout from 'src/layouts/BaseLayout.astro';
+import Landing from '@components/Landing.astro';
+import allLogos from '@assets/images/all-logos.avif';
+
+// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
+import { getOptimizedImage } from '@js/utils';
+import landingImage from '@assets/images/stone-massage-background1.png'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import { Image } from 'astro:assets';
+import FAQ from '@components/FAQ.astro';
+
+const optimizedImage = await getOptimizedImage(landingImage);
+---
+
+<BaseLayout
+  title="Direct Billing"
+  description="iMassage Therapeutic Clinique- Professional Massage Therapy"
+  preloadedImage={optimizedImage}
+>
+  <section class="bg-orange-50">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <!-- Header -->
+      <header class="text-center max-w-3xl mx-auto">
+        <h2 class="font-serif text-3xl md:text-4xl text-gray-900">
+          Direct Billing
+        </h2>
+        <p class="mt-3 text-emerald-900 font-semibold">
+          We offer direct billing to leading insurance providers in Canada.
+        </p>
+        <p class="mt-4 text-gray-700 leading-7">
+          At iMassage Therapeutic Clinique, we submit claims directly to your
+          insurer—so you can focus on rest and recovery. Whether you’re covered
+          by private insurance or being treated after an accident (MVA), we’ll
+          help simplify the process.
+        </p>
+      </header>
+
+      <!-- Content -->
+      <div
+        class="mt-10 mx-auto max-w-3xl lg:max-w-6xl flex flex-col gap-6 lg:flex-row lg:items-stretch"
+      >
+        <!-- Left: Panel -->
+        <div
+          class="place-content-center rounded-xl bg-orange-200/80 p-6 ring-1 ring-black/5 lg:w-[44%] lg:shrink-0 lg:p-8"
+        >
+          <h3 class="font-serif text-2xl md:text-3xl text-gray-900">
+            📌 How Direct Billing Works
+          </h3>
+          <p class="mt-3 text-gray-800">
+            Fast, simple, and hassle‑free—so you can leave feeling your best.
+          </p>
+        </div>
+
+        <!-- Right: Steps -->
+        <div
+          class="rounded-xl bg-white/90 p-6 ring-1 ring-black/10 lg:flex-1 lg:p-8"
+        >
+          <ol class="space-y-5 text-gray-900">
+            <li class="flex gap-3">
+              <span
+                class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-700 text-white text-xs"
+                >1</span
+              >
+              <span>Book your appointment (In‑Clinic or Mobile Massage).</span>
+            </li>
+            <li class="flex gap-3">
+              <span
+                class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-700 text-white text-xs"
+                >2</span
+              >
+              <span>Provide your insurance details when you arrive.</span>
+            </li>
+            <li class="flex gap-3">
+              <span
+                class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-700 text-white text-xs"
+                >3</span
+              >
+              <span>We submit the claim directly to your provider.</span>
+            </li>
+            <li class="flex gap-3">
+              <span
+                class="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-700 text-white text-xs"
+                >4</span
+              >
+              <span>You only pay any remaining balance, if applicable.</span>
+            </li>
+          </ol>
+
+          <div class="mt-8 flex justify-center">
+            <a
+              href="/booking"
+              class="inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-300 hover:text-emerald-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+            >
+              Book Appointment
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="">
+    <div class="">
+      <h3
+        class="bg-orange-200/50 py-12 md:py-16 text-center font-serif text-xl md:text-2xl lg:text-3xl text-gray-900"
+      >
+        We are pleased to offer direct billing for these providers:
+      </h3>
+
+      <div class="mt-8 max-w-6xl px-6 mx-auto">
+        <Image
+          src={allLogos}
+          alt="Logos of insurance providers we can direct bill"
+          widths={[640, 960, 1280, 1600, 1920]}
+          sizes="(min-width: 1280px) 1100px, (min-width: 768px) 90vw, 100vw"
+          format="avif"
+          class="mx-auto h-auto w-full max-w-5xl"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
+  <section class="bg-orange-100/70">
+    <div class="mx-auto max-w-6xl px-6 py-12 md:py-16 text-center">
+      <p class="text-gray-800">
+        We also support less common insurance providers.
+        <br class="hidden sm:block" />
+        Contact us to verify if your plan qualifies for direct billing.
+      </p>
+
+      <h3
+        class="mt-6 font-serif text-2xl md:text-3xl lg:text-4xl text-gray-900"
+      >
+        MVA (Motor Vehicle Accident) Massage Therapy
+      </h3>
+
+      <p class="mt-4 text-gray-700 leading-7 max-w-3xl mx-auto">
+        Selected Registered Massage Therapists (RMTs) at iMassage Therapeutic
+        Clinique provide treatment for MVA clients. If you’ve been injured in a
+        car accident, we can assist you with direct billing to your auto
+        insurance. Reach out for details and next steps.
+      </p>
+
+      <div
+        class="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
+      >
+        <a
+          href="/contact"
+          class="inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-300 hover:text-emerald-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+        >
+          Contact Us
+        </a>
+        <a
+          href="/booking"
+          class="inline-flex items-center rounded-full border-2 border-emerald-800 px-6 py-3 text-sm font-semibold text-emerald-900 transition-colors hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+        >
+          Book an Appointment
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <FAQ />
+</BaseLayout>
+
+<style lang="less">
+  /*-- -------------------------- -->
+  <---          Reviews           -->
+  <--- -------------------------- --*/
+
+  /* Mobile - 360px */
+  @media only screen and (min-width: 0em) {
+    #reviews {
+      /* Centers the button */
+      text-align: center;
+      padding: var(--sectionPadding);
+
+      .cs-container {
+        width: 100%;
+        max-width: (1104/16rem);
+        margin: auto;
+      }
+
+      .cs-topper {
+        text-align: center;
+        margin-bottom: (16/16rem);
+      }
+
+      .cs-title {
+        text-align: center;
+        max-width: (700/16rem);
+      }
+
+      .cs-text {
+        text-align: center;
+        max-width: (650/16rem);
+        /* 88px - 104px */
+        margin-bottom: clamp(5.5em, 10.2vw, 6.5em);
+      }
+
+      .cs-card-group {
+        /* 48px - 64px */
+        margin: 0 auto clamp(3rem, 5vw, 4rem);
+        padding: 0;
+      }
+
+      .cs-item {
+        text-align: left;
+        list-style: none;
+        width: 100%;
+        max-width: (542/16rem);
+        margin: 0 auto (64/16rem);
+        /* Prevents padding from affecting height & width */
+        box-sizing: border-box;
+        /* Padding L & R - 16px - 32px */
+        padding: (60/16rem) clamp(1rem, 3.2vw, 2rem) 0;
+        /* 32px - 40px */
+        padding-bottom: clamp(2rem, 5.4vw, 2.5rem);
+        background: #fff;
+        box-shadow: 0px 20px 39px 0px rgba(0, 0, 0, 0.05);
+        border-radius: (4/16rem);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        position: relative;
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+
+      .cs-item-img {
+        width: (80/16rem);
+        height: (80/16rem);
+        position: absolute;
+        top: (-40/16rem);
+      }
+
+      .cs-item-p {
+        font-size: (16/16rem);
+        line-height: 1.5em;
+        margin: 0 0 (20/16rem);
+        padding-bottom: (20/16rem);
+        color: var(--bodyTextColor);
+        border-bottom: 1px solid #e8e9ec;
+      }
+
+      .cs-reviewer {
+        font-size: (16/16rem);
+        font-weight: 700;
+        line-height: 1.5em;
+        width: 40%;
+        margin: 0 auto 0 0;
+        color: var(--headerColor);
+        display: block;
+      }
+
+      .cs-desc {
+        font-size: (14/16rem);
+        font-weight: 400;
+        color: var(#353535);
+        display: block;
+      }
+
+      .cs-item-stars {
+        width: (96/16rem);
+        height: (16/16rem);
+      }
+    }
+  }
+
+  /* Tablet - 768px */
+  @media only screen and (min-width: 48em) {
+    #reviews {
+      .cs-card-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: (16/16rem);
+      }
+
+      .cs-item {
+        /* reset margin so it won't interfere with flexbox */
+        margin: 0;
+      }
+    }
+  }
+
+  /* Dark Mode */
+  @media only screen and (min-width: 0em) {
+    body.dark-mode {
+      #reviews {
+        .cs-title,
+        .cs-text,
+        .cs-item-p,
+        .cs-reviewer {
+          color: var(--bodyTextColorWhite);
+        }
+
+        .cs-item {
+          background: var(--medium);
+        }
+
+        .cs-desc {
+          color: var(--primaryLight);
+        }
+      }
+    }
+  }
+</style>

@@ -1,0 +1,592 @@
+---
+import BaseLayout from 'src/layouts/BaseLayout.astro';
+import CTA from '@components/CTA.astro';
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import '@styles/blog.less';
+
+// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
+import { getOptimizedImage } from '@js/utils';
+import aboutImage1 from '@assets/images/Services-2.DeepTissueMassage.jpg';
+import aboutImage2 from '@assets/images/welcome.jpg';
+import serviceImg5 from '@assets/images/swedish-massage.jpg';
+
+import heroImg from '@assets/images/hero-img1.jpg';
+import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import FacebookIcon from '@components/Icons/Socials/FacebookIcon.astro';
+import InstagramIcon from '@components/Icons/Socials/InstagramIcon.astro';
+import LinkedInIcon from '@components/Icons/Socials/LinkedInIcon.astro';
+import TwitterIcon from '@components/Icons/Socials/TwitterIcon.astro';
+import WhyChooseUs from '@components/why-choose-us.astro';
+
+const optimizedImage = await getOptimizedImage(landingImage);
+
+const posts = await getCollection('blog');
+posts.sort(
+  (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+);
+---
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+<BaseLayout preloadedImage={optimizedImage}>
+  <!-- ============================================ -->
+  <!--                    Hero                      -->
+  <!-- ============================================ -->
+
+  <section id="hero" class="bg-orange-50 px-0">
+    <div class="mx-auto grid grid-cols-2 items-stretch gap-0">
+      <!-- Left: edge-to-edge image -->
+      <div class="relative md:col-span-1 col-span-2">
+        <!-- <Picture
+          src={heroImg}
+          alt="lady in a stone massage"
+          formats={['avif', 'webp']}
+          pictureAttributes={{
+            class:
+              'block aspect-video w-full object-cover lg:h-full lg:min-h-[770px]',
+          }}
+          loading="eager"
+        /> -->
+
+        <Image
+          loading={'eager'}
+          src={heroImg}
+          class="block aspect-video w-full object-cover h-full lg:min-h-[550px]"
+          alt="lady in a stone massage"
+        />
+      </div>
+
+      <!-- Right: text block on light card -->
+      <div
+        class="relative flex items-center justify-center px-6 py-12 col-span-2 md:col-span-1"
+      >
+        <div class="w-full max-w-xl">
+          <div class="p-8 md:p-10">
+            <!-- Topper (optional) -->
+            <!-- <span class="block text-sm font-semibold tracking-wide text-gray-600">
+              Hot Stone Massage - Edmonton
+            </span> -->
+
+            <!-- Big serif headline -->
+            <h1
+              class="font-serif text-left text-3xl leading-tight text-gray-950 md:text-4xl lg:text-5xl"
+            >
+              Restore, Rejuvenate,
+              <br class="hidden sm:block" />
+              and Feel Your Best
+            </h1>
+
+            <!-- Supporting paragraph -->
+            <p class="mt-6 text-base leading-7 text-gray-700 text-left">
+              Personalized therapeutic massage in Edmonton—deep tissue, Swedish,
+              and hot stone treatments designed to relieve pain, calm the mind,
+              and enhance everyday performance.
+            </p>
+
+            <!-- CTAs -->
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a
+                href="https://www.massagebook.com/biz/imassage-therapeutic-clinique"
+                class="inline-flex items-center justify-center rounded-full border-2 border-emerald-200 bg-emerald-200 px-6 py-3 text-sm font-semibold text-gray-950 transition-colors active:border-transparent hover:bg-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
+              >
+                Book Appointment
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- second content -->
+    <div class="mx-auto mt-4 grid grid-cols-4 items-stretch gap-0 relative">
+      <!-- Left: edge-to-edge image -->
+      <div class="relative col-span-5 xl:col-start-2 xl:col-end-4">
+        <Image
+          src={aboutImage2}
+          class="block aspect-square w-full object-cover lg:h-full mx-auto xl:ms-0 max-w-[600px]"
+          alt="lady in a stone massage"
+        />
+      </div>
+
+      <!-- Right: text block on light card -->
+      <div
+        class="xl:absolute relative inset-0 col-span-5 xl:col-start-3 xl:col-end-4 flex items-center justify-center md:px-6 py-12"
+      >
+        <div
+          class="w-full max-w-[680px] rounded-xl bg-orange-200 shadow-[0_10px_25px_rgba(0,0,0,0.15)] ring-1 ring-black/10"
+        >
+          <div class="p-6 sm:p-8 md:p-10">
+            <h3
+              class="font-serif text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-950"
+            >
+              Welcome to iMassage Therapeutic Clinique
+            </h3>
+
+            <p class="mt-5 text-gray-700 leading-7">
+              At iMassage Therapeutic Clinique, we focus on restorative,
+              evidence‑based massage care tailored to your body’s needs. From
+              deep tissue and hot stone to relaxation-focused treatments, our
+              goal is to reduce pain, release tension, and renew your overall
+              well‑being.
+            </p>
+
+            <div class="mt-8">
+              <a
+                href="/about"
+                class="inline-flex items-center rounded-full border-2 border-gray-900 px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA (Green band) ================ -->
+  <CTA
+    title="Restore Balance. Feel Renewed"
+    description="Expert therapeutic massage tailored to your needs."
+  />
+
+  <!-- ================= Services ================= -->
+  <section class="bg-orange-50">
+    <!-- Intro -->
+    <div class="mx-auto max-w-6xl px-6 py-16 lg:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="font-serif text-3xl md:text-4xl text-gray-950">
+          Our Services
+        </h2>
+        <p class="mt-4 text-gray-700 leading-7">
+          From deep tissue and hot stone to relaxing Swedish massage, each
+          session at iMassage Therapeutic Clinique is customized to your
+          goals—reducing pain, improving mobility, and helping you feel your
+          best.
+        </p>
+      </div>
+    </div>
+
+    <!-- Image row with overlay card on orange-200 -->
+    <div class="mx-auto max-w-7xl px-0">
+      <div class="grid grid-cols-1 md:grid-cols-12 items-stretch">
+        <!-- Left image -->
+        <div class="md:col-span-6">
+          <Image
+            src={aboutImage1}
+            alt="lady in a stone massage"
+            class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
+          />
+        </div>
+
+        <!-- Middle card on orange-200 -->
+        <div
+          class="bg-orange-200 md:col-span-6 flex items-center justify-center px-6 py-10"
+        >
+          <div class="w-full max-w-xl text-center md:text-left">
+            <h3 class="text-gray-900 font-semibold tracking-wide">
+              Therapeutic Deep-Tissue / Relaxation Massage
+            </h3>
+            <p class="mt-4 text-gray-700 leading-7">
+              Target chronic tension and restore ease of movement with focused
+              deep‑tissue work—balanced with soothing relaxation techniques for
+              a calm, refreshed body and mind.
+            </p>
+            <div class="mt-6">
+              <a
+                href="/services"
+                class="inline-flex items-center rounded-full border-2 border-gray-900 px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
+              >
+                View Services
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right image (stretches full width on small, aligns in grid on md+) -->
+        <div class="md:col-span-12">
+          <div class="grid grid-cols-1 md:grid-cols-12">
+            <div class="md:col-span-6 order-2 md:order-1">
+              <div
+                class="bg-orange-200 w-full h-full flex items-center justify-center px-6 py-10"
+              >
+                <div class="w-full max-w-xl text-center md:text-left">
+                  <h3 class="text-gray-900 font-semibold tracking-wide">
+                    Swedish Massage
+                  </h3>
+                  <p class="mt-4 text-gray-700 leading-7">
+                    A relaxing full-body massage that uses smooth, gentle strokes to improve circulation, 
+                    relieve muscle tension, and promote overall relaxation and well-being. Ideal for stress 
+                    relief and general relaxation.
+                  </p>
+                  <div class="mt-6">
+                    <a
+                      href="/services"
+                      class="inline-flex items-center rounded-full border-2 border-gray-900 px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
+                    >
+                      Learn More
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="md:col-span-6 order-1 md:order-2">
+              <Image
+                src={serviceImg5}
+                alt="lady in a stone massage"
+                class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Why Choose Us ================= -->
+  <WhyChooseUs />
+
+  <!-- ================= How to Book (Steps) ================= -->
+  <section class="bg-orange-50">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <h2 class="font-serif text-center text-3xl md:text-4xl text-gray-950">
+        Booking Made Simple
+      </h2>
+
+      <!-- Steps -->
+      <div
+        class="mt-10 grid grid-cols-1 gap-6 md:mt-12 md:grid-cols-3 md:gap-8"
+      >
+        <!-- Step 1 -->
+        <div
+          class="rounded-lg bg-orange-200/90 px-8 py-10 text-center shadow-sm ring-1 ring-black/5"
+        >
+          <div class="font-serif text-6xl text-gray-900">1</div>
+          <h3 class="mt-4 font-serif text-3xl text-gray-900">
+            Find Your Treatment
+          </h3>
+          <p class="mt-3 text-gray-700 leading-7">
+            Deep tissue, hot stone, Swedish—choose the care your body needs.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div
+          class="rounded-lg bg-orange-200/90 px-8 py-10 text-center shadow-sm ring-1 ring-black/5"
+        >
+          <div class="font-serif text-6xl text-gray-900">2</div>
+          <h3 class="mt-4 font-serif text-3xl text-gray-900">
+            Schedule in Minutes
+          </h3>
+          <p class="mt-3 text-gray-700 leading-7">
+            Pick the date and time that works best for you.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div
+          class="rounded-lg bg-orange-200/90 px-8 py-10 text-center shadow-sm ring-1 ring-black/5"
+        >
+          <div class="font-serif text-6xl text-gray-900">3</div>
+          <h3 class="mt-4 font-serif text-3xl text-gray-900">
+            Confirm & Enjoy
+          </h3>
+          <p class="mt-3 text-gray-700 leading-7">
+            Secure your spot and let us take care of the rest.
+          </p>
+        </div>
+      </div>
+
+      <!-- Direct billing + CTA -->
+      <div class="mt-10 text-center">
+        <p class="font-serif text-lg text-gray-900">Direct Billing Available</p>
+        <p class="mt-1 text-gray-700">Check with us for accepted providers.</p>
+
+        <a
+          href="/direct-billing"
+          class="mt-6 inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:text-emerald-900 hover:bg-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500"
+        >
+          Book Appointment
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Contact / Get in Touch ================= -->
+  <section id="contact" class="bg-orange-50">
+    <!-- max-w-7xl  -->
+    <div class="mx-auto grid grid-cols-1 lg:grid-cols-12">
+      <!-- Left: Info panel (green) -->
+      <div
+        class="lg:col-span-4 bg-emerald-200 text-emerald-50 px-8 py-12 md:px-12 md:py-16 flex flex-col justify-center items-center"
+      >
+        <div class="mt-8 space-y-5 text-emerald-100">
+          <h2 class="font-serif text-3xl text-emerald-950 md:text-4xl">
+            Get in Touch
+          </h2>
+
+          <div class="space-y-3">
+            <p class="text-lg">iMassage Therapeutic Clinique</p>
+            <p>
+              10121 150 Street NW<br />
+              Edmonton, Alberta T5P 1P2
+            </p>
+            <p>
+              780‑919‑1633<br />
+              info@imassageclinique.ca
+            </p>
+            <p>Mon–Sun: 9:00 AM – 9:00 PM</p>
+            <p>
+              Direct Billing Available. Please ask about eligible providers.
+            </p>
+          </div>
+
+          <!-- Socials -->
+          <div class="mt-8 flex items-center gap-4 text-emerald-50/90">
+            <a href="#" aria-label="Facebook" class="hover:text-white">
+              <FacebookIcon class:list={['text-emerald-950']} />
+            </a>
+            <a href="#" aria-label="Instagram" class="hover:text-white">
+              <InstagramIcon class:list={['text-emerald-950']} />
+            </a>
+            <a href="#" aria-label="LinkedIn" class="hover:text-white">
+              <LinkedInIcon class:list={['text-emerald-950']} />
+            </a>
+            <a href="#" aria-label="LinkedIn" class="hover:text-white">
+              <TwitterIcon class:list={['text-emerald-950']} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="lg:col-span-8 bg-orange-50 px-8 py-12 md:px-12 md:py-16">
+        <form class="max-w-2xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-sm text-gray-700 mb-2">First Name</label>
+              <input
+                type="text"
+                class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="First name"
+              />
+            </div>
+            <div>
+              <label class="block text-sm text-gray-700 mb-2">Last Name</label>
+              <input
+                type="text"
+                class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="Last name"
+              />
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <label class="block text-sm text-gray-700 mb-2">Email *</label>
+            <input
+              type="email"
+              required
+              class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div class="mt-5">
+            <label class="block text-sm text-gray-700 mb-2">Message</label>
+            <textarea
+              rows="5"
+              class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="How can we help?"></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="mt-6 w-full md:w-auto rounded bg-emerald-200 px-8 py-3 text-emerald-950 font-semibold transition-colors hover:text-emerald-900 hover:bg-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+          >
+            Send
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--               Services                    -->
+  <!-- ============================================ -->
+
+  <!-- <section
+    id="massage-services"
+    class="relative overflow-hidden p-(--sectionPadding) lg:max-w-[80rem] mx-auto gap-4 flex flex-col md:gap-8"
+  >
+    <h2 class="cs-title">Our Services</h2>
+    <ServiceGrid services={massageServiceData} />
+
+    <Picture
+      src={serviceBgImg}
+      alt="stone arrangement with rolled towel"
+      formats={['avif', 'webp']}
+      pictureAttributes={{
+        class: 'absolute -z-10 inset-0 w-full h-full lg:hidden ',
+      }}
+      class="object-cover w-full h-full"
+    />
+  </section> -->
+
+  <!-- <FAQ /> -->
+  <!-- ============================================ -->
+  <!--                 Blog Section                 -->
+  <!-- ============================================ -->
+  <!-- <section id="blog" class="glass-bg">
+    <div class="cs-container">
+      <div class="cs-content">
+        <span class="cs-topper">Our Blog</span>
+        <h2 class="cs-title">Wellness Tips & Massage Insights</h2>
+        <p class="cs-text">
+          Explore expert advice on relaxation, pain relief, and self-care.
+        </p>
+      </div>
+      <div class="main-content">
+        {posts.length === 0 && <h1>No Recent Posts</h1>}
+        {
+          posts.length >= 1 &&
+            posts.map((post) => (
+              <article class="recent-articles">
+                <picture class="blog-mainImage">
+                  <Image
+                    src={post.data.image}
+                    alt={post.data.imageAlt}
+                    width="795"
+                    height="400"
+                    decoding="async"
+                  />
+                </picture>
+
+                <div class="article-group">
+                  <div class="blog-authorGroup">
+                    <picture class="blog-author-img">
+                      <img
+                        src="/assets/favicons/favicon-stone-massage.jpg"
+                        alt="house"
+                        width="32"
+                        height="32"
+                        decoding="async"
+                      />
+                    </picture>
+                    {/* <span class="blog-author">{post.data.author}</span>
+                    <span aria-hidden="true" class="blog-dot" />
+                    <span class="blog-date">{formatDate(post.data.date)}</span> */}
+                    <span class="blog-author">Stone Massage Admin</span>
+                    <span aria-hidden="true" class="blog-dot" />
+                    <span class="blog-date">Jun 14, 2025</span>
+                  </div>
+                  <h2 class="blog-h1">{post.data.title}</h2>
+                  <p class="blog-desc">{post.data.description}</p>
+                  <a href={'/blog/' + post.id} class="blog-link">
+                    Continue Reading
+                  </a>
+                </div>
+              </article>
+            ))
+        }
+      </div>
+    </div>
+  </section> -->
+
+  <!-- ============================================ -->
+  <!--            Extra Content To Rank             -->
+  <!-- ============================================ -->
+
+  <!-- <section id="sbs-r">
+    <div class="cs-container">
+      <div class="cs-left">
+        <picture class="cs-picture cs-picture1">
+          <source
+            media="(max-width: 600px)"
+            srcset="/assets/images/stone-massage-feet.png"
+          />
+          <source
+            media="(min-width: 601px)"
+            srcset="/assets/images/stone-massage-feet.png"
+          />
+          <img
+            aria-hidden="true"
+            decoding="async"
+            src="/assets/images/stone-massage-feet.png"
+            alt="house"
+            loading="lazy"
+            width="400"
+            height="560"
+          />
+        </picture>
+        <picture class="cs-picture cs-picture2">
+          <source
+            media="(max-width: 600px)"
+            srcset="/assets/images/stone-massage-back.png"
+          />
+          <source
+            media="(min-width: 601px)"
+            srcset="/assets/images/stone-massage-back.png"
+          />
+          <img
+            aria-hidden="true"
+            decoding="async"
+            src="/assets/images/stone-massage-back.png"
+            alt="cabinets"
+            loading="lazy"
+            width="400"
+            height="560"
+          />
+        </picture>
+      </div>
+      <div class="cs-right">
+        <span class="cs-topper">Benefits of Massage Therapy</span>
+        <h2 class="cs-title">Reap the Benefits of Massage Therapy Today</h2>
+        <p class="cs-text">
+          Massage therapy is a proven way to relieve stress, ease muscle
+          tension, and improve overall well-being. At Healing Touch Massage
+          Therapy, we offer various techniques tailored to your needs, from
+          relaxation to therapeutic treatments.
+        </p>
+        <p class="cs-text">
+          <strong>1. Reduces Stress</strong><br />
+          Massage helps lower stress hormones and boost relaxation, leaving you feeling
+          calm and rejuvenated.
+        </p>
+        <p class="cs-text">
+          <strong>2. Eases Muscle Tension</strong><br />
+          Deep tissue and Swedish massage techniques target tight muscles, alleviating
+          pain and discomfort.
+        </p>
+        <p class="cs-text">
+          <strong>3. Enhances Circulation</strong><br />
+          Improved blood flow helps reduce inflammation, promote healing, and increase
+          energy levels.
+        </p>
+        <p class="cs-text">
+          <strong>4. Improves Flexibility</strong><br />
+          Regular massage can increase joint mobility and flexibility, promoting
+          better movement and posture.
+        </p>
+        <p class="cs-text">
+          Experience the therapeutic benefits of massage and improve your
+          quality of life. Book your appointment today!
+        </p>
+        <a href="/booking" class="cs-button-solid rounded-button"
+          >Book Your Massage Today</a
+        >
+      </div>
+    </div>
+  </section> -->
+
+  <!-- <CTA /> -->
+</BaseLayout>
+
+<style lang="less">
+  /* Add smooth scrolling to the entire HTML document */
+  html {
+    scroll-behavior: smooth;
+  }
+</style>
