@@ -24,9 +24,9 @@ type Social = {
 
 const optimizedImage = await getOptimizedImage(landingImage);
 
-const phoneDisplay = '780-919-1633';
-const phoneHref = 'tel:7809191633';
-const email = 'info@imassageclinique.ca';
+const phoneDisplay = '+1 780-729-0978';
+const phoneHref = 'tel:+17807290978';
+const email = 'imassageclinique@gmail.com';
 const emailHref = `mailto:${email}`;
 const socials: Social[] = [
   { name: 'Facebook', href: '#', Icon: FacebookIcon },
@@ -38,10 +38,10 @@ const socials: Social[] = [
 const clinicName = client.name || 'iMassage Therapeutic Clinique';
 const addressOne =
   client.address.lineOne?.trim() ||
-  'South Gate Mall, Edmonton, Alberta, Canada';
+  '10625 40 Ave NW';
 const mapHref =
   client.address.mapLink ||
-  'https://www.google.com/maps?q=South+Gate+Mall,+Edmonton,+Alberta,+Canada';
+  'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2374.612254114085!2d-113.51028162603954!3d53.47538949128358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a01f3c749cbe89%3A0x6a72e2d6f72946d0!2s10625%2040%20Ave%20NW!5e0!3m2!1sen!2sph!4v1759943839747!5m2!1sen!2sph';
 
 const hours = [
   { label: 'Mon – Sat', value: '10:00 am – 10:00 pm' },
