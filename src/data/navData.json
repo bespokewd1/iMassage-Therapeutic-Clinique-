@@ -41,6 +41,22 @@
       {
         "key": "MVA (Motor Vehicle Accident) Massage",
         "url": "/services/mva"
+      },
+       {
+        "key": "Bucal Massage",
+        "url": "/services/bucal-massage"
+      },
+       {
+        "key": "Couples Massage",
+        "url": "/services/couples-massage"
+      },
+       {
+        "key": "Injury Recovery Massage",
+        "url": "/services/injury-recovery"
+      },
+       {
+        "key": "Philippine Oil Massage",
+        "url": "/services/philippine-oil"
       }
   ]
   },
