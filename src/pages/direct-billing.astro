@@ -8,6 +8,7 @@ import { getOptimizedImage } from '@js/utils';
 import landingImage from '@assets/images/stone-massage-background1.png'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import { Image } from 'astro:assets';
 import FAQ from '@components/FAQ.astro';
+import CtaLink from '@components/CtaLink.astro';
 
 const optimizedImage = await getOptimizedImage(landingImage);
 ---
@@ -87,12 +88,9 @@ const optimizedImage = await getOptimizedImage(landingImage);
           </ol>
 
           <div class="mt-8 flex justify-center">
-            <a
-              href="https://www.massagebook.com/biz/imassage-therapeutic-clinique"
+            <CtaLink
               class="inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-300 hover:text-emerald-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-            >
-              Book Appointment
-            </a>
+            />
           </div>
         </div>
       </div>
@@ -151,12 +149,10 @@ const optimizedImage = await getOptimizedImage(landingImage);
         >
           Contact Us
         </a>
-        <a
-          href="https://www.massagebook.com/biz/imassage-therapeutic-clinique"
+        <CtaLink
+          label="Book an Appointment"
           class="inline-flex items-center rounded-full border-2 border-emerald-800 px-6 py-3 text-sm font-semibold text-emerald-900 transition-colors hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-        >
-          Book an Appointment
-        </a>
+        />
       </div>
     </div>
   </section>
