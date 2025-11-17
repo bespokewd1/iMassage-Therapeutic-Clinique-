@@ -205,15 +205,28 @@ const mapNote =
           services.map((s) => (
             <article class="relative bg-transparent overflow-hidden grid grid-rows-[min-content,1fr] sm:grid-rows-1 sm:grid-cols-2 rounded-xl ring-1 ring-black/10 ">
               {/* <div class="absolute  inset-0 bg-gradient-to-l from-emerald-900 from-35% via-emerald-900/80 via-55% to-emerald-900/10" /> */}
-              <div class="">
+              <div class="relative overflow-hidden">
+                <div
+                  class="absolute inset-0 scale-110"
+                  style={`
+                    background-image: url(${s.blurImg.src});
+                    background-size: cover;
+                    background-position: center;
+                    filter: blur(20px);
+                  `}
+                />
+
+                {/*
+                  decoding="sync"
+                  fetchpriority="high" */}
                 <Picture
                   src={s.img}
                   alt={s.title ?? 'Service Image'}
                   formats={['avif', 'webp']}
-                  class={'block w-full aspect-square size-full object-cover'}
-                  style={`background-image: url(${s.blurImg.src});background-size: cover;background-repeat: no-repeat;`}
+                  class="relative block w-full aspect-square size-full object-cover"
+                  decoding="sync"
+                  fetchpriority="high"
                 />
-                {/* <div class="absolute inset-0 bg-gradient-to-l from-emerald-900 from-10% via-10% to-emerald-500/10" /> */}
               </div>
 
               <div class="p-5 bg-emerald-200 z-10 text-emerald-50 h-full place-content-center space-y-4 ">
