@@ -13,11 +13,23 @@ import ogImg from '@assets/images/hero-img1.jpg';
 import { getOptimizedImage } from '@js/utils';
 const ogImage = await getOptimizedImage(ogImg);
 
+type Props = {
+  description?: string;
+  title?: string;
+  preloadedImage?: ImageMetadata | ImageMetadata[];
+};
+
 const {
   description = 'Discover relaxation at iMassage Therapeutic Clinique. Our professional massage therapy relieves stress, restores balance, and rejuvenates your body and mind. Book your session today.',
   title = 'iMassage Therapeutic Clinique | Professional Massage Therapy in Edmonton',
   preloadedImage,
 } = Astro.props;
+
+const preloadedImages = !preloadedImage
+  ? []
+  : Array.isArray(preloadedImage)
+    ? preloadedImage
+    : [preloadedImage];
 ---
 
 <!-- A fully fleshed-out <head>, dynamically changing based on client.json and the page front matter -->
@@ -43,7 +55,11 @@ const {
     />
 
     <!-- Preloads the image passed as a prop -->
-    <link rel="preload" href={preloadedImage.src} as="image" />
+    {
+      preloadedImages.map((img) => (
+        <link rel="preload" href={img.src} as="image" />
+      ))
+    }
     <link rel="preload" href={ogImage.src} as="image" />
 
     <!--Social Media Display-->
@@ -104,7 +120,10 @@ const {
     <!-- Sitewide Scripts -->
     <script src="@js/nav.js"></script>
 
-    <meta name="google-site-verification" content="rY3pdndNZg05EqokbLe7sL-On46hh_9Ilc1xAisvbb0" />
+    <meta
+      name="google-site-verification"
+      content="rY3pdndNZg05EqokbLe7sL-On46hh_9Ilc1xAisvbb0"
+    />
   </head>
   <body>
     <!--Screen reader skip main nav-->

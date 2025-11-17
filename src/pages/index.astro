@@ -12,15 +12,12 @@ import aboutImage2 from '@assets/images/welcome.jpg';
 import serviceImg5 from '@assets/images/swedish-massage.jpg';
 
 import heroImg from '@assets/images/hero-img1.jpg';
-import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import FacebookIcon from '@components/Icons/Socials/FacebookIcon.astro';
 import InstagramIcon from '@components/Icons/Socials/InstagramIcon.astro';
 import LinkedInIcon from '@components/Icons/Socials/LinkedInIcon.astro';
 import TwitterIcon from '@components/Icons/Socials/TwitterIcon.astro';
 import WhyChooseUs from '@components/why-choose-us.astro';
 import CtaLink from '@components/CtaLink.astro';
-
-const optimizedImage = await getOptimizedImage(landingImage);
 
 const posts = await getCollection('blog');
 posts.sort(
@@ -32,7 +29,7 @@ posts.sort(
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 />
-<BaseLayout preloadedImage={optimizedImage}>
+<BaseLayout preloadedImage={[heroImg, aboutImage2]}>
   <!-- ============================================ -->
   <!--                    Hero                      -->
   <!-- ============================================ -->

@@ -4,7 +4,7 @@ import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE AS
 import { Image } from 'astro:assets';
 import clientData from '@data/client.json';
 import navData from '@data/navData.json';
-import { serviceMetaBySlug } from '@data/servicesMeta';
+import { serviceMetaBySlug, type ServiceMeta } from '@data/servicesMeta';
 
 // services images
 import services1Img from '@assets/images/Services-1.TherapeuticMassage.jpg';
@@ -37,11 +37,15 @@ import CtaLink from '@components/CtaLink.astro';
 
 const optimizedImage = await getOptimizedImage(landingImage);
 
-type Service = {
-  title: string;
-  blurb: string;
-  cta?: string;
-  img: ImageMetadata;
+// type Service = {
+//   title: string;
+//   blurb: string;
+//   cta?: string;
+//   img: ImageMetadata;
+//   href?: string;
+// };
+//
+type Service = ServiceMeta & {
   href?: string;
 };
 
@@ -66,6 +70,7 @@ const services: Service[] = (servicesRoot?.children ?? [])
       blurb: meta.blurb,
       cta: meta.cta ?? 'Read More',
       img: meta.img,
+      blurImg: meta.blurImg,
       href: child.url,
     } as Service;
   })
@@ -161,7 +166,21 @@ const mapNote =
   'We offer in‑clinic massage services at Southgate Centre (Southgate Mall), Edmonton, Alberta. See our contact page for directions and parking details.';
 ---
 
-<BaseLayout preloadedImage={optimizedImage}>
+<BaseLayout
+  preloadedImage={[
+    services1Img,
+    services2Img,
+    services3Img,
+    services4Img,
+    services6Img,
+    services7Img,
+    services8Img,
+    services9Img,
+    services10Img,
+    services11Img,
+    services12Img,
+  ]}
+>
   <section class="bg-orange-50">
     <div class="mx-auto max-w-[120rem] px-6 py-16 md:py-20">
       <!-- Header -->
@@ -189,9 +208,10 @@ const mapNote =
               <div class="">
                 <Picture
                   src={s.img}
-                  alt={s.title}
+                  alt={s.title ?? 'Service Image'}
                   formats={['avif', 'webp']}
                   class={'block w-full aspect-square size-full object-cover'}
+                  style={`background-image: url(${s.blurImg.src});background-size: cover;background-repeat: no-repeat;`}
                 />
                 {/* <div class="absolute inset-0 bg-gradient-to-l from-emerald-900 from-10% via-10% to-emerald-500/10" /> */}
               </div>
