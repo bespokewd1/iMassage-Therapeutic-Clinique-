@@ -3,6 +3,8 @@ import BaseLayout from 'src/layouts/BaseLayout.astro';
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import { Image } from 'astro:assets';
 import clientData from '@data/client.json';
+import navData from '@data/navData.json';
+import { serviceMetaBySlug } from '@data/servicesMeta';
 
 // services images
 import services1Img from '@assets/images/Services-1.TherapeuticMassage.jpg';
@@ -42,103 +44,32 @@ type Service = {
   img: ImageMetadata;
   href?: string;
 };
-const services: Service[] = [
-  {
-    title: 'Deep Tissue Massage',
-    blurb:
-      'Targets deeper muscle layers to relieve chronic tension, muscle tightness, and pain.',
-    cta: 'Read More',
-    img: services2Img,
-    href: '/services/deep-tissue',
-  },
-  // {
-  //   title: 'Hot Stone Massage',
-  //   blurb:
-  //     'Uses smooth, heated stones to melt away muscle tension and promote deep relaxation.',
-  //   cta: 'Read More',
-  //   img: services5Img,
-  //   href: '/services/hot-stone',
-  // },
-  {
-    title: 'Swedish Massage',
-    blurb:
-      'A gentle, full-body massage designed to reduce stress, ease tension, and promote overall relaxation.',
-    cta: 'Read More',
-    img: services3Img,
-    href: '/services/swedish',
-  },
-  {
-    title: 'Prenatal Massage',
-    blurb:
-      'A soothing massage tailored to the needs of expectant mothers to ease discomfort and support prenatal wellness.',
-    cta: 'Read More',
-    img: services1Img,
-    href: '/services/prenatal',
-  },
-  {
-    title: 'Cupping',
-    blurb:
-      'An ancient therapy using suction cups to improve circulation, relieve muscle tension, and promote healing.',
-    cta: 'Read More',
-    img: services4Img,
-    href: '/services/cupping',
-  },
-  {
-    title: 'Sports Massage',
-    blurb:
-      'Focused therapy for athletes to enhance performance, prevent injury, and aid recovery.',
-    cta: 'Read More',
-    img: services6Img,
-    href: '/services/sports',
-  },
-  {
-    title: 'Craniosacral Massage',
-    blurb:
-      'A light-touch technique that releases tension in the central nervous system to improve overall health and well-being.',
-    cta: 'Read More',
-    img: services7Img,
-    href: '/services/craniosacral',
-  },
-  {
-    title: 'MVA (Motor Vehicle Accident) Massage',
-    blurb:
-      'Therapeutic treatment to address pain and soft tissue injuries resulting from car accidents, often covered by insurance.',
-    cta: 'Read More',
-    img: services8Img,
-    href: '/services/mva',
-  },
-  {
-    title: 'Bucal Massage',
-    blurb:
-      'Gentle facial and jaw therapy to relieve tension and improve circulation.',
-    cta: 'Read More',
-    img: services9Img,
-    href: '/services/bucal-massage',
-  },
-  {
-    title: 'Couples Massage',
-    blurb: 'Relaxing side-by-side massage experience for you and your partner.',
-    cta: 'Read More',
-    img: services10Img,
-    href: '/services/couples-massage',
-  },
-  {
-    title: 'Injury Recovery Massage',
-    blurb:
-      'Targeted therapy to aid healing, reduce pain, and restore mobility.',
-    cta: 'Read More',
-    img: services11Img,
-    href: '/services/injury-massage',
-  },
-  {
-    title: 'Philippine Oil Massage',
-    blurb:
-      'Traditional Filipino massage using local Filipino warm oils (e.g., Pau d’Arco) to relax muscles and promote wellness.',
-    cta: 'Read More',
-    img: services12Img,
-    href: '/services/philippine-massage',
-  },
-];
+
+const servicesRoot =
+  navData.find(
+    (n) =>
+      n.key === 'Services' || n.url === '/services/' || n.url === '/services'
+  ) ?? null;
+
+function slugFromUrl(url: string): string {
+  const last = url.split('/').filter(Boolean).pop() || '';
+  return last;
+}
+
+const services: Service[] = (servicesRoot?.children ?? [])
+  .map((child) => {
+    const slug = slugFromUrl(child.url);
+    const meta = serviceMetaBySlug[slug];
+    if (!meta) return null;
+    return {
+      title: meta.title ?? child.key,
+      blurb: meta.blurb,
+      cta: meta.cta ?? 'Read More',
+      img: meta.img,
+      href: child.url,
+    } as Service;
+  })
+  .filter(Boolean) as Service[];
 
 type Benefit = {
   title: string;
