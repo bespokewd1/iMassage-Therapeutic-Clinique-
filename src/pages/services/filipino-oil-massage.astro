@@ -5,7 +5,7 @@ import type { HeroServiceProps } from '@components/Services/ServiceHero.astro';
 import { getOptimizedImage } from '@js/utils';
 import ServiceHero from '@components/Services/ServiceHero.astro';
 import type { PriceBenefitsProps } from '@components/Services/PriceBenifits.astro';
-import PriceBenifits from '@components/Services/philippines.astro';
+import PriceBenifits from '@components/Services/PriceBenifits.astro';
 import services7Img from '@assets/images/hilot.png';
 
 const optimizedImage = await getOptimizedImage(landingImage);
@@ -29,12 +29,12 @@ export const craniHero: HeroServiceProps = {
       body: 'Promotes relaxation, stress relief, and a renewed sense of vitality from head to toe.',
     },
   ],
-  ctaPrimary: { label: 'Book Philippine Oil Massage', href: '/booking' },
-  ctaSecondary: { label: 'Ask About Philippine Oil Massage', href: '/contact' },
+  ctaPrimary: { label: 'Book Filipino Oil Massage', href: '/booking' },
+  ctaSecondary: { label: 'Ask About Filipino Oil Massage', href: '/contact' },
 };
 
 export const craniData: PriceBenefitsProps = {
-  benefitsTitle: 'Benefits of Philippine Oil Massage',
+  benefitsTitle: 'Benefits of Filipino Oil Massage.',
   benefits: [
     {
       num: '01',
@@ -57,12 +57,14 @@ export const craniData: PriceBenefitsProps = {
       body: 'Helps calm the mind and restore the body’s natural harmony.',
     },
   ],
-  benefitsTagline: 'Warm oils, deep relaxation, improved circulation, and authentic Filipino healing',
+  benefitsTagline:
+    'Warm oils, deep relaxation, improved circulation, and authentic Filipino healing',
   prices: [
     { duration: '45 minutes', price: '$95' },
     { duration: '60 minutes', price: '$115' },
     { duration: '75 minutes', price: '$135' },
   ],
+  ctaLabel: 'Book Filipino Massage Session',
 };
 
 // availabilityNote:

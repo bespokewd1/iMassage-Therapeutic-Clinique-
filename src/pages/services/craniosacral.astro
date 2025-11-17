@@ -5,7 +5,7 @@ import type { HeroServiceProps } from '@components/Services/ServiceHero.astro';
 import { getOptimizedImage } from '@js/utils';
 import ServiceHero from '@components/Services/ServiceHero.astro';
 import type { PriceBenefitsProps } from '@components/Services/PriceBenifits.astro';
-import PriceBenifits from '@components/Services/craniosacral.astro';
+import PriceBenifits from '@components/Services/PriceBenifits.astro';
 import services7Img from '@assets/images/Services-7.jpg';
 
 const optimizedImage = await getOptimizedImage(landingImage);
@@ -63,6 +63,7 @@ export const craniData: PriceBenefitsProps = {
     { duration: '60 minutes', price: '$115' },
     { duration: '75 minutes', price: '$135' },
   ],
+  ctaLabel: 'Book Craniosacral Massage Session',
 };
 
 // availabilityNote:

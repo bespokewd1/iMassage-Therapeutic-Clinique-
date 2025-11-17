@@ -1,7 +1,6 @@
 ---
 import BaseLayout from 'src/layouts/BaseLayout.astro';
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
-import { Image } from 'astro:assets';
 // Use your best deep‑tissue hero image here
 import deepTissueHero from '@assets/images/Services-2.DeepTissueMassage.jpg';
 import type { HeroServiceProps } from '@components/Services/ServiceHero.astro';
@@ -81,6 +80,7 @@ const priceBenefits: PriceBenefitsProps = {
   benefits: benefits,
   benefitsTagline: 'Relieve Pain, Reduce Stress & Restore Balance',
   prices: prices,
+  ctaLabel: 'Book Deep‑Tissue Session',
 };
 ---
 

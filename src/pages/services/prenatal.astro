@@ -6,7 +6,7 @@ import { getOptimizedImage } from '@js/utils';
 import ServiceHero from '@components/Services/ServiceHero.astro';
 import services1Img from '@assets/images/Services-1.TherapeuticMassage.jpg';
 import type { PriceBenefitsProps } from '@components/Services/PriceBenifits.astro';
-import PriceBenifits from '@components/Services/prenatal.astro';
+import PriceBenifits from '@components/Services/PriceBenifits.astro';
 import services3Img from '@assets/images/Services-3.RelaxationMassage.jpg';
 
 const optimizedImage = await getOptimizedImage(landingImage);
@@ -65,6 +65,7 @@ export const pregnancyData: PriceBenefitsProps = {
     { duration: '60 minutes', price: '$100' },
     { duration: '90 minutes', price: '$140' },
   ],
+  ctaLabel: 'Book Prenatal Massage Session',
 };
 ---
 

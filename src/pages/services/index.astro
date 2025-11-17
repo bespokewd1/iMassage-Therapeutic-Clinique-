@@ -13,7 +13,7 @@ import services5Img from '@assets/images/Services-5.HotStoneMassage.jpg';
 import services6Img from '@assets/images/Services-6.LymphaticMassage.jpg';
 import services7Img from '@assets/images/Services-7.jpg';
 import services8Img from '@assets/images/Services-8.jpg';
-import services9Img from '@assets/images/bucal-massage.jpg'; 
+import services9Img from '@assets/images/bucal-massage.jpg';
 import services10Img from '@assets/images/couples-massage.jpg';
 import services11Img from '@assets/images/injury.png';
 import services12Img from '@assets/images/hilot.png';
@@ -31,6 +31,7 @@ import MapPinFilled from '@components/Icons/Utility/MapPinFilled.astro';
 import PhoneIcon from '@components/Icons/Utility/PhoneIcon.astro';
 import CheckIcon from '@components/Icons/Utility/CheckIcon.astro';
 import CheckIconFilled from '@components/Icons/Utility/CheckIconFilled.astro';
+import CtaLink from '@components/CtaLink.astro';
 
 const optimizedImage = await getOptimizedImage(landingImage);
 
@@ -125,8 +126,7 @@ const services: Service[] = [
   },
   {
     title: 'Couples Massage',
-    blurb:
-      'Relaxing side-by-side massage experience for you and your partner.',
+    blurb: 'Relaxing side-by-side massage experience for you and your partner.',
     cta: 'Read More',
     img: services10Img,
     href: '/services/couples-massage',
@@ -147,7 +147,6 @@ const services: Service[] = [
     img: services12Img,
     href: '/services/philippine-massage',
   },
-  
 ];
 
 type Benefit = {
@@ -331,12 +330,9 @@ const mapNote =
         <div
           class="mt-4 flex flex-col items-center gap-3 sm:flex-row sm:justify-center"
         >
-          <a
-            href="https://www.massagebook.com/biz/imassage-therapeutic-clinique"
+          <CtaLink
             class="inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-300 hover:text-emerald-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-          >
-            Book an Appointment
-          </a>
+          />
           <a
             href="/contact"
             class="inline-flex items-center rounded-full border-2 border-emerald-900 px-6 py-3 text-sm font-semibold text-emerald-900 transition-colors hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"

@@ -5,7 +5,7 @@ import type { HeroServiceProps } from '@components/Services/ServiceHero.astro';
 import { getOptimizedImage } from '@js/utils';
 import ServiceHero from '@components/Services/ServiceHero.astro';
 import type { PriceBenefitsProps } from '@components/Services/PriceBenifits.astro';
-import PriceBenifits from '@components/Services/injury.astro';
+import PriceBenifits from '@components/Services/PriceBenifits.astro';
 import services7Img from '@assets/images/injury.png';
 
 const optimizedImage = await getOptimizedImage(landingImage);
@@ -57,12 +57,14 @@ export const craniData: PriceBenefitsProps = {
       body: 'Supports balanced muscle recovery to reduce risk of re-injury.',
     },
   ],
-  benefitsTagline: 'Faster healing, pain relief, improved mobility, and long-term recovery support',
+  benefitsTagline:
+    'Faster healing, pain relief, improved mobility, and long-term recovery support',
   prices: [
     { duration: '45 minutes', price: '$95' },
     { duration: '60 minutes', price: '$115' },
     { duration: '75 minutes', price: '$135' },
   ],
+  ctaLabel: 'Book Recovery Massage Session',
 };
 
 // availabilityNote:

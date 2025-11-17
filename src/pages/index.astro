@@ -18,6 +18,7 @@ import InstagramIcon from '@components/Icons/Socials/InstagramIcon.astro';
 import LinkedInIcon from '@components/Icons/Socials/LinkedInIcon.astro';
 import TwitterIcon from '@components/Icons/Socials/TwitterIcon.astro';
 import WhyChooseUs from '@components/why-choose-us.astro';
+import CtaLink from '@components/CtaLink.astro';
 
 const optimizedImage = await getOptimizedImage(landingImage);
 
@@ -74,26 +75,22 @@ posts.sort(
             <h1
               class="font-serif text-left text-3xl leading-tight text-gray-950 md:text-4xl lg:text-5xl"
             >
-              Your Path to Relaxation 
+              Your Path to Relaxation
               <br class="hidden sm:block" />
               Starts Here
             </h1>
 
             <!-- Supporting paragraph -->
             <p class="mt-6 text-base leading-7 text-gray-700 text-left">
-              Experience soothing, professional massage therapy designed to relieve stress,
-               restore balance, and renew your body and mind.
-
+              Experience soothing, professional massage therapy designed to
+              relieve stress, restore balance, and renew your body and mind.
             </p>
 
             <!-- CTAs -->
             <div class="mt-8 flex flex-wrap gap-4">
-              <a
-                href="https://imassage-therapeutic.janeapp.com/"
+              <CtaLink
                 class="inline-flex items-center justify-center rounded-full border-2 border-emerald-200 bg-emerald-200 px-6 py-3 text-sm font-semibold text-gray-950 transition-colors active:border-transparent hover:bg-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600"
-              >
-                Book Appointment
-              </a>
+              />
             </div>
           </div>
         </div>
@@ -218,8 +215,9 @@ posts.sort(
                     Swedish Massage
                   </h3>
                   <p class="mt-4 text-gray-700 leading-7">
-                    A relaxing full-body massage that uses smooth, gentle strokes to improve circulation, 
-                    relieve muscle tension, and promote overall relaxation and well-being. Ideal for stress 
+                    A relaxing full-body massage that uses smooth, gentle
+                    strokes to improve circulation, relieve muscle tension, and
+                    promote overall relaxation and well-being. Ideal for stress
                     relief and general relaxation.
                   </p>
                   <div class="mt-6">
@@ -305,12 +303,14 @@ posts.sort(
         <p class="font-serif text-lg text-gray-900">Direct Billing Available</p>
         <p class="mt-1 text-gray-700">Check with us for accepted providers.</p>
 
-        <a
-          href="https://imassage-therapeutic.janeapp.com/"
+        <CtaLink
           class="mt-6 inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:text-emerald-900 hover:bg-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500"
+        />
+        <!-- <a
+          href="https://imassage-therapeutic.janeapp.com/"
         >
           Book Appointment
-        </a>
+        </a> -->
       </div>
     </div>
   </section>
@@ -336,7 +336,7 @@ posts.sort(
             </p>
             <p>
               +1 780-729-0978
-<br />
+              <br />
               imassageclinique@gmail.com
             </p>
             <p>Mon–Sun: 9:00 AM – 9:00 PM</p>

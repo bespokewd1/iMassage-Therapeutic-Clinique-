@@ -1,4 +1,6 @@
 ---
+import CtaLink from '@components/CtaLink.astro';
+
 export interface ServiceBenefit {
   num: string;
   title: string;
@@ -15,9 +17,10 @@ export interface PriceBenefitsProps {
   benefits: Array<ServiceBenefit>;
   benefitsTagline: string;
   prices: Array<ServicePriceRow>;
+  ctaLabel: string;
 }
 
-const { benefitsTitle, benefits, benefitsTagline, prices } =
+const { benefitsTitle, benefits, benefitsTagline, prices, ctaLabel } =
   Astro.props as PriceBenefitsProps;
 ---
 
@@ -51,12 +54,11 @@ const { benefitsTitle, benefits, benefitsTagline, prices } =
     <p class="mt-10 text-center font-serif text-xl text-emerald-900">
       {benefitsTagline}
     </p>
-
     <!-- Pricing -->
     <!-- <div class="mt-8 rounded-xl bg-orange-100 p-6 md:p-10 ring-1 ring-black/5">
       <div class="grid grid-cols-1 gap-8 md:grid-cols-3"> -->
-        <!-- Pricing headline / note -->
-        <!-- <div class="md:col-span-1">
+    <!-- Pricing headline / note -->
+    <!-- <div class="md:col-span-1">
           <h3 class="font-serif text-2xl text-gray-900">Duration & Pricing</h3>
           <p class="mt-2 text-gray-800">
             All prices are tax‑included.
@@ -67,8 +69,8 @@ const { benefitsTitle, benefits, benefitsTagline, prices } =
           </p>
         </div> -->
 
-        <!-- Price table -->
-        <!-- <div class="md:col-span-2">
+    <!-- Price table -->
+    <!-- <div class="md:col-span-2">
           <ul
             class="divide-y divide-emerald-900/10 bg-white/90 rounded-lg ring-1 ring-black/5"
           >
@@ -100,12 +102,10 @@ const { benefitsTitle, benefits, benefitsTagline, prices } =
     <div
       class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
     >
-      <a
-        href="https://www.massagebook.com/biz/imassage-therapeutic-clinique"
+      <CtaLink
+        label={ctaLabel}
         class="inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:bg-emerald-300 hover:text-emerald-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-      >
-        Book Deep‑Tissue Session
-      </a>
+      />
       <a
         href="/contact"
         class="inline-flex items-center rounded-full border-2 border-emerald-900 px-6 py-3 text-sm font-semibold text-emerald-900 transition-colors hover:bg-emerald-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"

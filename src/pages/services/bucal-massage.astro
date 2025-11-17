@@ -5,7 +5,7 @@ import type { HeroServiceProps } from '@components/Services/ServiceHero.astro';
 import { getOptimizedImage } from '@js/utils';
 import ServiceHero from '@components/Services/ServiceHero.astro';
 import type { PriceBenefitsProps } from '@components/Services/PriceBenifits.astro';
-import PriceBenifits from '@components/Services/bucal.astro';
+import PriceBenifits from '@components/Services/PriceBenifits.astro';
 import services7Img from '@assets/images/bucal-massage.jpg';
 
 const optimizedImage = await getOptimizedImage(landingImage);
@@ -57,12 +57,14 @@ export const craniData: PriceBenefitsProps = {
       body: 'Gentle techniques help move fluid and reduce facial puffiness.',
     },
   ],
-  benefitsTagline: 'Jaw relief, improved circulation, calmer facial muscles, and renewed comfort',
+  benefitsTagline:
+    'Jaw relief, improved circulation, calmer facial muscles, and renewed comfort',
   prices: [
     { duration: '45 minutes', price: '$95' },
     { duration: '60 minutes', price: '$115' },
     { duration: '75 minutes', price: '$135' },
   ],
+  ctaLabel: 'Book Bucal Massage Session',
 };
 
 // availabilityNote:
