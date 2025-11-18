@@ -11,12 +11,13 @@ import '../styles/global.css';
 
 import ogImg from '@assets/images/hero-img1.jpg';
 import { getOptimizedImage } from '@js/utils';
+import type { GetImageResult } from 'astro';
 const ogImage = await getOptimizedImage(ogImg);
 
 type Props = {
   description?: string;
   title?: string;
-  preloadedImage?: ImageMetadata | ImageMetadata[];
+  preloadedImage?: GetImageResult | GetImageResult[];
 };
 
 const {

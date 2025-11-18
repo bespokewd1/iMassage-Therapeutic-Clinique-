@@ -23,13 +23,17 @@ const posts = await getCollection('blog');
 posts.sort(
   (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
 );
+
+const heroImage = await getOptimizedImage(heroImg);
+const aboutImg2 = await getOptimizedImage(aboutImage2);
 ---
 
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 />
-<BaseLayout preloadedImage={[heroImg, aboutImage2]}>
+
+<BaseLayout preloadedImage={[heroImage, aboutImg2]}>
   <!-- ============================================ -->
   <!--                    Hero                      -->
   <!-- ============================================ -->
@@ -99,6 +103,7 @@ posts.sort(
       <!-- Left: edge-to-edge image -->
       <div class="relative col-span-5 xl:col-start-2 xl:col-end-4">
         <Image
+          loading={'eager'}
           src={aboutImage2}
           class="block aspect-square w-full object-cover lg:h-full mx-auto xl:ms-0 max-w-[600px]"
           alt="lady in a stone massage"

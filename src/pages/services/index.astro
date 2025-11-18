@@ -167,24 +167,39 @@ const email = clientData.email || 'info@yourclinic.ca';
 const bookingHref = '/booking'; // change to your actual booking link if different
 const mapNote =
   'We offer in‑clinic massage services at Southgate Centre (Southgate Mall), Edmonton, Alberta. See our contact page for directions and parking details.';
+
+const svcImg1 = await getOptimizedImage(services1Img);
+const svcImg2 = await getOptimizedImage(services2Img);
+const svcImg3 = await getOptimizedImage(services3Img);
+const svcImg4 = await getOptimizedImage(services4Img);
+const svcImg6 = await getOptimizedImage(services6Img);
+const svcImg7 = await getOptimizedImage(services7Img);
+const svcImg8 = await getOptimizedImage(services8Img);
+const svcImg9 = await getOptimizedImage(services9Img);
+const svcImg10 = await getOptimizedImage(services10Img);
+const svcImg11 = await getOptimizedImage(services11Img);
+const svcImg12 = await getOptimizedImage(services12Img);
+const svcImg13 = await getOptimizedImage(services13Img);
+const svcImg14 = await getOptimizedImage(services14Img);
+const svcImg15 = await getOptimizedImage(services15Img);
 ---
 
 <BaseLayout
   preloadedImage={[
-    services1Img,
-    services2Img,
-    services3Img,
-    services4Img,
-    services6Img,
-    services7Img,
-    services8Img,
-    services9Img,
-    services10Img,
-    services11Img,
-    services12Img,
-    services13Img,
-    services14Img,
-    services15Img,
+    svcImg1,
+    svcImg2,
+    svcImg3,
+    svcImg4,
+    svcImg6,
+    svcImg7,
+    svcImg8,
+    svcImg9,
+    svcImg10,
+    svcImg11,
+    svcImg12,
+    svcImg13,
+    svcImg14,
+    svcImg15,
   ]}
 >
   <section class="bg-orange-50">
@@ -221,18 +236,23 @@ const mapNote =
                     filter: blur(20px);
                   `}
                 />
-
-                {/*
+                <Image
+                  src={s.img}
+                  alt={s.title ?? 'Service Image'}
+                  class="relative block w-full aspect-square size-full object-cover"
+                  loading={'eager'}
                   decoding="sync"
-                  fetchpriority="high" */}
-                <Picture
+                  fetchpriority="high"
+                />
+                {/* <Picture
                   src={s.img}
                   alt={s.title ?? 'Service Image'}
                   formats={['avif', 'webp']}
                   class="relative block w-full aspect-square size-full object-cover"
+                  loading={'eager'}
                   decoding="sync"
                   fetchpriority="high"
-                />
+                /> */}
               </div>
 
               <div class="p-5 bg-emerald-200 z-10 text-emerald-50 h-full place-content-center space-y-4 ">

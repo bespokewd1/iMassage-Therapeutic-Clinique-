@@ -54,10 +54,12 @@ const team: TeamMember[] = [
 const owners = team.filter((m) => m.role === 'Marianne/Founder RMT');
 const therapists = team.filter((m) => m.role === 'Therapist');
 const orderedTeam = [...owners, ...therapists];
+
+const whyChooseImage = await getOptimizedImage(whyChooseImg);
 ---
 
 <BaseLayout
-  preloadedImage={whyChooseImg}
+  preloadedImage={whyChooseImage}
 >
   <!-- ============================================ -->
   <!--                    LANDING                   -->
