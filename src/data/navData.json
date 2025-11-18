@@ -56,6 +56,18 @@
       {
         "key": "Filipino Oil Massage",
         "url": "/services/filipino-oil-massage"
+      },
+      {
+        "key": "Foot Massage",
+        "url": "/services/foot-massage"
+      },
+      {
+        "key": "Therapeutic Massage",
+        "url": "/services/therapeutic-massage"
+      },
+      {
+        "key": "Hot Stone Massage",
+        "url": "/services/hot-stone"
       }
     ]
   },

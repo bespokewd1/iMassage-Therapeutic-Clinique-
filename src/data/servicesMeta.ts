@@ -11,6 +11,9 @@ import services9Img from '@assets/images/bucal-massage.jpg';
 import services10Img from '@assets/images/couples-massage.jpg';
 import services11Img from '@assets/images/injury.png';
 import services12Img from '@assets/images/hilot.png';
+import services13Img from '@assets/images/foot.png';
+import services14Img from '@assets/images/therapeutic.png';
+import services15Img from '@assets/images/stone-massage-background1.png';
 
 import services1ImgBlur from '@assets/images/blur-Services-1.TherapeuticMassage.webp';
 import services2ImgBlur from '@assets/images/blur-Services-2.DeepTissueMassage.webp';
@@ -23,6 +26,9 @@ import services9ImgBlur from '@assets/images/blur-bucal-massage.webp';
 import services10ImgBlur from '@assets/images/blur-couples-massage.webp';
 import services11ImgBlur from '@assets/images/blur-injury.webp';
 import services12ImgBlur from '@assets/images/blur-hilot.webp';
+import services13ImgBlur from '@assets/images/blur-foot.webp';
+import services14ImgBlur from '@assets/images/blur-therapeutic.webp';
+import services15ImgBlur from '@assets/images/blur-hot-stone.webp';
 
 export type ServiceMeta = {
   title?: string; // optional for override
@@ -98,4 +104,23 @@ export const serviceMetaBySlug: Record<string, ServiceMeta> = {
     img: services12Img,
     blurImg: services12ImgBlur,
   },
+  'foot-massage': {
+    blurb:
+      'A focused treatment that targets pressure points in the feet to relieve tension, improve circulation, and promote full-body relaxation.',
+    img: services13Img,
+    blurImg: services13ImgBlur,
+  },
+  'therapeutic-massage': {
+    blurb:
+      'A customized, hands-on treatment designed to reduce muscle tension, ease pain, and support overall mobility and recovery.',
+    img: services14Img,
+    blurImg: services14ImgBlur,
+  },
+  'hot-stone': {
+    blurb:
+      'A soothing massage that uses warmed stones to relax tight muscles, improve blood flow, and deliver deep, calming relief.',
+    img: services15Img,
+    blurImg: services15ImgBlur,
+  },
+  
 };
