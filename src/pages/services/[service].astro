@@ -20,14 +20,12 @@ const { service } = Astro.props;
 
 const data = service.data;
 
-console.log(service, 'data is **********************************************');
-
 const highlights = data.hightlights.map((h) => ({
   title: h.featName,
   body: h.featBody,
 }));
 
-export const heroData: HeroServiceProps = {
+const heroData: HeroServiceProps = {
   title: data.title,
   image: data.image,
   alt: data.imageAlt,
@@ -43,12 +41,12 @@ const benefits = data.benefits.map((b, i) => ({
   body: b.benefitBody,
 }));
 
-export const benefitsData: PriceBenefitsProps = {
+const benefitsData: PriceBenefitsProps = {
   benefitsTitle: data.benefitsTitle,
   benefits,
   benefitsTagline: data.benefitsTagline,
   prices: data.prices ?? [],
-  ctaLabel: 'Book Massage Session',
+  ctaLabel: 'Book A Massage Session',
 };
 
 const serviceImage = await getOptimizedImage(data.image);

@@ -32,7 +32,7 @@ const services: Service[] = (await getCollection('services'))
   .map((service) => {
     return {
       title: service.data.title,
-      blurb: service.data.cardDescription ?? service.data.subtitle,
+      blurb: service.data.cardDescription || service.data.subtitle,
       cta: 'Read More',
       img: service.data.image,
       href: `/services/${service.id}`,

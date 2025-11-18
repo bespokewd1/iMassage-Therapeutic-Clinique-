@@ -5,7 +5,7 @@ backend:
 local_backend: true
 media_folder: src/assets/images/blog # Location where files will be stored in the repo - we store them in src so that Astro can optimize them.
 public_folder: src/assets/images/blog # Ensure that this path is the same as the media_folder path above.
-site_url: https://stonemassage.ca/ # Displays a link to home page in the top-right corner of the CMS dashboard
+site_url: https://imassage-therapeutic.ca/ # Displays a link to home page in the top-right corner of the CMS dashboard
 logo_url: https://codestitch.app/frontend/images/logo.png # change url to a link to the image you want to use, no file paths, must be a URL
 collections:
   - name: 'blog' # Used in routes, e.g., /admin/collections/blog. Is also the key when fetching data from the CMS.
@@ -25,8 +25,8 @@ collections:
   - name: 'services'
     label: 'Services'
     folder: 'src/content/services'
-    media_folder: src/assets/images/services # Images uploaded for 'services' will go here
-    public_folder: src/assets/images/services # The public path used in the content file
+    media_folder: /src/assets/images/services # Images uploaded for 'services' will go here
+    public_folder: /src/assets/images/services # The public path used in the content file
     create: true
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
