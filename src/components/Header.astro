@@ -1,5 +1,5 @@
 ---
-import navData from '@data/navData.json';
+import { getNavData } from '@data/navData';
 import { Icon } from 'astro-icon/components';
 import DarkModeToggle from '@components/DarkModeToggle.astro';
 import MainLogo from '@assets/images/logo/updated-logo.png';
@@ -12,6 +12,8 @@ import ChevronUp from './Icons/Utility/ChevronUp.astro';
 interface Props extends HTMLAttributes<'header'> {}
 
 const props = Astro.props as Props;
+
+const navData = await getNavData();
 ---
 
 <!-- ============================================ --><!--                 Navigation                   --><!-- ============================================ --><!--Banner at the Top - Display on Mobile -->
@@ -55,7 +57,10 @@ const props = Astro.props as Props;
               <li
                 class:list={[
                   'cs-li',
-                  { 'cs-dropdown': entry.children?.length > 0 },
+                  {
+                    'cs-dropdown':
+                      entry.children?.length && entry.children.length > 0,
+                  },
                 ]}
               >
                 {entry.children?.length > 0 ? (
@@ -114,13 +119,12 @@ const props = Astro.props as Props;
                     {entry.key}
                   </a>
                 )}
-
                 {entry.children?.length > 0 && (
                   <ul
                     id={`submenu-${entry.key}`}
                     class="cs-drop-ul rounded-xl bg-orange-50 border-emerald-300"
                   >
-                    {entry.children.map((child) => (
+                    {entry.children?.map((child) => (
                       <li class="cs-drop-li ">
                         <a
                           href={child.url}
@@ -158,9 +162,10 @@ const props = Astro.props as Props;
   </div>
 </header>
 <!-- Popup Overlay -->
+<!-- flex -->
 <div
   id="popup"
-  class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[9999] hidden"
+  class="fixed inset-0 bg-black/40 backdrop-blur-sm items-center justify-center z-[9999] hidden"
 >
   <div
     class="p-6 rounded-xl shadow-xl w-11/12 max-w-md"

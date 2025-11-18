@@ -25,6 +25,8 @@ collections:
   - name: 'services'
     label: 'Services'
     folder: 'src/content/services'
+    media_folder: src/assets/images/services # Images uploaded for 'services' will go here
+    public_folder: src/assets/images/services # The public path used in the content file
     create: true
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
@@ -33,7 +35,7 @@ collections:
           name: 'cardDescription',
           widget: 'text',
           required: false,
-          hint: 'Optional short description for the services list; will use the description if empty.',
+          hint: 'Optional short description for the services list; will use the service description if empty.',
         }
       - {
           label: 'Service Description',
@@ -53,6 +55,15 @@ collections:
           widget: 'string',
           hint: 'Used for accessibility purposes and SEO.',
         }
+      - label: 'Service Feature'
+        name: 'hightlights'
+        widget: 'list'
+        min: 1
+        max: 3
+        hint: 'maximum of 3, used to display on the service landing page'
+        fields:
+          - { label: 'Feature Name', name: 'featName', widget: 'string' }
+          - { label: 'Feature Description', name: 'featBody', widget: 'text' }
       - {
           label: 'Benefits Title',
           name: 'benefitsTitle',
@@ -68,10 +79,15 @@ collections:
       - label: 'Benefits'
         name: 'benefits'
         widget: 'list'
+        hint: 'maximum of 4 benefits list'
         max: 4
         fields:
-          - { label: 'Title', name: 'title', widget: 'string' }
-          - { label: 'Body', name: 'body', widget: 'text' }
+          - { label: 'Benefit Name', name: 'benefitName', widget: 'string' }
+          - {
+              label: 'Benefit Description',
+              name: 'benefitBody',
+              widget: 'text',
+            }
       - label: 'Prices'
         name: 'prices'
         widget: 'list'
@@ -79,13 +95,13 @@ collections:
         hint: 'optional prices for the service'
         fields:
           - {
-              label: 'Duration',
+              label: 'Session Duration',
               name: 'duration',
               widget: 'string',
               hint: 'e.g. 45 minutes',
             }
           - {
-              label: 'Price',
+              label: 'Session Price',
               name: 'price',
               widget: 'string',
               hint: 'e.g. $85',

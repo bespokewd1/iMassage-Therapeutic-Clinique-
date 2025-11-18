@@ -4,25 +4,6 @@ import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE AS
 // import { Image } from 'astro:assets';
 import { Image } from 'astro-lqip/components';
 import clientData from '@data/client.json';
-import navData from '@data/navData.json';
-import { serviceMetaBySlug, type ServiceMeta } from '@data/servicesMeta';
-
-// services images
-import services1Img from '@assets/images/Services-1.TherapeuticMassage.jpg';
-import services2Img from '@assets/images/Services-2.DeepTissueMassage.jpg';
-import services3Img from '@assets/images/swedish-massage.jpg';
-import services4Img from '@assets/images/Services-4.CuppingMassage.jpg';
-import services5Img from '@assets/images/Services-5.HotStoneMassage.jpg';
-import services6Img from '@assets/images/Services-6.LymphaticMassage.jpg';
-import services7Img from '@assets/images/Services-7.jpg';
-import services8Img from '@assets/images/Services-8.jpg';
-import services9Img from '@assets/images/bucal-massage.jpg';
-import services10Img from '@assets/images/couples-massage.jpg';
-import services11Img from '@assets/images/injury.png';
-import services12Img from '@assets/images/hilot.png';
-import services13Img from '@assets/images/foot.png';
-import services14Img from '@assets/images/therapeutic.png';
-import services15Img from '@assets/images/stone-massage-background1.png';
 
 import serviceIcon1 from '@assets/images/service-icons-transparent/deep-tissue.png';
 import serviceIcon2 from '@assets/images/service-icons-transparent/hot-stone.png';
@@ -31,54 +12,32 @@ import serviceIcon4 from '@assets/images/service-icons-transparent/thai-oil.png'
 
 import benefitImg from '@assets/images/About-Section.TherapistImage.jpg';
 
-import { Picture } from 'astro:assets';
 import { getOptimizedImage } from '@js/utils';
 import MapPinFilled from '@components/Icons/Utility/MapPinFilled.astro';
 import PhoneIcon from '@components/Icons/Utility/PhoneIcon.astro';
-import CheckIcon from '@components/Icons/Utility/CheckIcon.astro';
 import CheckIconFilled from '@components/Icons/Utility/CheckIconFilled.astro';
 import CtaLink from '@components/CtaLink.astro';
+import { getCollection } from 'astro:content';
 
-const optimizedImage = await getOptimizedImage(landingImage);
-
-// type Service = {
-//   title: string;
-//   blurb: string;
-//   cta?: string;
-//   img: ImageMetadata;
-//   href?: string;
-// };
-//
-type Service = ServiceMeta & {
-  href?: string;
+type Service = {
+  title: string;
+  blurb: string;
+  cta?: string;
+  img: ImageMetadata;
+  href: string;
 };
 
-const servicesRoot =
-  navData.find(
-    (n) =>
-      n.key === 'Services' || n.url === '/services/' || n.url === '/services'
-  ) ?? null;
-
-function slugFromUrl(url: string): string {
-  const last = url.split('/').filter(Boolean).pop() || '';
-  return last;
-}
-
-const services: Service[] = (servicesRoot?.children ?? [])
-  .map((child) => {
-    const slug = slugFromUrl(child.url);
-    const meta = serviceMetaBySlug[slug];
-    if (!meta) return null;
+const services: Service[] = (await getCollection('services'))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  .map((service) => {
     return {
-      title: meta.title ?? child.key,
-      blurb: meta.blurb,
-      cta: meta.cta ?? 'Read More',
-      img: meta.img,
-      blurImg: meta.blurImg,
-      href: child.url,
-    } as Service;
-  })
-  .filter(Boolean) as Service[];
+      title: service.data.title,
+      blurb: service.data.cardDescription ?? service.data.subtitle,
+      cta: 'Read More',
+      img: service.data.image,
+      href: `/services/${service.id}`,
+    };
+  });
 
 type Benefit = {
   title: string;
@@ -169,40 +128,14 @@ const bookingHref = '/booking'; // change to your actual booking link if differe
 const mapNote =
   'We offer in‑clinic massage services at Southgate Centre (Southgate Mall), Edmonton, Alberta. See our contact page for directions and parking details.';
 
-const svcImg1 = await getOptimizedImage(services1Img);
-const svcImg2 = await getOptimizedImage(services2Img);
-const svcImg3 = await getOptimizedImage(services3Img);
-const svcImg4 = await getOptimizedImage(services4Img);
-const svcImg6 = await getOptimizedImage(services6Img);
-const svcImg7 = await getOptimizedImage(services7Img);
-const svcImg8 = await getOptimizedImage(services8Img);
-const svcImg9 = await getOptimizedImage(services9Img);
-const svcImg10 = await getOptimizedImage(services10Img);
-const svcImg11 = await getOptimizedImage(services11Img);
-const svcImg12 = await getOptimizedImage(services12Img);
-const svcImg13 = await getOptimizedImage(services13Img);
-const svcImg14 = await getOptimizedImage(services14Img);
-const svcImg15 = await getOptimizedImage(services15Img);
+async function reloadImages() {
+  return Promise.all(services.map(async (s) => await getOptimizedImage(s.img)));
+}
+
+const preloadedImages = await reloadImages();
 ---
 
-<BaseLayout
-  preloadedImage={[
-    svcImg1,
-    svcImg2,
-    svcImg3,
-    svcImg4,
-    svcImg6,
-    svcImg7,
-    svcImg8,
-    svcImg9,
-    svcImg10,
-    svcImg11,
-    svcImg12,
-    svcImg13,
-    svcImg14,
-    svcImg15,
-  ]}
->
+<BaseLayout preloadedImage={preloadedImages}>
   <section class="bg-orange-50">
     <div class="mx-auto max-w-[120rem] px-6 py-16 md:py-20">
       <!-- Header -->
@@ -227,16 +160,7 @@ const svcImg15 = await getOptimizedImage(services15Img);
           services.map((s) => (
             <article class="relative bg-transparent overflow-hidden grid grid-rows-[min-content,1fr] sm:grid-rows-1 sm:grid-cols-2 rounded-xl ring-1 ring-black/10 ">
               {/* <div class="absolute  inset-0 bg-gradient-to-l from-emerald-900 from-35% via-emerald-900/80 via-55% to-emerald-900/10" /> */}
-              <div class="relative overflow-hidden">
-                <div
-                  class="absolute inset-0 scale-110"
-                  style={`
-                    background-image: url(${s.blurImg.src});
-                    background-size: cover;
-                    background-position: center;
-                    filter: blur(20px);
-                  `}
-                />
+              <div class="">
                 <Image
                   src={s.img}
                   alt={s.title ?? 'Service Image'}
@@ -265,10 +189,10 @@ const svcImg15 = await getOptimizedImage(services15Img);
                 <p class="text-sm/6 text-emerald-900 text-pretty">{s.blurb}</p>
                 <div class="mt-4">
                   <a
-                    href={s.href ?? '/services'}
+                    href={s.href}
                     class="inline-flex items-center rounded-full bg-orange-200 hover:bg-orange-100 transition-colors text-gray-900 px-4 py-2 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
                   >
-                    {s.cta ?? 'Learn More'}
+                    {s.cta ?? 'Read More'}
                   </a>
                 </div>
               </div>

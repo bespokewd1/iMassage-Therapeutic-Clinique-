@@ -1,6 +1,6 @@
 ---
 import client from '@data/client.json';
-import navData from '@data/navData.json';
+import { getNavData } from '@data/navData';
 import { getCurrentYear } from '@js/utils';
 // import MainLogo from '@components/Icons/MainLogo.astro';
 import MainLogo from '@assets/images/logo/updated-logo.png';
@@ -9,6 +9,7 @@ import { Picture } from 'astro:assets';
 import googleReviewsLogo from '@assets/images/google-reviews-banner.png';
 const currentYear = getCurrentYear();
 
+const navData = await getNavData();
 const servicesNode = navData.find((e) => e.key === 'Services');
 const services = Array.isArray(servicesNode?.children)
   ? servicesNode.children

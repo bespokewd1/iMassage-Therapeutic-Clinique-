@@ -31,13 +31,18 @@ const servicesCollection = defineCollection({
       subtitle: z.string(),
       image: image(),
       imageAlt: z.string(),
+      hightlights: z.array(
+        z.object({
+          featName: z.string(),
+          featBody: z.string(),
+        }),
+      ),
       benefitsTitle: z.string(),
       benefitsTagline: z.string(),
       benefits: z.array(
         z.object({
-          num: z.string(),
-          title: z.string(),
-          body: z.string(),
+          benefitName: z.string(),
+          benefitBody: z.string(),
         }),
       ),
       prices: z.array(
