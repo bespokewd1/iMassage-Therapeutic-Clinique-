@@ -1,7 +1,8 @@
 ---
 import BaseLayout from 'src/layouts/BaseLayout.astro';
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
-import { Image } from 'astro:assets';
+// import { Image } from 'astro:assets';
+import { Image } from 'astro-lqip/components';
 import clientData from '@data/client.json';
 import navData from '@data/navData.json';
 import { serviceMetaBySlug, type ServiceMeta } from '@data/servicesMeta';
@@ -243,6 +244,8 @@ const svcImg15 = await getOptimizedImage(services15Img);
                   loading={'eager'}
                   decoding="sync"
                   fetchpriority="high"
+                  lqip="base64"
+                  lqipSize={10}
                 />
                 {/* <Picture
                   src={s.img}
