@@ -1,6 +1,10 @@
 ---
-import { Image } from 'astro:assets';
-import whyChooseImg from '@assets/images/why-choose.webp';
+import { Image } from 'astro-lqip/components';
+// import whyChooseImg from '@assets/images/home/why-choose.webp';
+import homeData from '@data/home.json';
+import { resolveImage } from '@js/imageUtils';
+
+const whyChooseImg = await resolveImage(homeData.whyChooseUs.image);
 ---
 
 <section id="why-choose-us" class="px-0">
@@ -9,11 +13,17 @@ import whyChooseImg from '@assets/images/why-choose.webp';
   >
     <!-- Left image -->
     <div class="relative col-span-5 xl:col-start-2 xl:col-end-4">
-      <Image
-        src={whyChooseImg}
-        class="block aspect-square w-full object-cover lg:h-full mx-auto xl:ms-0 max-w-[600px]"
-        alt="lady in a stone massage"
-      />
+      {
+        whyChooseImg && (
+          <Image
+            src={whyChooseImg}
+            class="block aspect-square w-full object-cover lg:h-full mx-auto xl:ms-0 max-w-[600px]"
+            alt={homeData.whyChooseUs.alt}
+            lqip="base64"
+            lqipSize={10}
+          />
+        )
+      }
     </div>
 
     <!-- Card with bullets -->
@@ -27,36 +37,22 @@ import whyChooseImg from '@assets/images/why-choose.webp';
           <h3
             class="font-serif text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-950"
           >
-            Why Choose iMassage?
+            {homeData.whyChooseUs.title}
           </h3>
 
           <p class="mt-4 text-gray-700 leading-7">
-            We deliver thoughtful, therapeutic care tailored to your body—so you
-            leave lighter, looser, and genuinely restored.
+            {homeData.whyChooseUs.description}
           </p>
 
           <ul class="mt-6 space-y-3 text-gray-800">
-            <li class="flex gap-3">
-              <span class="mt-2 h-2 w-2 rounded-full bg-gray-900"></span>
-              <span>Registered, experienced therapists focused on results</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="mt-2 h-2 w-2 rounded-full bg-gray-900"></span>
-              <span
-                >Personalized treatment plans for pain relief and relaxation</span
-              >
-            </li>
-            <li class="flex gap-3">
-              <span class="mt-2 h-2 w-2 rounded-full bg-gray-900"></span>
-              <span
-                >Evidence‑based techniques: deep tissue, hot stone, Swedish, and
-                more</span
-              >
-            </li>
-            <li class="flex gap-3">
-              <span class="mt-2 h-2 w-2 rounded-full bg-gray-900"></span>
-              <span>Welcoming clinic with easy booking and flexible hours</span>
-            </li>
+            {
+              homeData.whyChooseUs.points.map((point) => (
+                <li class="flex gap-3">
+                  <span class="mt-2 h-2 w-2 rounded-full bg-gray-900" />
+                  <span>{point.text}</span>
+                </li>
+              ))
+            }
           </ul>
 
           <div class="mt-8">

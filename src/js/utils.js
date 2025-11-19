@@ -23,3 +23,4 @@ export async function getOptimizedImage(image) {
 
 // Learn more agout the getImage() function here
 // https://docs.astro.build/en/guides/images/#generating-images-with-getimage
+//

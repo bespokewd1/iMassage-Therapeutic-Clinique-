@@ -4,15 +4,14 @@ import CTA from '@components/CTA.astro';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro-lqip/components';
 import client from '@data/clientData';
+import homeData from '@data/home.json';
+import { resolveImage } from '@js/imageUtils';
 import '@styles/blog.less';
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import { getOptimizedImage } from '@js/utils';
-import aboutImage1 from '@assets/images/Services-2.DeepTissueMassage.jpg';
-import aboutImage2 from '@assets/images/welcome.jpg';
-import serviceImg5 from '@assets/images/swedish-massage.jpg';
 
-import heroImg from '@assets/images/hero-img1.jpg';
+// import heroImg from '@assets/images/home/hero-img1.jpg';
 import FacebookIcon from '@components/Icons/Socials/FacebookIcon.astro';
 import InstagramIcon from '@components/Icons/Socials/InstagramIcon.astro';
 import LinkedInIcon from '@components/Icons/Socials/LinkedInIcon.astro';
@@ -25,8 +24,21 @@ posts.sort(
   (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
 );
 
+const heroImg = await resolveImage(homeData.hero.image);
+const welcomeImage = await resolveImage(homeData.welcome.image);
+
 const heroImage = await getOptimizedImage(heroImg);
-const aboutImg2 = await getOptimizedImage(aboutImage2);
+const aboutImg2 = await getOptimizedImage(welcomeImage);
+
+const allServices = await getCollection('services');
+
+// Look for the service where the Title matches what was saved in home.json
+const highlight1 = allServices.find(
+  (s) => s.data.title === homeData.serviceHighlights.highlight1
+);
+const highlight2 = allServices.find(
+  (s) => s.data.title === homeData.serviceHighlights.highlight2
+);
 ---
 
 <link
@@ -43,16 +55,20 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
     <div class="mx-auto grid grid-cols-2 items-stretch gap-0">
       <!-- Left: edge-to-edge image -->
       <div class="relative md:col-span-1 col-span-2">
-        <Image
-          src={heroImg}
-          class="block aspect-video w-full object-cover h-full lg:min-h-[550px]"
-          alt="lady in a stone massage"
-          loading={'eager'}
-          decoding="sync"
-          fetchpriority="high"
-          lqip="base64"
-          lqipSize={10}
-        />
+        {
+          heroImg && (
+            <Image
+              src={heroImg}
+              class="block aspect-video w-full object-cover h-full lg:min-h-[550px]"
+              alt={homeData.hero.alt}
+              loading={'eager'}
+              decoding="sync"
+              fetchpriority="high"
+              lqip="base64"
+              lqipSize={10}
+            />
+          )
+        }
       </div>
 
       <!-- Right: text block on light card -->
@@ -65,15 +81,12 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
             <h1
               class="font-serif text-left text-3xl leading-tight text-gray-950 md:text-4xl lg:text-5xl"
             >
-              Your Path to Relaxation
-              <br class="hidden sm:block" />
-              Starts Here
+              {homeData.hero.title}
             </h1>
 
             <!-- Supporting paragraph -->
             <p class="mt-6 text-base leading-7 text-gray-700 text-left">
-              Experience soothing, professional massage therapy designed to
-              relieve stress, restore balance, and renew your body and mind.
+              {homeData.hero.subtitle}
             </p>
 
             <!-- CTAs -->
@@ -91,16 +104,20 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
     <div class="mx-auto mt-4 grid grid-cols-4 items-stretch gap-0 relative">
       <!-- Left: edge-to-edge image -->
       <div class="relative col-span-5 xl:col-start-2 xl:col-end-4">
-        <Image
-          loading={'eager'}
-          src={aboutImage2}
-          class="block aspect-square w-full object-cover lg:h-full mx-auto xl:ms-0 max-w-[600px]"
-          alt="lady in a stone massage"
-          decoding="sync"
-          fetchpriority="high"
-          lqip="base64"
-          lqipSize={10}
-        />
+        {
+          welcomeImage && (
+            <Image
+              loading={'eager'}
+              src={welcomeImage}
+              class="block aspect-square w-full object-cover lg:h-full mx-auto xl:ms-0 max-w-[600px]"
+              alt={homeData.welcome.alt}
+              decoding="sync"
+              fetchpriority="high"
+              lqip="base64"
+              lqipSize={10}
+            />
+          )
+        }
       </div>
 
       <!-- Right: text block on light card -->
@@ -114,15 +131,11 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
             <h3
               class="font-serif text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-950"
             >
-              Welcome to iMassage Therapeutic Clinique
+              {homeData.welcome.title}
             </h3>
 
             <p class="mt-5 text-gray-700 leading-7">
-              At iMassage Therapeutic Clinique, we focus on restorative,
-              evidence‑based massage care tailored to your body’s needs. From
-              deep tissue and hot stone to relaxation-focused treatments, our
-              goal is to reduce pain, release tension, and renew your overall
-              well‑being.
+              {homeData.welcome.body}
             </p>
 
             <div class="mt-8">
@@ -141,8 +154,8 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
 
   <!-- ================= CTA (Green band) ================ -->
   <CTA
-    title="Restore Balance. Feel Renewed"
-    description="Expert therapeutic massage tailored to your needs."
+    title={homeData.greenCta.title}
+    description={homeData.greenCta.description}
   />
 
   <!-- ================= Services ================= -->
@@ -151,13 +164,10 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
     <div class="mx-auto max-w-6xl px-6 py-16 lg:py-20">
       <div class="mx-auto max-w-3xl text-center">
         <h2 class="font-serif text-3xl md:text-4xl text-gray-950">
-          Our Services
+          {homeData.serviceHighlights.heading}
         </h2>
         <p class="mt-4 text-gray-700 leading-7">
-          From deep tissue and hot stone to relaxing Swedish massage, each
-          session at iMassage Therapeutic Clinique is customized to your
-          goals—reducing pain, improving mobility, and helping you feel your
-          best.
+          {homeData.serviceHighlights.description}
         </p>
       </div>
     </div>
@@ -166,75 +176,81 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
     <div class="mx-auto max-w-7xl px-0">
       <div class="grid grid-cols-1 md:grid-cols-12 items-stretch">
         <!-- Left image -->
-        <div class="md:col-span-6">
-          <Image
-            src={aboutImage1}
-            alt="lady in a stone massage"
-            class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
-          />
-        </div>
+        {
+          highlight1 && (
+            <>
+              <div class="md:col-span-6">
+                <Image
+                  src={highlight1.data.image}
+                  alt={highlight1.data.imageAlt}
+                  class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
+                  lqip="base64"
+                  lqipSize={10}
+                />
+              </div>
 
-        <!-- Middle card on orange-200 -->
-        <div
-          class="bg-orange-200 md:col-span-6 flex items-center justify-center px-6 py-10"
-        >
-          <div class="w-full max-w-xl text-center md:text-left">
-            <h3 class="text-gray-900 font-semibold tracking-wide">
-              Therapeutic Deep-Tissue / Relaxation Massage
-            </h3>
-            <p class="mt-4 text-gray-700 leading-7">
-              Target chronic tension and restore ease of movement with focused
-              deep‑tissue work—balanced with soothing relaxation techniques for
-              a calm, refreshed body and mind.
-            </p>
-            <div class="mt-6">
-              <a
-                href="/services"
-                class="inline-flex items-center rounded-full border-2 border-gray-900 px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
-              >
-                View Services
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right image (stretches full width on small, aligns in grid on md+) -->
-        <div class="md:col-span-12">
-          <div class="grid grid-cols-1 md:grid-cols-12">
-            <div class="md:col-span-6 order-2 md:order-1">
-              <div
-                class="bg-orange-200 w-full h-full flex items-center justify-center px-6 py-10"
-              >
+              <div class="bg-orange-200 md:col-span-6 flex items-center justify-center px-6 py-10">
                 <div class="w-full max-w-xl text-center md:text-left">
                   <h3 class="text-gray-900 font-semibold tracking-wide">
-                    Swedish Massage
+                    {highlight1.data.title}
                   </h3>
                   <p class="mt-4 text-gray-700 leading-7">
-                    A relaxing full-body massage that uses smooth, gentle
-                    strokes to improve circulation, relieve muscle tension, and
-                    promote overall relaxation and well-being. Ideal for stress
-                    relief and general relaxation.
+                    {highlight1.data.subtitle}
                   </p>
                   <div class="mt-6">
                     <a
                       href="/services"
                       class="inline-flex items-center rounded-full border-2 border-gray-900 px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
                     >
-                      Learn More
+                      View Services
                     </a>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="md:col-span-6 order-1 md:order-2">
-              <Image
-                src={serviceImg5}
-                alt="lady in a stone massage"
-                class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
-              />
-            </div>
-          </div>
-        </div>
+            </>
+          )
+        }
+
+        <!-- Right image (stretches full width on small, aligns in grid on md+) -->
+        {
+          highlight2 && (
+            <>
+              <div class="md:col-span-12">
+                <div class="grid grid-cols-1 md:grid-cols-12">
+                  <div class="md:col-span-6 order-2 md:order-1">
+                    <div class="bg-orange-200 w-full h-full flex items-center justify-center px-6 py-10">
+                      <div class="w-full max-w-xl text-center md:text-left">
+                        <h3 class="text-gray-900 font-semibold tracking-wide">
+                          {highlight2.data.title}
+                        </h3>
+                        <p class="mt-4 text-gray-700 leading-7">
+                          {highlight2.data.subtitle}
+                        </p>
+                        <div class="mt-6">
+                          <a
+                            href="/services"
+                            class="inline-flex items-center rounded-full border-2 border-gray-900 px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-orange-100 transition"
+                          >
+                            Learn More
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="md:col-span-6 order-1 md:order-2">
+                    <Image
+                      src={highlight2.data.image}
+                      alt={highlight2.data.imageAlt}
+                      class="block aspect-[16/10] w-full object-cover md:aspect-auto md:h-[420px]"
+                      lqip="base64"
+                      lqipSize={10}
+                    />
+                  </div>
+                </div>
+              </div>
+            </>
+          )
+        }
       </div>
     </div>
   </section>
@@ -246,57 +262,34 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
   <section class="bg-orange-50">
     <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
       <h2 class="font-serif text-center text-3xl md:text-4xl text-gray-950">
-        Booking Made Simple
+        {homeData.bookingSteps.title}
       </h2>
 
       <!-- Steps -->
       <div
         class="mt-10 grid grid-cols-1 gap-6 md:mt-12 md:grid-cols-3 md:gap-8"
       >
-        <!-- Step 1 -->
-        <div
-          class="rounded-lg bg-orange-200/90 px-8 py-10 text-center shadow-sm ring-1 ring-black/5"
-        >
-          <div class="font-serif text-6xl text-gray-900">1</div>
-          <h3 class="mt-4 font-serif text-3xl text-gray-900">
-            Find Your Treatment
-          </h3>
-          <p class="mt-3 text-gray-700 leading-7">
-            Deep tissue, hot stone, Swedish—choose the care your body needs.
-          </p>
-        </div>
-
-        <!-- Step 2 -->
-        <div
-          class="rounded-lg bg-orange-200/90 px-8 py-10 text-center shadow-sm ring-1 ring-black/5"
-        >
-          <div class="font-serif text-6xl text-gray-900">2</div>
-          <h3 class="mt-4 font-serif text-3xl text-gray-900">
-            Schedule in Minutes
-          </h3>
-          <p class="mt-3 text-gray-700 leading-7">
-            Pick the date and time that works best for you.
-          </p>
-        </div>
-
-        <!-- Step 3 -->
-        <div
-          class="rounded-lg bg-orange-200/90 px-8 py-10 text-center shadow-sm ring-1 ring-black/5"
-        >
-          <div class="font-serif text-6xl text-gray-900">3</div>
-          <h3 class="mt-4 font-serif text-3xl text-gray-900">
-            Confirm & Enjoy
-          </h3>
-          <p class="mt-3 text-gray-700 leading-7">
-            Secure your spot and let us take care of the rest.
-          </p>
-        </div>
+        {
+          homeData.bookingSteps.steps.map((step) => (
+            <div class="rounded-lg bg-orange-200/90 px-8 py-10 text-center shadow-sm ring-1 ring-black/5">
+              <div class="font-serif text-6xl text-gray-900">{step.num}</div>
+              <h3 class="mt-4 font-serif text-3xl text-gray-900">
+                {step.title}
+              </h3>
+              <p class="mt-3 text-gray-700 leading-7">{step.description}</p>
+            </div>
+          ))
+        }
       </div>
 
       <!-- Direct billing + CTA -->
       <div class="mt-10 text-center">
-        <p class="font-serif text-lg text-gray-900">Direct Billing Available</p>
-        <p class="mt-1 text-gray-700">Check with us for accepted providers.</p>
+        <p class="font-serif text-lg text-gray-900">
+          {homeData.bookingSteps.billingText}
+        </p>
+        <p class="mt-1 text-gray-700">
+          {homeData.bookingSteps.billingSub}
+        </p>
 
         <CtaLink
           class="mt-6 inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:text-emerald-900 hover:bg-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500"
