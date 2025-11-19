@@ -16,5 +16,9 @@
     "twitter": "https://www.twitter.com/yourpage",
     "linkedin": "https://www.linkedin.com/yourpage"
   },
+  "openingHours": {
+    "daysOpen": "Monday – Sunday",
+    "hours": "9:00 AM – 9:00 PM"
+  },
 	"domain": "https://imassage-therapeutic.ca/"
 }

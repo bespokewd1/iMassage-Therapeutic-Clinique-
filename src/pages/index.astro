@@ -3,6 +3,7 @@ import BaseLayout from 'src/layouts/BaseLayout.astro';
 import CTA from '@components/CTA.astro';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro-lqip/components';
+import client from '@data/clientData';
 import '@styles/blog.less';
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
@@ -42,17 +43,6 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
     <div class="mx-auto grid grid-cols-2 items-stretch gap-0">
       <!-- Left: edge-to-edge image -->
       <div class="relative md:col-span-1 col-span-2">
-        <!-- <Picture
-          src={heroImg}
-          alt="lady in a stone massage"
-          formats={['avif', 'webp']}
-          pictureAttributes={{
-            class:
-              'block aspect-video w-full object-cover lg:h-full lg:min-h-[770px]',
-          }}
-          loading="eager"
-        /> -->
-
         <Image
           src={heroImg}
           class="block aspect-video w-full object-cover h-full lg:min-h-[550px]"
@@ -71,11 +61,6 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
       >
         <div class="w-full max-w-xl">
           <div class="p-2 md:p-10">
-            <!-- Topper (optional) -->
-            <!-- <span class="block text-sm font-semibold tracking-wide text-gray-600">
-              Hot Stone Massage - Edmonton
-            </span> -->
-
             <!-- Big serif headline -->
             <h1
               class="font-serif text-left text-3xl leading-tight text-gray-950 md:text-4xl lg:text-5xl"
@@ -316,11 +301,6 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
         <CtaLink
           class="mt-6 inline-flex items-center rounded-full bg-emerald-200 px-6 py-3 text-sm font-semibold text-emerald-950 transition-colors hover:text-emerald-900 hover:bg-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500"
         />
-        <!-- <a
-          href="https://imassage-therapeutic.janeapp.com/"
-        >
-          Book Appointment
-        </a> -->
       </div>
     </div>
   </section>
@@ -339,17 +319,19 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
           </h2>
 
           <div class="space-y-3">
-            <p class="text-lg">iMassage Therapeutic Clinique</p>
+            <p class="text-lg">{client.name}</p>
             <p>
-              10625 40 Ave NW<br />
-              Edmonton, AB T6J 2M4
+              {client.address.lineOne},
+              {client.address.lineTwo}
             </p>
             <p>
-              +1 780-729-0978
+              {client.phoneFormatted}
               <br />
-              imassageclinique@gmail.com
+              {client.email}
             </p>
-            <p>Mon–Sun: 9:00 AM – 9:00 PM</p>
+            <p>
+              {client.openingHours.daysOpen}: {client.openingHours.hours}
+            </p>
             <p>
               Direct Billing Available. Please ask about eligible providers.
             </p>
@@ -357,16 +339,32 @@ const aboutImg2 = await getOptimizedImage(aboutImage2);
 
           <!-- Socials -->
           <div class="mt-8 flex items-center gap-4 text-emerald-50/90">
-            <a href="#" aria-label="Facebook" class="hover:text-white">
+            <a
+              href={client.socials.facebook}
+              aria-label="Facebook"
+              class="hover:text-white"
+            >
               <FacebookIcon class:list={['text-emerald-950']} />
             </a>
-            <a href="#" aria-label="Instagram" class="hover:text-white">
+            <a
+              href={client.socials.instagram}
+              aria-label="Instagram"
+              class="hover:text-white"
+            >
               <InstagramIcon class:list={['text-emerald-950']} />
             </a>
-            <a href="#" aria-label="LinkedIn" class="hover:text-white">
+            <a
+              href={client.socials.linkedin}
+              aria-label="LinkedIn"
+              class="hover:text-white"
+            >
               <LinkedInIcon class:list={['text-emerald-950']} />
             </a>
-            <a href="#" aria-label="LinkedIn" class="hover:text-white">
+            <a
+              href={client.socials.twitter}
+              aria-label="LinkedIn"
+              class="hover:text-white"
+            >
               <TwitterIcon class:list={['text-emerald-950']} />
             </a>
           </div>

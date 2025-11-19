@@ -25,6 +25,8 @@ collections:
   - name: 'services'
     label: 'Services'
     folder: 'src/content/services'
+    editor:
+      preview: false
     media_folder: /src/assets/images/services # Images uploaded for 'services' will go here
     public_folder: /src/assets/images/services # The public path used in the content file
     create: true
@@ -156,6 +158,22 @@ collections:
                   widget: 'string',
                   required: false,
                 }
+          - label: 'Opening Hours'
+            name: 'openingHours'
+            widget: 'object'
+            fields:
+              - {
+                  label: 'Days Open',
+                  name: 'daysOpen',
+                  widget: 'string',
+                  hint: 'e.g. Monday – Sunday or Monday – Friday',
+                }
+              - {
+                  label: 'Hours',
+                  name: 'hours',
+                  widget: 'string',
+                  hint: 'e.g. 8:00 AM – 9:00 PM',
+                }
           - label: 'Socials'
             name: 'socials'
             widget: 'object'
@@ -164,3 +182,19 @@ collections:
               - { label: 'Instagram', name: 'instagram', widget: 'string' }
               - { label: 'Twitter', name: 'twitter', widget: 'string' }
               - { label: 'LinkedIn', name: 'linkedin', widget: 'string' }
+
+      - name: 'booking'
+        label: 'Booking Link'
+        file: 'src/data/booking.json'
+        description: 'Link to the booking page'
+        fields:
+          - {
+              label: 'Booking Button Text',
+              name: 'buttonText',
+              widget: 'string',
+            }
+          - {
+              label: 'Booking Button Link',
+              name: 'buttonLink',
+              widget: 'string',
+            }
