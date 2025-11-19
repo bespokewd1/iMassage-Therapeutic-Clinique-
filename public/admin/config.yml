@@ -106,3 +106,61 @@ collections:
               widget: 'string',
               hint: 'e.g. $85',
             }
+
+  - name: 'Site Settings'
+    label: 'Site Settings'
+    delete: false # Prevent deleting the file
+    editor:
+      preview: false
+    files:
+      - name: 'client'
+        label: 'Client Info'
+        file: 'src/data/client.json'
+        description: 'Global site information (Name, Phone, Address, etc.)'
+        fields:
+          - { label: 'Business Name', name: 'name', widget: 'string' }
+          - { label: 'Email', name: 'email', widget: 'string' }
+          - {
+              label: 'Phone Number',
+              name: 'phone',
+              widget: 'string',
+              hint: 'Enter in any format, e.g., 780-729-0978.',
+            }
+          - label: 'Address'
+            name: 'address'
+            widget: 'object'
+            fields:
+              - { label: 'Line One', name: 'lineOne', widget: 'string' }
+              - { label: 'Line Two', name: 'lineTwo', widget: 'string' }
+              - {
+                  label: 'City',
+                  name: 'city',
+                  widget: 'string',
+                  required: false,
+                }
+              - {
+                  label: 'State/Province',
+                  name: 'state',
+                  widget: 'string',
+                  required: false,
+                }
+              - {
+                  label: 'Zip/Postal',
+                  name: 'zip',
+                  widget: 'string',
+                  required: false,
+                }
+              - {
+                  label: 'Google Maps Link',
+                  name: 'mapLink',
+                  widget: 'string',
+                  required: false,
+                }
+          - label: 'Socials'
+            name: 'socials'
+            widget: 'object'
+            fields:
+              - { label: 'Facebook', name: 'facebook', widget: 'string' }
+              - { label: 'Instagram', name: 'instagram', widget: 'string' }
+              - { label: 'Twitter', name: 'twitter', widget: 'string' }
+              - { label: 'LinkedIn', name: 'linkedin', widget: 'string' }
