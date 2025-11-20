@@ -1,16 +1,31 @@
 ---
 import { Image } from 'astro:assets';
-
+import { getCollection } from 'astro:content';
 import stackStones from '@assets/images/stack-stones.jpeg';
+
+const faqEntries = await getCollection('faq');
+
+// Optional: sort by "order", then fallback to slug or title
+const faqs = faqEntries
+  .sort((a, b) => {
+    const ao = a.data.order ?? Number.MAX_SAFE_INTEGER;
+    const bo = b.data.order ?? Number.MAX_SAFE_INTEGER;
+    if (ao !== bo) return ao - bo;
+    return a.id.localeCompare(b.id);
+  })
+  .map((entry, idx) => ({
+    question: entry.data.question,
+    answer: entry.data.answer,
+    // Ensure only one or none is active; use entry.data.active if present
+    active: entry.data.active ?? idx === 0,
+  }));
 ---
 
 <section id="faq-1741">
-  <!-- class="cs-container max-w-full flex flex-col lg:flex-row" -->
   <div
     class="cs-container my-0 grid max-w-full grid-cols-1 grid-rows-[auto_1fr] lg:grid-cols-2 lg:grid-rows-1"
   >
     <div class="cs-content relative mx-auto w-full max-w-5xl overflow-hidden">
-      <!-- Visual block (left-side hero style) -->
       <div class="relative h-full w-full">
         <Image
           src={stackStones}
@@ -22,7 +37,6 @@ import stackStones from '@assets/images/stack-stones.jpeg';
           widths={[480, 640, 768, 960, 1200]}
         />
 
-        <!-- Overlay text to match the screenshot style -->
         <div
           class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent backdrop-blur-sm"
         >
@@ -46,81 +60,22 @@ import stackStones from '@assets/images/stack-stones.jpeg';
       </div>
     </div>
 
-    <div class="cs-flex-group mx-auto max-w-3xl place-content-center p-4">
-      <ul class="cs-faq-group">
-        <!-- Active class added as default -->
-        <li class="cs-faq-item active">
-          <button class="cs-button">
-            <span class="cs-button-text">
-              What types of massage do you offer?
-            </span>
-          </button>
-          <p class="cs-item-text">
-            We offer a variety of massages, including Swedish, deep tissue, hot
-            stone, prenatal, and therapeutic massage. Our therapists will help
-            you choose the best option for your needs.
-          </p>
-        </li>
-        <li class="cs-faq-item">
-          <button class="cs-button">
-            <span class="cs-button-text"> How do I book an appointment? </span>
-          </button>
-          <p class="cs-item-text">
-            You can book a mobile massage by calling us — we’ll come to your
-            home. For a clinic massage, simply click “Book Online” to schedule
-            your visit at our location.
-          </p>
-        </li>
-        <li class="cs-faq-item">
-          <button class="cs-button">
-            <span class="cs-button-text">
-              What should I expect during my first massage session?
-            </span>
-          </button>
-          <p class="cs-item-text">
-            Your therapist will discuss your needs and preferences before
-            beginning the session. You’ll be given privacy to get comfortable,
-            and the therapist will ensure you feel relaxed throughout the
-            treatment.
-          </p>
-        </li>
-        <li class="cs-faq-item">
-          <button class="cs-button">
-            <span class="cs-button-text">
-              What payment methods do you accept?
-            </span>
-          </button>
-          <p class="cs-item-text">
-            We accept credit/debit cards, cash, and online payments. Gift cards
-            and package deals are also available for purchase.
-          </p>
-        </li>
-        <li class="cs-faq-item">
-          <button class="cs-button">
-            <span class="cs-button-text">
-              What should I wear for my massage?
-            </span>
-          </button>
-          <p class="cs-item-text">
-            You can undress to your comfort level. Our therapists use
-            professional draping techniques to ensure your privacy and comfort
-            at all times.
-          </p>
-        </li>
-        <li class="cs-faq-item">
-          <button class="cs-button">
-            <span class="cs-button-text">
-              Can I request a specific therapist?
-            </span>
-          </button>
-          <p class="cs-item-text">
-            Yes! If you have a preferred therapist, please mention it when
-            booking your appointment, and we’ll do our best to accommodate your
-            request.
-          </p>
-        </li>
-      </ul>
-    </div>
+    {
+      faqs.length > 0 && (
+        <div class="cs-flex-group mx-auto max-w-3xl place-content-center p-4">
+          <ul class="cs-faq-group">
+            {faqs.map((faq) => (
+              <li class={`cs-faq-item ${faq.active ? 'active' : ''}`}>
+                <button class="cs-button">
+                  <span class="cs-button-text">{faq.question}</span>
+                </button>
+                <p class="cs-item-text">{faq.answer}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
   </div>
 </section>
 

@@ -54,8 +54,19 @@ const servicesCollection = defineCollection({
     }),
 });
 
+const faqCollection = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/faq' }),
+  schema: z.object({
+    question: z.string(),
+    answer: z.string(),
+    active: z.boolean().optional().default(false),
+    order: z.number().optional(),
+  }),
+});
+
 export const collections = {
 	blog: blogsCollection,
   services: servicesCollection,
+  faq: faqCollection,
 };
 

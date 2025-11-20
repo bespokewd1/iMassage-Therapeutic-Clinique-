@@ -350,3 +350,31 @@ collections:
                   name: 'billingSub',
                   widget: 'string',
                 }
+
+  - name: 'faq'
+    label: 'FAQs'
+    folder: 'src/content/faq'
+    create: true
+    editor:
+      preview: false
+    sortable_fields: ['order', 'question']
+    fields:
+      - { label: 'Question', name: 'question', widget: 'string' }
+      - { label: 'Answer', name: 'answer', widget: 'text' }
+      - {
+          label: 'Active By Default',
+          name: 'active',
+          widget: 'boolean',
+          required: false,
+          default: false,
+          hint: 'If true, this FAQ will be open by default.',
+        }
+      - {
+          label: 'Order',
+          name: 'order',
+          widget: 'number',
+          value_type: 'int',
+          min: 0,
+          required: false,
+          hint: 'Optional sort order. Lower numbers appear first.',
+        }
