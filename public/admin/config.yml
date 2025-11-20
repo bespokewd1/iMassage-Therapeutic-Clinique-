@@ -378,3 +378,70 @@ collections:
           required: false,
           hint: 'Optional sort order. Lower numbers appear first.',
         }
+
+  - name: 'team'
+    label: 'Team Members'
+    folder: 'src/content/team'
+    media_folder: /src/assets/images/team # Images uploaded for 'services' will go here
+    public_folder: /src/assets/images/team # The public path used in the content file
+    create: true
+    editor:
+      preview: false
+    sortable_fields: ['role', 'name', 'occupation']
+    fields:
+      - {
+          label: 'Team Member Name',
+          name: 'name',
+          widget: 'string',
+          hint: 'Enter the full name of the therapist or founder.',
+        }
+      - label: 'Position / Role'
+        name: 'role'
+        widget: 'select'
+        options:
+          - { label: 'Founder RMT', value: 'founder' }
+          - { label: 'Therapist', value: 'therapist' }
+        default: 'therapist'
+        hint: 'Select whether this person is the founder or a therapist.'
+      - {
+          label: 'Team Member Photo',
+          name: 'photo',
+          widget: 'image',
+          required: false,
+          hint: 'Optional. The photo of the team member.',
+        }
+      - {
+          label: 'Professional Title',
+          name: 'occupation',
+          widget: 'string',
+          default: 'Licensed Massage Therapist',
+          hint: 'e.g., “Licensed Massage Therapist”, “Registered Massage Therapist (RMT)”.',
+        }
+      - {
+          label: 'Practicing Since',
+          name: 'since',
+          widget: 'string',
+          hint: 'e.g., “Since 2019” or “Practicing since 2020”.',
+        }
+      - {
+          label: 'Location / Credentials',
+          name: 'where',
+          widget: 'string',
+          required: false,
+          hint: 'Optional. e.g., “RMT, Alberta” or “BSPT, Philippines”.',
+        }
+      - {
+          label: 'Short Bio',
+          name: 'bio',
+          widget: 'text',
+          hint: 'A short paragraph about this person and their massage style.',
+        }
+      # - {
+      #     label: 'Display Order',
+      #     name: 'order',
+      #     widget: 'number',
+      #     value_type: 'int',
+      #     min: 0,
+      #     required: false,
+      #     hint: 'Optional. Lower numbers appear first. Founder will still be shown before therapists.',
+      #   }

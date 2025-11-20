@@ -64,9 +64,24 @@ const faqCollection = defineCollection({
   }),
 });
 
+const teamCollection = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: './src/content/team' }),
+  schema: ({ image }) => z.object({
+    name: z.string(),
+    role: z.enum(['founder', 'therapist']),
+    photo: image().optional(),
+    occupation: z.string(),
+    since: z.string(),
+    where: z.string().optional(),
+    bio: z.string(),
+    // order: z.number().optional(),
+  }),
+});
+
 export const collections = {
 	blog: blogsCollection,
   services: servicesCollection,
   faq: faqCollection,
+  team: teamCollection,
 };
 

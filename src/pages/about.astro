@@ -9,117 +9,133 @@ import whyChooseImg from '@assets/images/why-choose.webp';
 import { getOptimizedImage } from '@js/utils';
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import WhyChooseUs from '@components/why-choose-us.astro';
+import { getCollection } from 'astro:content';
 const optimizedImage = await getOptimizedImage(landingImage);
 
 type Role = 'Marianne/Founder RMT' | 'Therapist';
 
-interface TeamMember {
-  role: Role;
-  occupation: string; // e.g., 'Licensed Massage Therapist'
-  since: string; // e.g., 'Since 2019'
-  where?: string; // optional, e.g., 'Alberta, Canada' or 'BSPT, Philippines'
-  name: string;
-  bio: string;
-}
+// interface TeamMember {
+//   role: Role;
+//   occupation: string; // e.g., 'Licensed Massage Therapist'
+//   since: string; // e.g., 'Since 2019'
+//   where?: string; // optional, e.g., 'Alberta, Canada' or 'BSPT, Philippines'
+//   name: string;
+//   bio: string;
+// }
 
 // Data: owner/founder first in array (we’ll render owners first anyway)
-const team: TeamMember[] = [
-  {
-    role: 'Marianne/Founder RMT',
-    occupation: 'Licensed Massage Therapist',
-    since: 'Since 2019',
-    where: 'RMT, Alberta',
-    name: '',
-    bio: 'Clinic founder and registered massage therapist with a restorative approach. Marianne blends deep tissue and relaxation techniques to relieve pain, ease tension, and support lasting well‑being.',
-  },
-  {
-    role: 'Therapist',
-    occupation: 'Licensed Massage Therapist',
-    since: 'Since 2024',
-    where: 'RMT, Alberta',
-    name: '',
-    bio: ' provides attentive, client‑centered care—combining firm, focused work with a calming touch to reduce stress and help your body move with ease.',
-  },
-  {
-    role: 'Therapist',
-    occupation: 'Licensed Massage Therapist',
-    since: 'Since 2025',
-    where: 'RMT, Alberta',
-    name: '',
-    bio: ' creates a comfortable, relaxing environment while addressing specific concerns. Her thoughtful pressure and technique help release tension and restore balance.',
-  },
-];
+// const team: TeamMember[] = [
+//   {
+//     role: 'Marianne/Founder RMT',
+//     occupation: 'Licensed Massage Therapist',
+//     since: 'Since 2019',
+//     where: 'RMT, Alberta',
+//     name: '',
+//     bio: 'Clinic founder and registered massage therapist with a restorative approach. Marianne blends deep tissue and relaxation techniques to relieve pain, ease tension, and support lasting well‑being.',
+//   },
+//   {
+//     role: 'Therapist',
+//     occupation: 'Licensed Massage Therapist',
+//     since: 'Since 2024',
+//     where: 'RMT, Alberta',
+//     name: '',
+//     bio: ' provides attentive, client‑centered care—combining firm, focused work with a calming touch to reduce stress and help your body move with ease.',
+//   },
+//   {
+//     role: 'Therapist',
+//     occupation: 'Licensed Massage Therapist',
+//     since: 'Since 2025',
+//     where: 'RMT, Alberta',
+//     name: '',
+//     bio: ' creates a comfortable, relaxing environment while addressing specific concerns. Her thoughtful pressure and technique help release tension and restore balance.',
+//   },
+// ];
 
-// Helpers to keep Owner/Founder at the top
-const owners = team.filter((m) => m.role === 'Marianne/Founder RMT');
-const therapists = team.filter((m) => m.role === 'Therapist');
-const orderedTeam = [...owners, ...therapists];
+// // Helpers to keep Owner/Founder at the top
+// const owners = team.filter((m) => m.role === 'Marianne/Founder RMT');
+// const therapists = team.filter((m) => m.role === 'Therapist');
+// const orderedTeam = [...owners, ...therapists];
 
+// Load team from content collection
+const teamEntries = await getCollection('team');
+// Map + sort: founders first, then therapists,
+// and within each group sort by `order` then `name`
+const orderedTeam = teamEntries
+  .map((entry) => ({
+    name: entry.data.name,
+    role: entry.data.role, // 'founder' | 'therapist'
+    occupation: entry.data.occupation,
+    since: entry.data.since,
+    where: entry.data.where,
+    bio: entry.data.bio,
+  }))
+  .sort((a, b) => {
+    // 1) Founders first
+    if (a.role === 'founder' && b.role !== 'founder') return -1;
+    if (b.role === 'founder' && a.role !== 'founder') return 1;
+
+    // 2) Tiebreaker by name
+    return a.name.localeCompare(b.name);
+  });
 const whyChooseImage = await getOptimizedImage(whyChooseImg);
 ---
 
-<BaseLayout
-  preloadedImage={whyChooseImage}
->
+<BaseLayout preloadedImage={whyChooseImage}>
   <!-- ============================================ -->
   <!--                    LANDING                   -->
   <!-- ============================================ -->
 
   <!-- <Landing title="About Us" image={optimizedImage} /> -->
 
-<section class="bg-orange-50">
-  <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
-    <div class="mx-auto max-w-3xl text-center">
-      <h2 class="font-serif text-3xl md:text-5xl text-gray-950">
-        Meet Our Expert Therapists
-      </h2>
-      <p class="mt-4 text-gray-700 leading-7">
-        Our team at iMassage Therapeutic Clinique is dedicated to thoughtful,
-        results‑focused massage care. We tailor every session to your goals so
-        you can leave lighter, looser, and genuinely restored.
-      </p>
+  <section class="bg-orange-50">
+    <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="font-serif text-3xl text-gray-950 md:text-5xl">
+          Meet Our Expert Therapists
+        </h2>
+        <p class="mt-4 leading-7 text-gray-700">
+          Our team at iMassage Therapeutic Clinique is dedicated to thoughtful,
+          results‑focused massage care. We tailor every session to your goals so
+          you can leave lighter, looser, and genuinely restored.
+        </p>
+      </div>
+
+      <!-- Cards -->
+      <div
+        class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+      >
+        {
+          orderedTeam.map((m) => (
+            <article class="rounded-lg bg-orange-200/90 p-6 shadow-sm ring-1 ring-black/5">
+              <div class="mb-3">
+                <span
+                  class:list={[
+                    'inline-block rounded-full px-3 py-1 text-xs font-semibold tracking-wide',
+                    m.role === 'founder'
+                      ? 'bg-emerald-900 text-emerald-50'
+                      : 'bg-emerald-200 text-emerald-900',
+                  ]}
+                >
+                  {m.role === 'founder' ? 'Founder RMT' : 'Therapist'}
+                </span>
+              </div>
+
+              <div class="space-y-2">
+                <p class="text-sm text-gray-700">{m.occupation}</p>
+                <p class="text-xs text-gray-700">
+                  {m.since}
+                  {m.where ? ' • ' + m.where : ''}
+                </p>
+                <h3 class="font-semibold text-gray-900">{m.name}</h3>
+              </div>
+
+              <p class="mt-4 text-sm leading-6 text-gray-800">{m.bio}</p>
+            </article>
+          ))
+        }
+      </div>
     </div>
-
-    <!-- Cards -->
-    <div
-      class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
-    >
-      {
-        orderedTeam.map((m) => (
-          <article
-            class="rounded-lg bg-orange-200/90 p-6 shadow-sm ring-1 ring-black/5"
-          >
-            <!-- Role badge -->
-            <div class="mb-3">
-              <span
-                class:list={[
-                  'inline-block rounded-full px-3 py-1 text-xs font-semibold tracking-wide',
-                  m.role === 'Marianne/Founder RMT'
-                    ? 'bg-emerald-900 text-emerald-50'
-                    : 'bg-emerald-200 text-emerald-900',
-                ]}
-              >
-                {m.role}
-              </span>
-            </div>
-
-            <div class="space-y-2">
-              <p class="text-sm text-gray-700">{m.occupation}</p>
-              <p class="text-xs text-gray-700">
-                {m.since}{m.where ? ' • ' + m.where : ''}
-              </p>
-              <h3 class="text-gray-900 font-semibold">{m.name}</h3>
-            </div>
-
-            <p class="mt-4 text-sm leading-6 text-gray-800">
-              {m.bio}
-            </p>
-          </article>
-        ))
-      }
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- ============================================ -->
   <!--                 Side By Side                 -->
@@ -208,8 +224,11 @@ const whyChooseImage = await getOptimizedImage(whyChooseImg);
     </div>
   </section> -->
   <!-- <FAQ /> -->
-  <CTA title='Relief for Your Body, Calm for Your Mind' description='Personalized care that eases pain and restores well‑being.' />
-<WhyChooseUs/>
+  <CTA
+    title="Relief for Your Body, Calm for Your Mind"
+    description="Personalized care that eases pain and restores well‑being."
+  />
+  <WhyChooseUs />
 </BaseLayout>
 
 <style lang="less">
