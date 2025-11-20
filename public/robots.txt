@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /admin/
 Allow: /
 
-Sitemap: https://stonemassage.ca/sitemap-index.xml
+Sitemap: https://imassage-therapeutic.ca/sitemap-index.xml

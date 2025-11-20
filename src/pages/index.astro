@@ -101,9 +101,13 @@ const highlight2 = allServices.find(
     </div>
 
     <!-- second content -->
-    <div class="mx-auto mt-4 grid grid-cols-4 items-stretch gap-0 relative">
+    <div
+      class="mx-auto mt-4 min-h-[28.125rem] grid grid-cols-6 items-stretch gap-0 relative"
+    >
       <!-- Left: edge-to-edge image -->
-      <div class="relative col-span-5 xl:col-start-2 xl:col-end-4">
+      <div
+        class="relative col-span-full xl:col-start-2 xl:col-end-4 xl:justify-self-end"
+      >
         {
           welcomeImage && (
             <Image
@@ -122,14 +126,15 @@ const highlight2 = allServices.find(
 
       <!-- Right: text block on light card -->
       <div
-        class="xl:absolute relative inset-0 col-span-5 xl:col-start-3 xl:col-end-4 flex items-center justify-center md:px-6 py-12"
+        class="xl:absolute relative inset-0 col-span-full xl:col-start-4 xl:col-end-7 xl:justify-self-start flex items-center justify-center md:px-6 py-12"
       >
         <div
           class="w-full max-w-[680px] rounded-xl bg-orange-200 shadow-[0_10px_25px_rgba(0,0,0,0.15)] ring-1 ring-black/10"
         >
           <div class="p-6 sm:p-8 md:p-10">
+            <!-- text-2xl sm:text-3xl md:text-4xl -->
             <h3
-              class="font-serif text-2xl sm:text-3xl md:text-4xl leading-snug text-gray-950"
+              class="font-serif text-[clamp(var(--text-2xl),5vw,var(--text-4xl))] leading-snug text-gray-950"
             >
               {homeData.welcome.title}
             </h3>
