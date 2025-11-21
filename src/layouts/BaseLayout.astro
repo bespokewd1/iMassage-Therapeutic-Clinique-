@@ -10,8 +10,8 @@ import '@styles/root.less';
 import '../styles/global.css';
 
 import { getOptimizedImage } from '@js/utils';
-import type { GetImageResult } from 'astro';
 
+import type { GetImageResult } from 'astro';
 import { resolveImage } from '@js/imageUtils';
 import seoSetting from '@data/seo-pages.json';
 const ogImg = await resolveImage(seoSetting.global.ogImage);
@@ -24,7 +24,7 @@ type Props = {
   description?: string;
   title?: string;
   preloadedImage?: GetImageResult | GetImageResult[];
-  ogImage?: GetImageResult;
+  ogImage: GetImageResult | null;
 };
 
 const {

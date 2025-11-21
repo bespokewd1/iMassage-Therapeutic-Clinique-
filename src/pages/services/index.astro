@@ -19,6 +19,16 @@ import CheckIconFilled from '@components/Icons/Utility/CheckIconFilled.astro';
 import CtaLink from '@components/CtaLink.astro';
 import { getCollection } from 'astro:content';
 
+import { resolveImage } from '@js/imageUtils';
+import type { GetImageResult } from 'astro';
+import seoSetting from '@data/seo-pages.json';
+const seo = seoSetting.services;
+const ogImg = await resolveImage(seo.ogImage);
+let ogImage: GetImageResult | null = null;
+if (ogImg) {
+  ogImage = await getOptimizedImage(ogImg);
+}
+
 type Service = {
   title: string;
   blurb: string;
@@ -135,15 +145,20 @@ async function reloadImages() {
 const preloadedImages = await reloadImages();
 ---
 
-<BaseLayout preloadedImage={preloadedImages}>
+<BaseLayout
+  ogImage={ogImage}
+  title={seo.title}
+  description={seo.description}
+  preloadedImage={preloadedImages}
+>
   <section class="bg-orange-50">
     <div class="mx-auto max-w-[120rem] px-6 py-16 md:py-20">
       <!-- Header -->
-      <header class="text-center max-w-3xl mx-auto">
-        <h1 class="font-serif text-3xl md:text-4xl text-gray-900">
+      <header class="mx-auto max-w-3xl text-center">
+        <h1 class="font-serif text-3xl text-gray-900 md:text-4xl">
           Our Services
         </h1>
-        <p class="mt-4 text-gray-700 leading-7">
+        <p class="mt-4 leading-7 text-gray-700">
           We offer massage therapy for pain relief, stress reduction, and
           relaxation. Our licensed therapists specialize in deep‑tissue, hot
           stone, Swedish, cupping, and lymphatic‑focused treatments delivered
@@ -154,17 +169,17 @@ const preloadedImages = await reloadImages();
 
       <!-- Cards -->
       <div
-        class="mt-10 xl:px-16 grid grid-cols-[repeat(auto-fit,minmax(min(450px,100%),1fr))] gap-6 lg:gap-8"
+        class="mt-10 grid grid-cols-[repeat(auto-fit,minmax(min(450px,100%),1fr))] gap-6 lg:gap-8 xl:px-16"
       >
         {
           services.map((s) => (
-            <article class="relative bg-transparent overflow-hidden grid grid-rows-[min-content,1fr] sm:grid-rows-1 sm:grid-cols-2 rounded-xl ring-1 ring-black/10 ">
+            <article class="relative grid grid-rows-[min-content,1fr] overflow-hidden rounded-xl bg-transparent ring-1 ring-black/10 sm:grid-cols-2 sm:grid-rows-1">
               {/* <div class="absolute  inset-0 bg-gradient-to-l from-emerald-900 from-35% via-emerald-900/80 via-55% to-emerald-900/10" /> */}
               <div class="">
                 <Image
                   src={s.img}
                   alt={s.title ?? 'Service Image'}
-                  class="relative block w-full aspect-square size-full object-cover"
+                  class="relative block aspect-square size-full w-full object-cover"
                   loading={'eager'}
                   decoding="sync"
                   fetchpriority="high"
@@ -182,15 +197,15 @@ const preloadedImages = await reloadImages();
                 /> */}
               </div>
 
-              <div class="p-5 bg-emerald-200 z-10 text-emerald-50 h-full place-content-center space-y-4 ">
-                <h3 class="font-semibold text-shadow-md text-emerald-950 text-xl text-balance">
+              <div class="z-10 h-full place-content-center space-y-4 bg-emerald-200 p-5 text-emerald-50">
+                <h3 class="text-shadow-md text-xl font-semibold text-balance text-emerald-950">
                   {s.title}
                 </h3>
-                <p class="text-sm/6 text-emerald-900 text-pretty">{s.blurb}</p>
+                <p class="text-sm/6 text-pretty text-emerald-900">{s.blurb}</p>
                 <div class="mt-4">
                   <a
                     href={s.href}
-                    class="inline-flex items-center rounded-full bg-orange-200 hover:bg-orange-100 transition-colors text-gray-900 px-4 py-2 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
+                    class="inline-flex items-center rounded-full bg-orange-200 px-4 py-2 text-sm font-semibold text-gray-900 transition-colors hover:bg-orange-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300"
                   >
                     {s.cta ?? 'Read More'}
                   </a>
@@ -206,7 +221,7 @@ const preloadedImages = await reloadImages();
   <section class="bg-orange-100">
     <div class="mx-auto max-w-6xl px-6 py-16 md:py-20">
       <header class="text-center">
-        <h2 class="font-serif text-3xl md:text-4xl text-gray-900">
+        <h2 class="font-serif text-3xl text-gray-900 md:text-4xl">
           Service Benefits
         </h2>
       </header>
@@ -222,10 +237,10 @@ const preloadedImages = await reloadImages();
                 aria-hidden="true"
               >
                 {/* {b.icon} */}
-                <Image src={b.icon} alt={b.title} class={'drop-shadow-lg '} />
+                <Image src={b.icon} alt={b.title} class={'drop-shadow-lg'} />
               </div>
               <h3 class="font-semibold text-emerald-900">{b.title}</h3>
-              <p class="mt-3 text-sm text-gray-700 leading-6">{b.body}</p>
+              <p class="mt-3 text-sm leading-6 text-gray-700">{b.body}</p>
             </div>
           ))
         }
@@ -253,19 +268,19 @@ const preloadedImages = await reloadImages();
   </section>
 
   <section class="bg-orange-50">
-    <div class="mx-auto max-w-[120rem] flex flex-col md:flex-row">
+    <div class="mx-auto flex max-w-[120rem] flex-col md:flex-row">
       <!-- Left image -->
       <div class="relative">
         <Image
           src={benefitImg}
           alt="Therapeutic massage providing relief and relaxation"
-          class="object-cover aspect-video h-full"
+          class="aspect-video h-full object-cover"
         />
         <div
-          class="pointer-events-none absolute left-6 top-6 hidden max-w-[24ch] text-white drop-shadow-md lg:block"
+          class="pointer-events-none absolute top-6 left-6 hidden max-w-[24ch] text-white drop-shadow-md lg:block"
         >
           <h2
-            class="font-serif drop-shadow-md text-4xl/[1.1] md:text-5xl/[1.1]"
+            class="font-serif text-4xl/[1.1] drop-shadow-md md:text-5xl/[1.1]"
           >
             Who Can
             <br />
@@ -276,7 +291,7 @@ const preloadedImages = await reloadImages();
 
       <!-- Right content -->
       <div class="bg-orange-50 px-6 py-12 md:px-10">
-        <h2 class="font-serif text-3xl md:text-4xl text-gray-900 lg:hidden">
+        <h2 class="font-serif text-3xl text-gray-900 md:text-4xl lg:hidden">
           Who Can Benefit?
         </h2>
 
@@ -303,10 +318,10 @@ const preloadedImages = await reloadImages();
   <section class="bg-orange-100">
     <div class="mx-auto max-w-4xl px-6 py-16 md:py-20">
       <header class="text-center">
-        <h2 class="font-serif text-3xl md:text-4xl text-gray-900">
+        <h2 class="font-serif text-3xl text-gray-900 md:text-4xl">
           How to Book an Appointment
         </h2>
-        <p class="mt-4 text-gray-700 leading-7">
+        <p class="mt-4 leading-7 text-gray-700">
           Booking a therapeutic massage at iMassage Therapeutic Clinique is
           simple. Follow these steps to reserve your in‑clinic session.
         </p>
@@ -322,7 +337,7 @@ const preloadedImages = await reloadImages();
         {
           steps.map((s) => (
             <li class="grid grid-cols-[4rem_1fr] items-start gap-6">
-              <div class="flex h-16 w-16 items-center justify-center rounded-full bg-[#3b3a2f] text-2xl font-serif text-white">
+              <div class="flex h-16 w-16 items-center justify-center rounded-full bg-[#3b3a2f] font-serif text-2xl text-white">
                 {s.num}
               </div>
 
@@ -418,7 +433,7 @@ const preloadedImages = await reloadImages();
           </li>
         </ul>
 
-        <p class="mt-6 text-gray-800 font-medium">
+        <p class="mt-6 font-medium text-gray-800">
           Don’t wait—experience therapeutic massage for pain relief, stress
           reduction, and relaxation today!
         </p>

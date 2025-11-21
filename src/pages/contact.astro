@@ -13,6 +13,16 @@ import InstagramIcon from '@components/Icons/Socials/InstagramIcon.astro';
 import CheckIcon from '@components/Icons/Utility/CheckIcon.astro';
 import MapPinFilled from '@components/Icons/Utility/MapPinFilled.astro';
 
+import { resolveImage } from '@js/imageUtils';
+import type { GetImageResult } from 'astro';
+import seoSetting from '@data/seo-pages.json';
+const seo = seoSetting.contact;
+const ogImg = await resolveImage(seo.ogImage);
+let ogImage: GetImageResult | null = null;
+if (ogImg) {
+  ogImage = await getOptimizedImage(ogImg);
+}
+
 // type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 // type IconComponent = AstroComponentDirectives;
 
@@ -48,12 +58,13 @@ const hours = [
 ---
 
 <BaseLayout
-  title="Contact"
-  description="iMassage Therapeutic Clinique- Professional Massage Therapy"
+  title={seo.title || 'Contact'}
+  description={seo.description}
+  ogImage={ogImage}
   preloadedImage={optimizedImage}
 >
   <section
-    class="relative bg-orange-50 grid grid-cols-5 lg:grid-cols-6 lg:grid-rows-5 xl:grid-rows-4 lg:max-h-[900px]"
+    class="relative grid grid-cols-5 bg-orange-50 lg:max-h-[900px] lg:grid-cols-6 lg:grid-rows-5 xl:grid-rows-4"
   >
     <!-- Background image band -->
     <div class="relative col-span-6 lg:row-span-2">
@@ -62,7 +73,7 @@ const hours = [
         width={optimizedImage.attributes.width}
         height={optimizedImage.attributes.height}
         alt="Green plants and soft light through a window"
-        class="lg:h-full w-full object-cover"
+        class="w-full object-cover lg:h-full"
         loading="eager"
         decoding="async"
       />
@@ -70,18 +81,18 @@ const hours = [
 
     <!-- Content -->
     <div
-      class="mx-auto max-w-6xl col-span-6 lg:col-start-2 lg:col-end-6 lg:row-start-2 relative lg:absolute lg:inset-0 h-full lg:pb-4 border-b"
+      class="relative col-span-6 mx-auto h-full max-w-6xl border-b lg:absolute lg:inset-0 lg:col-start-2 lg:col-end-6 lg:row-start-2 lg:pb-4"
     >
       <!-- lg:shadow-xl lg:ring-1 lg:ring-black/10 -->
       <div
-        class="grid grid-cols-1 gap-8 rounded-xl bg-orange-50/85 backdrop-blur-md p-6 md:grid-cols-2 md:p-10 h-full"
+        class="grid h-full grid-cols-1 gap-8 rounded-xl bg-orange-50/85 p-6 backdrop-blur-md md:grid-cols-2 md:p-10"
       >
         <!-- Left: text -->
-        <div class="md:col-span-2 lg:col-span-1 flex flex-col gap-6 lg:pr-6">
-          <h2 class="font-serif text-3xl md:text-4xl text-gray-900">
+        <div class="flex flex-col gap-6 md:col-span-2 lg:col-span-1 lg:pr-6">
+          <h2 class="font-serif text-3xl text-gray-900 md:text-4xl">
             Book Your Massage Today!
           </h2>
-          <p class="text-gray-700 leading-7">
+          <p class="leading-7 text-gray-700">
             Have questions about our therapeutic massage services, pricing, or
             mobile availability? Our team is happy to assist. Reach out to book
             an appointment or ask about the best treatment for your needs.
@@ -102,10 +113,10 @@ const hours = [
             </li>
           </ul>
 
-          <div class="grid sm:grid-cols-2 gap-x-4 gap-y-6 mt-4">
+          <div class="mt-4 grid gap-x-4 gap-y-6 sm:grid-cols-2">
             <div class="xs:col-span-1">
               <h3
-                class="text-sm font-semibold uppercase tracking-wide text-gray-700"
+                class="text-sm font-semibold tracking-wide text-gray-700 uppercase"
               >
                 Phone
               </h3>
@@ -119,7 +130,7 @@ const hours = [
 
             <div class="">
               <h3
-                class="text-sm font-semibold uppercase tracking-wide text-gray-700"
+                class="text-sm font-semibold tracking-wide text-gray-700 uppercase"
               >
                 Email
               </h3>
@@ -133,7 +144,7 @@ const hours = [
 
             <div class="xs:col-span-2">
               <h3
-                class="text-sm font-semibold uppercase tracking-wide text-gray-700"
+                class="text-sm font-semibold tracking-wide text-gray-700 uppercase"
               >
                 Social Media
               </h3>
@@ -168,7 +179,7 @@ const hours = [
                 >
                 <input
                   type="text"
-                  class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   placeholder="First name"
                 />
               </div>
@@ -177,7 +188,7 @@ const hours = [
                 >
                 <input
                   type="text"
-                  class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                   placeholder="Last name"
                 />
               </div>
@@ -188,7 +199,7 @@ const hours = [
               <input
                 type="email"
                 required
-                class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                 placeholder="you@example.com"
               />
             </div>
@@ -197,7 +208,7 @@ const hours = [
               <label class="mb-1 block text-sm text-gray-700">Message</label>
               <textarea
                 rows="5"
-                class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                class="w-full rounded border border-gray-300 bg-white px-3 py-2 text-gray-900 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
                 placeholder="How can we help?"></textarea>
             </div>
 
@@ -214,12 +225,12 @@ const hours = [
   </section>
 
   <section class="bg-orange-50">
-    <div class="mx-auto max-w-3xl xl:max-w-6xl px-6 py-16 md:py-20 md:px-10">
+    <div class="mx-auto max-w-3xl px-6 py-16 md:px-10 md:py-20 xl:max-w-6xl">
       <div class="mx-auto">
-        <h2 class="font-serif text-3xl md:text-4xl text-gray-950">
+        <h2 class="font-serif text-3xl text-gray-950 md:text-4xl">
           Visit Us In‑Clinic
         </h2>
-        <p class="mt-4 text-gray-700 leading-7">
+        <p class="mt-4 leading-7 text-gray-700">
           Our licensed therapists provide personalized therapeutic
           care—including deep‑tissue, relaxation massage, and hot stone
           therapy—in a calm, welcoming space. We’re easy to find and always
@@ -233,12 +244,12 @@ const hours = [
           <div class="space-y-6">
             <div>
               <h3
-                class="text-sm font-semibold uppercase tracking-wide text-gray-700"
+                class="text-sm font-semibold tracking-wide text-gray-700 uppercase"
               >
                 Address
               </h3>
-              <div class="pl-2 mt-2 text-gray-900">
-                <p class="font-medium inline-flex items-center gap-2">
+              <div class="mt-2 pl-2 text-gray-900">
+                <p class="inline-flex items-center gap-2 font-medium">
                   <span>
                     <MapPinFilled />
                   </span>
@@ -248,7 +259,7 @@ const hours = [
                   href={mapHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="mt-1 block text-emerald-800 hover:text-emerald-700 underline underline-offset-2"
+                  class="mt-1 block text-emerald-800 underline underline-offset-2 hover:text-emerald-700"
                 >
                   {addressOne}
                 </a>
@@ -257,7 +268,7 @@ const hours = [
 
             <div>
               <h3
-                class="text-sm font-semibold uppercase tracking-wide text-gray-700"
+                class="text-sm font-semibold tracking-wide text-gray-700 uppercase"
               >
                 Opening Hours
               </h3>
@@ -265,7 +276,7 @@ const hours = [
                 {
                   hours.map((h) => (
                     <li class="flex items-center gap-6">
-                      <small class="font-semibold min-w-16">{h.label}:</small>
+                      <small class="min-w-16 font-semibold">{h.label}:</small>
                       <p class="">{h.value}</p>
                     </li>
                   ))

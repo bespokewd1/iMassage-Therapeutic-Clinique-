@@ -8,12 +8,23 @@ import { Image } from 'astro-lqip/components';
 import FAQ from '@components/FAQ.astro';
 import CtaLink from '@components/CtaLink.astro';
 
+import { resolveImage } from '@js/imageUtils';
+import type { GetImageResult } from 'astro';
+import seoSetting from '@data/seo-pages.json';
+const seo = seoSetting.directBilling;
+const ogImg = await resolveImage(seo.ogImage);
+let ogImage: GetImageResult | null = null;
+if (ogImg) {
+  ogImage = await getOptimizedImage(ogImg);
+}
+
 const optimizedImage = await getOptimizedImage(allLogos);
 ---
 
 <BaseLayout
-  title="Direct Billing"
-  description="iMassage Therapeutic Clinique- Professional Massage Therapy"
+  title={seo.title || 'Direct Billing'}
+  description={seo.description}
+  ogImage={ogImage}
   preloadedImage={optimizedImage}
 >
   <section class="bg-orange-50">

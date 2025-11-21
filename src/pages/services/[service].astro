@@ -52,7 +52,12 @@ const benefitsData: PriceBenefitsProps = {
 const serviceImage = await getOptimizedImage(data.image);
 ---
 
-<BaseLayout preloadedImage={serviceImage}>
+<BaseLayout
+  title={data.title}
+  description={data.cardDescription}
+  ogImage={serviceImage}
+  preloadedImage={serviceImage}
+>
   <ServiceHero {...heroData} />
   <PriceBenifits {...benefitsData} />
 </BaseLayout>

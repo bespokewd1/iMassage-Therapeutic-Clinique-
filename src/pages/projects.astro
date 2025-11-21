@@ -5,12 +5,24 @@ import Landing from '@components/Landing.astro';
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import { getOptimizedImage } from '@js/utils';
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+
+import { resolveImage } from '@js/imageUtils';
+import type { GetImageResult } from 'astro';
+import seoSetting from '@data/seo-pages.json';
+const seo = seoSetting.services;
+const ogImg = await resolveImage(seo.ogImage);
+let ogImage: GetImageResult | null = null;
+if (ogImg) {
+  ogImage = await getOptimizedImage(ogImg);
+}
+
 const optimizedImage = await getOptimizedImage(landingImage);
 ---
 
 <BaseLayout
-  title="Projects"
-  description="Meta description for the page"
+  title={seo.title}
+  description={seo.description}
+  ogImage={ogImage}
   preloadedImage={optimizedImage}
 >
   <!-- ============================================ -->

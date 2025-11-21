@@ -7,6 +7,15 @@ import whyChooseImg from '@assets/images/why-choose.webp';
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import { getOptimizedImage } from '@js/utils';
+import { resolveImage } from '@js/imageUtils';
+import type { GetImageResult } from 'astro';
+import seoSetting from '@data/seo-pages.json';
+const seo = seoSetting.about;
+const ogImg = await resolveImage(seo.ogImage);
+let ogImage: GetImageResult | null = null;
+if (ogImg) {
+  ogImage = await getOptimizedImage(ogImg);
+}
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import WhyChooseUs from '@components/why-choose-us.astro';
 import { getCollection } from 'astro:content';
@@ -50,7 +59,12 @@ const promotions = allPromos.filter(({ data }) => {
 });
 ---
 
-<BaseLayout preloadedImage={whyChooseImage}>
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  ogImage={ogImage}
+  preloadedImage={whyChooseImage}
+>
   <!-- ============================================ -->
   <!--                    LANDING                   -->
   <!-- ============================================ -->

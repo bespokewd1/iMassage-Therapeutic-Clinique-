@@ -7,6 +7,16 @@ import landingImage from '@assets/images/stone-massage-background1.png';
 import { getCollection } from 'astro:content';
 import { Image } from 'astro-lqip/components';
 
+import { resolveImage } from '@js/imageUtils';
+import type { GetImageResult } from 'astro';
+import seoSetting from '@data/seo-pages.json';
+const seo = seoSetting.home;
+const ogImg = await resolveImage(seo.ogImage);
+let ogImage: GetImageResult | null = null;
+if (ogImg) {
+  ogImage = await getOptimizedImage(ogImg);
+}
+
 const optimizedImage = await getOptimizedImage(landingImage);
 const galleryItems = await getCollection('gallery');
 
@@ -30,8 +40,9 @@ const itemsByCategory = (catId: string) =>
 ---
 
 <BaseLayout
-  title="Gallery"
-  description="iMassage Therapeutic Clinique- Professional Massage Therapy"
+  title={seo.title || 'Gallery'}
+  description={seo.description}
+  ogImage={ogImage}
   preloadedImage={optimizedImage}
 >
   <!-- ============================================ -->
