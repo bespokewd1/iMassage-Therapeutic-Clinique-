@@ -5,7 +5,21 @@ import Landing from '@components/Landing.astro';
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import { getOptimizedImage } from '@js/utils';
 import landingImage from '@assets/images/landing.jpg'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import { getCollection } from 'astro:content';
 const optimizedImage = await getOptimizedImage(landingImage);
+
+const reviews = await getCollection('reviews');
+
+// helper: initials from name
+const getInitials = (name: string) => {
+  if (!name) return '';
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+  return (
+    parts[0].charAt(0).toUpperCase() +
+    parts[parts.length - 1].charAt(0).toUpperCase()
+  );
+};
 ---
 
 <BaseLayout preloadedImage={optimizedImage}>
@@ -18,7 +32,7 @@ const optimizedImage = await getOptimizedImage(landingImage);
   <!-- ============================================ -->
   <!--                  Reviews                     -->
   <!-- ============================================ -->
-
+  <!--
   <section id="reviews">
     <div class="container">
       <div class="review">
@@ -217,7 +231,96 @@ const optimizedImage = await getOptimizedImage(landingImage);
         </div>
       </div>
     </div>
+  </section> -->
+
+  <!-- ============================================ -->
+  <!--                  Reviews                     -->
+  <!-- ============================================ -->
+  <section class="bg-orange-50 py-16 md:py-24">
+    <div class="container mx-auto max-w-6xl px-4">
+      <div
+        class="grid gap-12 md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-12"
+      >
+        {
+          reviews.map(({ id, data }) => {
+            const initials = getInitials(data.name);
+            return (
+              <article class="relative flex h-full flex-col rounded-md bg-orange-200/90 p-8 pt-12 shadow-md">
+                {/* Avatar */}
+                <div class="absolute -top-10 left-8">
+                  {data.photo ? (
+                    <img
+                      src={data.photo.src}
+                      alt={data.name}
+                      class="h-20 w-20 rounded-full object-cover ring-4 ring-white dark:ring-slate-900"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div
+                      class="flex h-20 w-20 items-center justify-center rounded-full bg-emerald-200 text-xl font-semibold text-emerald-900 ring-4 ring-white dark:ring-slate-900"
+                      aria-hidden="true"
+                    >
+                      {initials}
+                    </div>
+                  )}
+                </div>
+
+                {/* Review text */}
+                <p class="mt-4 text-sm leading-relaxed text-slate-900">
+                  {data.reviewText}
+                </p>
+
+                {/* Stars */}
+                <div class="mt-4 mb-3 flex justify-start gap-1">
+                  {Array.from({ length: 5 }, (_, s) => (
+                    <svg
+                      class:list={[
+                        'h-4 w-5',
+                        s < data.rating
+                          ? 'fill-[#FFA500] text-[#FFA500]'
+                          : 'fill-gray-300 text-gray-300',
+                      ]}
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                    </svg>
+                  ))}
+                </div>
+
+                {/* Name + desc */}
+                <div class="mt-auto flex items-center justify-between border-t border-slate-700 pt-4 dark:border-slate-700">
+                  <div>
+                    <span class="block text-sm font-semibold text-slate-900">
+                      {data.name}
+                    </span>
+                    {data.desc && (
+                      <span class="block text-xs text-slate-500">
+                        {data.desc}
+                      </span>
+                    )}
+                  </div>
+                  {data.href && (
+                    <a
+                      href={data.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-xs font-medium text-emerald-600 hover:text-emerald-700"
+                    >
+                      View review
+                    </a>
+                  )}
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+    </div>
   </section>
+
   <CTA
     title="Restore Balance. Feel Renewed"
     description="Expert therapeutic massage tailored to your needs."

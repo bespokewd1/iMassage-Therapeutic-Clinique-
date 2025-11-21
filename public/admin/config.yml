@@ -474,3 +474,51 @@ collections:
       #     required: false,
       #     hint: 'Optional. Lower numbers appear first. Founder will still be shown before therapists.',
       #   }
+
+  - name: 'reviews'
+    label: 'Testimonials/Reviews'
+    folder: 'src/content/testimonials'
+    media_folder: /src/assets/images/testimonial # Images uploaded for 'reviews' will go here
+    public_folder: /src/assets/images/testimonial # The public path used in the content file
+    create: true
+    editor:
+      preview: false
+    sortable_fields: ['name', 'rating']
+    fields:
+      - {
+          label: 'Client Name',
+          name: 'name',
+          widget: 'string',
+          hint: 'Enter the full name of the Client',
+        }
+      - {
+          label: 'Client Role / Description',
+          name: 'desc',
+          widget: 'string',
+          required: false,
+          hint: 'e.g. “Homeowner”, “Regular Client”, “New Client”, etc.',
+        }
+      - {
+          label: 'Rating',
+          name: 'rating',
+          widget: 'number',
+          value_type: 'int',
+          max: 5,
+          default: 5,
+          hint: 'Set the Rate of the User',
+        }
+      - { label: 'Review Text', name: 'reviewText', widget: 'text' }
+      - {
+          label: 'Team Member Photo',
+          name: 'photo',
+          widget: 'image',
+          required: false,
+          hint: 'Optional. The photo of the client.',
+        }
+      - {
+          label: 'Review Link',
+          name: 'href',
+          widget: 'string',
+          required: false,
+          hint: 'Optional. Review Direct Url',
+        }

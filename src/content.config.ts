@@ -78,10 +78,28 @@ const teamCollection = defineCollection({
   }),
 });
 
+// Reviews / Testimonials collection
+const reviewsCollection = defineCollection({
+  loader: glob({
+    pattern: '**/[^_]*.{md,mdx}',
+    base: './src/content/testimonials',
+  }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(), // Client Name
+      desc: z.string().optional(),
+      rating: z.number().int().max(5).default(5),
+      reviewText: z.string(),
+      photo: image().optional(),
+      href: z.string().optional(),
+    }),
+});
+
 export const collections = {
 	blog: blogsCollection,
   services: servicesCollection,
   faq: faqCollection,
   team: teamCollection,
+  reviews: reviewsCollection,
 };
 
