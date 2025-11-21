@@ -522,3 +522,84 @@ collections:
           required: false,
           hint: 'Optional. Review Direct Url',
         }
+
+  - name: 'promotions'
+    label: 'Promotions / Specials'
+    folder: 'src/content/promotions'
+    media_folder: /src/assets/images/promotions
+    public_folder: /src/assets/images/promotions
+    create: true
+    editor:
+      preview: false
+    sortable_fields: ['title', 'startDate', 'endDate']
+    fields:
+      - {
+          label: 'Title',
+          name: 'title',
+          widget: 'string',
+          hint: 'Short name of the promotion/special.',
+        }
+      - {
+          label: 'Description',
+          name: 'description',
+          widget: 'text',
+          hint: 'Details about the promotion.',
+        }
+      - {
+          label: 'Image',
+          name: 'image',
+          widget: 'image',
+          required: false,
+          hint: 'Optional visual for the promotion.',
+        }
+      - {
+          label: 'Start Date',
+          name: 'startDate',
+          widget: 'datetime',
+          hint: 'When this promo becomes valid.',
+        }
+      - {
+          label: 'End Date',
+          name: 'endDate',
+          widget: 'datetime',
+          required: false,
+          hint: 'Optional. Leave empty if open‑ended.',
+        }
+      - {
+          label: 'Active',
+          name: 'active',
+          widget: 'boolean',
+          default: true,
+          hint: 'Only active promotions will be shown on the site.',
+        }
+
+  - name: 'gallery'
+    label: 'Gallery'
+    folder: 'src/content/gallery'
+    media_folder: /src/assets/images/gallery
+    public_folder: /src/assets/images/gallery
+    create: true
+    editor:
+      preview: false
+    sortable_fields: ['category', 'caption']
+    fields:
+      - {
+          label: 'Image',
+          name: 'image',
+          widget: 'image',
+          hint: 'Upload a gallery image.',
+        }
+      - {
+          label: 'Caption',
+          name: 'caption',
+          widget: 'string',
+          hint: 'Short description; also used as the image alt text.',
+        }
+      - label: 'Category'
+        name: 'category'
+        widget: 'select'
+        options:
+          - { label: 'Inside Our Clinic', value: 'inside-clinic' }
+          - { label: 'Client Experience', value: 'client-experience' }
+          - { label: 'Events & Specials', value: 'events-specials' }
+        hint: 'Select which gallery tab this image belongs to.'

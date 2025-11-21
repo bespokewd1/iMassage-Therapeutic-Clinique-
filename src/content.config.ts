@@ -95,11 +95,47 @@ const reviewsCollection = defineCollection({
     }),
 });
 
+// Promotions / Specials collection
+const promotionsCollection = defineCollection({
+  loader: glob({
+    pattern: '**/[^_]*.{md,mdx}',
+    base: './src/content/promotions',
+  }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      description: z.string(),
+      image: image().optional(),
+      startDate: z.date(),
+      endDate: z.date().optional(),
+      active: z.boolean().default(true),
+    }),
+});
+
+const galleryCollection = defineCollection({
+  loader: glob({
+    pattern: '**/[^_]*.{md,mdx}',
+    base: './src/content/gallery',
+  }),
+  schema: ({ image }) =>
+    z.object({
+      image: image(),
+      caption: z.string(),
+      category: z.enum([
+        'inside-clinic',
+        'client-experience',
+        'events-specials',
+      ]),
+    }),
+});
+
 export const collections = {
 	blog: blogsCollection,
   services: servicesCollection,
   faq: faqCollection,
   team: teamCollection,
   reviews: reviewsCollection,
+  promotions: promotionsCollection,
+  gallery: galleryCollection,
 };
 

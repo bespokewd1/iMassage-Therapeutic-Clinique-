@@ -2,6 +2,7 @@
 import BaseLayout from 'src/layouts/BaseLayout.astro';
 import CTA from '@components/CTA.astro';
 import Landing from '@components/Landing.astro';
+import { Image } from 'astro-lqip/components';
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import { getOptimizedImage } from '@js/utils';
 import landingImage from '@assets/images/stone-massage-background1.png'; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
@@ -25,7 +26,7 @@ const optimizedImage = await getOptimizedImage(landingImage);
 
   <section id="gallery">
     <div
-      class="flex flex-col mb-10 gap-y-4 items-center md:flex-row sm:justify-center md:gap-x-8"
+      class="mb-10 flex flex-col items-center gap-y-4 sm:justify-center md:flex-row md:gap-x-8"
     >
       <button
         id="btn-tab1"
@@ -44,72 +45,72 @@ const optimizedImage = await getOptimizedImage(landingImage);
       >
     </div>
     <div class="cs-container tab-content" id="tab1">
-      <h1 class="md:text-4xl mb-4" style="text-transform: uppercase;">
+      <h1 class="mb-4 md:text-4xl" style="text-transform: uppercase;">
         Inside Our Clinic
       </h1>
-      <div class="w-full mb-8">
+      <div class="mb-8 w-full">
         <div
-          class="flex flex-col justify-center items-center gap-4 lg:flex-row lg:flex-wrap"
+          class="flex flex-col items-center justify-center gap-4 lg:flex-row lg:flex-wrap"
         >
           <img
             src="/assets/images/clinic1.png"
-            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+            class="aspect-video w-full max-w-xs rounded-lg object-cover sm:max-w-sm md:max-w-md lg:max-w-lg"
           />
           <img
             src="/assets/images/clinic2.png"
-            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+            class="aspect-video w-full max-w-xs rounded-lg object-cover sm:max-w-sm md:max-w-md lg:max-w-lg"
           />
           <img
             src="/assets/images/clinic3.png"
-            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+            class="aspect-video w-full max-w-xs rounded-lg object-cover sm:max-w-sm md:max-w-md lg:max-w-lg"
           />
         </div>
       </div>
       <a href="/contact" class="cs-button-solid">Get Free Quote</a>
     </div>
     <div class="cs-container tab-content hidden" id="tab2">
-      <h1 class="md:text-4xl mb-4" style="text-transform: uppercase;">
+      <h1 class="mb-4 md:text-4xl" style="text-transform: uppercase;">
         Client Experience
       </h1>
-      <div class="w-full mb-8">
+      <div class="mb-8 w-full">
         <div
-          class="flex flex-col justify-center items-center gap-4 lg:flex-row lg:flex-wrap"
+          class="flex flex-col items-center justify-center gap-4 lg:flex-row lg:flex-wrap"
         >
           <img
             src="/assets/images/stone-massage-background1.png"
-            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+            class="aspect-video w-full max-w-xs rounded-lg object-cover sm:max-w-sm md:max-w-md lg:max-w-lg"
           />
           <img
             src="/assets/images/stone-massage-back.png"
-            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+            class="aspect-video w-full max-w-xs rounded-lg object-cover sm:max-w-sm md:max-w-md lg:max-w-lg"
           />
           <img
             src="/assets/images/stone-massage-feet.png"
-            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+            class="aspect-video w-full max-w-xs rounded-lg object-cover sm:max-w-sm md:max-w-md lg:max-w-lg"
           />
         </div>
       </div>
       <a href="/contact" class="cs-button-solid">Get Free Quote</a>
     </div>
     <div class="cs-container tab-content hidden" id="tab3">
-      <h1 class="md:text-4xl mb-4" style="text-transform: uppercase;">
+      <h1 class="mb-4 md:text-4xl" style="text-transform: uppercase;">
         Events & Specials
       </h1>
-      <div class="w-full mb-8">
+      <div class="mb-8 w-full">
         <div
-          class="flex flex-col justify-center items-center gap-4 lg:flex-row lg:flex-wrap"
+          class="flex flex-col items-center justify-center gap-4 lg:flex-row lg:flex-wrap"
         >
           <img
             src="/assets/images/stone-massage-feet.png"
-            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+            class="aspect-video w-full max-w-xs rounded-lg object-cover sm:max-w-sm md:max-w-md lg:max-w-lg"
           />
           <img
             src="/assets/images/clinic2.png"
-            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+            class="aspect-video w-full max-w-xs rounded-lg object-cover sm:max-w-sm md:max-w-md lg:max-w-lg"
           />
           <img
             src="/assets/images/stone-massage-background1.png"
-            class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-video object-cover rounded-lg"
+            class="aspect-video w-full max-w-xs rounded-lg object-cover sm:max-w-sm md:max-w-md lg:max-w-lg"
           />
         </div>
       </div>
