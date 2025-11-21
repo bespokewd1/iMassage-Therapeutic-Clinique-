@@ -593,7 +593,7 @@ collections:
           label: 'Caption',
           name: 'caption',
           widget: 'string',
-          hint: 'Short description; also used as the image alt text.',
+          hint: 'Short description; also used as the image alt text for SEO.',
         }
       - label: 'Category'
         name: 'category'
@@ -602,4 +602,5 @@ collections:
           - { label: 'Inside Our Clinic', value: 'inside-clinic' }
           - { label: 'Client Experience', value: 'client-experience' }
           - { label: 'Events & Specials', value: 'events-specials' }
+        default: 'inside-clinic'
         hint: 'Select which gallery tab this image belongs to.'
