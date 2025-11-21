@@ -9,21 +9,29 @@ import '@styles/root.less';
 // import '@styles/dark.less';
 import '../styles/global.css';
 
-import ogImg from '@assets/images/hero-img1.jpg';
 import { getOptimizedImage } from '@js/utils';
 import type { GetImageResult } from 'astro';
-const ogImage = await getOptimizedImage(ogImg);
+
+import { resolveImage } from '@js/imageUtils';
+import seoSetting from '@data/seo-pages.json';
+const ogImg = await resolveImage(seoSetting.global.ogImage);
+let defaultOgImg: GetImageResult | null = null;
+if (ogImg) {
+  defaultOgImg = await getOptimizedImage(ogImg);
+}
 
 type Props = {
   description?: string;
   title?: string;
   preloadedImage?: GetImageResult | GetImageResult[];
+  ogImage?: GetImageResult;
 };
 
 const {
   description = 'Discover relaxation at iMassage Therapeutic Clinique. Our professional massage therapy relieves stress, restores balance, and rejuvenates your body and mind. Book your session today.',
   title = 'iMassage Therapeutic Clinique | Professional Massage Therapy in Edmonton',
   preloadedImage,
+  ogImage = defaultOgImg,
 } = Astro.props;
 
 const preloadedImages = !preloadedImage
@@ -61,7 +69,7 @@ const preloadedImages = !preloadedImage
         <link rel="preload" href={img.src} as="image" />
       ))
     }
-    <link rel="preload" href={ogImage.src} as="image" />
+    {ogImage && <link rel="preload" href={ogImage.src} as="image" />}
 
     <!--Social Media Display-->
     <meta property="og:title" content={title} />
@@ -71,8 +79,14 @@ const preloadedImages = !preloadedImage
       property="og:url"
       content={`https://${client.domain}${Astro.url.pathname}`}
     />
-    <meta property="og:image" content={ogImage.src} />
-    <meta property="og:image:secure_url" content={ogImage.src} />
+    {
+      ogImage && (
+        <>
+          <meta property="og:image" content={ogImage.src} />
+          <meta property="og:image:secure_url" content={ogImage.src} />
+        </>
+      )
+    }
 
     <!--Favicons-->
     <link

@@ -2,8 +2,13 @@
 import { getNavData } from '@data/navData';
 import { Icon } from 'astro-icon/components';
 import DarkModeToggle from '@components/DarkModeToggle.astro';
-import MainLogo from '@assets/images/logo/updated-logo.png';
-import { Image } from 'astro:assets';
+import { resolveImage } from '@js/imageUtils';
+// import MainLogo from '@assets/images/logo/updated-logo.png';
+// import { Image } from 'astro:assets';
+import { Image } from 'astro-lqip/components';
+import navInfo from '@data/navInfo.json';
+
+const MainLogo = await resolveImage(navInfo.image);
 
 import type { HTMLAttributes } from 'astro/types';
 import ChevronDown from './Icons/Utility/ChevronDown.astro';
@@ -25,11 +30,15 @@ const navData = await getNavData();
   <div class="cs-container justify-start">
     <!-- Logo -->
     <a href="/" class="cs-logo mr-0" aria-label="back to home">
-      <Image
-        src={MainLogo}
-        alt="Main logo massage"
-        class="px-2 drop-shadow-md max-w-[180px]"
-      />
+      {
+        MainLogo && (
+          <Image
+            src={MainLogo}
+            alt={navInfo.alt}
+            class="max-w-[180px] px-2 drop-shadow-md"
+          />
+        )
+      }
     </a>
 
     <!-- Navigation -->
@@ -64,12 +73,12 @@ const navData = await getNavData();
                 ]}
               >
                 {entry.children?.length > 0 ? (
-                  <div class="block relative lg:contents">
+                  <div class="relative block lg:contents">
                     <a
                       href={entry.url}
                       class:list={[
                         'cs-li-link before:hidden',
-                        'rounded-full bg-orange-50 pr-8 pl-3 lg:pr-3 py-1 text-gray-950 hover:bg-orange-100 transition-colors ',
+                        'rounded-full bg-orange-50 py-1 pr-8 pl-3 text-gray-950 transition-colors hover:bg-orange-100 lg:pr-3',
                         {
                           'cs-active bg-orange-200 text-gray-50':
                             Astro.url.pathname === entry.url,
@@ -86,9 +95,9 @@ const navData = await getNavData();
                       aria-expanded="false"
                       aria-controls={`submenu-${entry.key}`}
                       class:list={[
-                        'before:hidden block lg:hidden submenu-btn',
-                        'rounded-full rounded-tl-none rounded-bl-none bg-orange-100 px-1 py-1 text-gray-950 hover:bg-orange-100 transition-colors ',
-                        'z-10 absolute right-0 top-1/2 -translate-y-1/2 h-full ',
+                        'submenu-btn block before:hidden lg:hidden',
+                        'rounded-full rounded-tl-none rounded-bl-none bg-orange-100 px-1 py-1 text-gray-950 transition-colors hover:bg-orange-100',
+                        'absolute top-1/2 right-0 z-10 h-full -translate-y-1/2',
                         { 'cs-active': Astro.url.pathname.includes(entry.url) },
                       ]}
                     >
@@ -105,7 +114,7 @@ const navData = await getNavData();
                     href={entry.url}
                     class:list={[
                       'cs-li-link before:hidden',
-                      'rounded-full bg-orange-50 px-3 py-1 text-gray-950 hover:bg-orange-100 transition-colors ',
+                      'rounded-full bg-orange-50 px-3 py-1 text-gray-950 transition-colors hover:bg-orange-100',
                       {
                         'cs-active bg-orange-200 text-gray-50':
                           Astro.url.pathname === entry.url,
@@ -122,13 +131,13 @@ const navData = await getNavData();
                 {entry.children?.length > 0 && (
                   <ul
                     id={`submenu-${entry.key}`}
-                    class="cs-drop-ul rounded-xl bg-orange-50 border-emerald-300"
+                    class="cs-drop-ul rounded-xl border-emerald-300 bg-orange-50"
                   >
                     {entry.children?.map((child) => (
-                      <li class="cs-drop-li ">
+                      <li class="cs-drop-li">
                         <a
                           href={child.url}
-                          class="cs-li-link cs-drop-link text-gray-950 hover:bg-orange-100 transition-colors "
+                          class="cs-li-link cs-drop-link text-gray-950 transition-colors hover:bg-orange-100"
                           aria-current={
                             Astro.url.pathname === child.url
                               ? 'page'
@@ -165,28 +174,28 @@ const navData = await getNavData();
 <!-- flex -->
 <div
   id="popup"
-  class="fixed inset-0 bg-black/40 backdrop-blur-sm items-center justify-center z-[9999] hidden"
+  class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/40 backdrop-blur-sm"
 >
   <div
-    class="p-6 rounded-xl shadow-xl w-11/12 max-w-md"
+    class="w-11/12 max-w-md rounded-xl p-6 shadow-xl"
     style="background: rgba(255, 255, 255, 0.3);"
   >
     <div class="flex flex-col gap-4">
       <a
         href="https://www.massagebook.com/therapists/StoneMassage?src=external"
-        class="cs-button-solid rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem]"
+        class="cs-button-solid rounded-full p-4 text-center text-[.6rem] leading-snug text-white md:text-[1rem]"
       >
         Book In-Clinic Appointment (Online)
       </a>
       <a
         href="tel:587-938-0458"
-        class="cs-button-solid rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem]"
+        class="cs-button-solid rounded-full p-4 text-center text-[.6rem] leading-snug text-white md:text-[1rem]"
       >
         Call to Book In-Home Massage
       </a>
       <button
         onclick="document.getElementById('popup').classList.add('hidden')"
-        class="text-sm text-white-500 hover:text-white mt-2"
+        class="text-white-500 mt-2 text-sm hover:text-white"
       >
         Close
       </button>
