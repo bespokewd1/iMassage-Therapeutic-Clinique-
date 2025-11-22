@@ -1,7 +1,8 @@
 ---
 title: Self-Care Tips to Extend the Benefits of Your Massage
-description: Maximize the benefits of your massage with these expert self-care tips, including hydration, stretching, and relaxation techniques.
-author: BuckyBuck
+description: Maximize the benefits of your massage with these expert self-care
+  tips, including hydration, stretching, and relaxation techniques.
+author: iMassage Admin
 date: 2023-06-08T15:26:46.705Z
 image: /src/assets/images/blog/blog-2.webp
 imageAlt: Couple hot stone massage
