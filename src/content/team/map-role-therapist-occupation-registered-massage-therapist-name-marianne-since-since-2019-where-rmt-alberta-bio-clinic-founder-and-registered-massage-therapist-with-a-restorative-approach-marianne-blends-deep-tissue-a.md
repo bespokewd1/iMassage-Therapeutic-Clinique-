@@ -1,6 +1,6 @@
 ---
-name: Marianne
-role: founder
+name: Claire
+role: therapist
 occupation: Licensed Massage Therapist
 since: Since 2019
 where: RMT, Alberta
