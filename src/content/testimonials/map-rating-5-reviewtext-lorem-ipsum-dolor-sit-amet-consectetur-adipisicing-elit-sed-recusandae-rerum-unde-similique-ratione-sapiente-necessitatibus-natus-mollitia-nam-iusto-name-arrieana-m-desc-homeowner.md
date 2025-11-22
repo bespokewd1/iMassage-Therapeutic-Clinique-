@@ -1,8 +1,8 @@
 ---
-name: Arrieana M.
+name: Carol B.
 desc: Homeowner
 rating: 5
-reviewText: Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed
-  recusandae rerum unde similique ratione sapiente necessitatibus natus mollitia
-  nam iusto.
+reviewText: Great service from start to finish. The space was clean, calming,
+  and the massage really helped with my shoulder tension. I’ll definitely be
+  booking again.
 ---
