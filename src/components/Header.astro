@@ -1,5 +1,6 @@
 ---
 import { getNavData } from '@data/navData';
+import client from '@data/clientData';
 import { Icon } from 'astro-icon/components';
 import DarkModeToggle from '@components/DarkModeToggle.astro';
 import { resolveImage } from '@js/imageUtils';
@@ -13,6 +14,7 @@ const MainLogo = await resolveImage(navInfo.image);
 import type { HTMLAttributes } from 'astro/types';
 import ChevronDown from './Icons/Utility/ChevronDown.astro';
 import ChevronUp from './Icons/Utility/ChevronUp.astro';
+import AnnouncementBar from './AnnouncementBar.astro';
 
 interface Props extends HTMLAttributes<'header'> {}
 
@@ -25,9 +27,12 @@ const navData = await getNavData();
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 </style>
-<header id="cs-navigation" class="sticky bg-emerald-200/75" {...props}>
+<header id="cs-navigation" class="sticky bg-emerald-200/75 p-0" {...props}>
+  <!-- Fixed Announcement Bar -->
+  <AnnouncementBar />
+
   <!-- Push content below the fixed top bar -->
-  <div class="cs-container justify-start">
+  <div class="cs-container justify-start p-4">
     <!-- Logo -->
     <a href="/" class="cs-logo mr-0" aria-label="back to home">
       {
