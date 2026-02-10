@@ -1,5 +1,5 @@
 ---
-name: Claire
+name: Marianne
 role: therapist
 occupation: Licensed Massage Therapist
 since: Since 2019

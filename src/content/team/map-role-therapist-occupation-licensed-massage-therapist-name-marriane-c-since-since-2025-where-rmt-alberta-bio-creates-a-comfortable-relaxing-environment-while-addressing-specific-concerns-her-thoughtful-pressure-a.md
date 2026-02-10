@@ -1,5 +1,5 @@
 ---
-name: Marriane C
+name: Rowena
 role: therapist
 occupation: Licensed Massage Therapist
 since: Since 2025

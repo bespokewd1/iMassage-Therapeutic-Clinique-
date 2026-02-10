@@ -1,5 +1,5 @@
 ---
-name: Anne
+name: Christine
 role: therapist
 occupation: Licensed Massage Therapist
 since: Since 2024
