@@ -857,6 +857,8 @@ collections:
     media_folder: /src/assets/images/gallery
     public_folder: /src/assets/images/gallery
     create: true
+    identifier_field: caption
+    slug: '{{category}}-{{slug}}'
     editor:
       preview: false
     sortable_fields: ['category', 'caption']
